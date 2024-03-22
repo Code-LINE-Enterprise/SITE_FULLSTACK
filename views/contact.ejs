@@ -46,16 +46,16 @@
               <form action="/public/php/contact.php" method="post" role="form" class="php-email-form" id="formPrincipal">
                 <div class="col-md-6 form-group">
                   <label for="name"><h5>Nome Completo*:</h5></label>
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Ex: José Silva" required>
+                  <input type="text" class="form-control" placeholder="Ex: José Silva" name="usuarioNome" id="usuarioNome">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="email"><h5>Email*:</h5></label>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Ex: exemplo@email.com" required>
+                  <input type="email" class="form-control" placeholder="Ex: exemplo@email.com" name="usuarioEmail" id="usuarioEmail" >
                   <p id="emailError" class="error-message"></p>
               </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="genero"><h5>Gênero*:</h5></label>
-                    <select id="genero" name="genero" required>
+                    <select name="usuarioGenero" id="usuarioGenero" required>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                         <option value="outro">Prefiro não dizer</option>
@@ -63,32 +63,32 @@
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="phone"><h5>Celular*:</h5></label>
-                  <input type="phone" name="phone" class="form-control" id="phone" placeholder="Ex: (12)93456-7890" required onblur="validacaoCel(event)" maxlength="11">
+                  <input type="phone" class="form-control" placeholder="Ex: (12)93456-7890" required onblur="validacaoCel(event)" maxlength="11" name="usuarioTelefone" id="usuarioTelefone">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="email"><h5>CPF*:</h5></label>
-                  <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Ex: 000.000.000-00" onblur="mascaraCpf(event)"
-                  onblur="validacaoCPF(event)" maxlength="14" required>
+                  <input type="text" class="form-control" placeholder="Ex: 000.000.000-00" onblur="mascaraCpf(event)"
+                  onblur="validacaoCPF(event)" maxlength="14" name="usuarioCpf" id="usuarioCpf">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="birth"><h5>Data de nascimento*:</h5></label>
-                  <input type="date" class="form-control" name="birth" id="birth" placeholder="DD/MM/AAAA" required>
+                  <input type="date" class="form-control" placeholder="DD/MM/AAAA" name="usuarioDataNasc" id="usuarioDataNasc">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="zip-code"><h5>CEP*:</h5></label>
-                    <input type="text" class="form-control" name="zip-code" id="zip-code" placeholder="XXXXX-XXX" style="padding-right: 50px;" onblur="mascaraCEP()" maxlength="8" required>
+                    <input type="text" class="form-control" placeholder="XXXXX-XXX" style="padding-right: 50px;" onblur="mascaraCEP()" maxlength="8" name="usuarioCEP" id="usuarioCEP">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="address"><h5>Rua*:</h5></label>
-                  <input type="text" class="form-control" name="address" id="address" placeholder="Ex: Rua José da Silva" required>
+                  <input type="text" class="form-control" placeholder="Ex: Rua José da Silva" name="usuarioRua" id="usuarioRua" >
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="number"><h5>Número*:</h5></label>
-                  <input type="text" class="form-control" name="number" id="number" placeholder="Ex: 90" required>
+                  <input type="text" class="form-control" placeholder="Ex: 90" name="usuarioNum" id="usuarioNum">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="neighborhood"><h5>Bairro*:</h5></label>
-                  <input type="text" class="form-control" name="neighborhood" id="neighborhood" placeholder="Ex: Centro" required>
+                  <input type="text" class="form-control" placeholder="Ex: Centro" name="usuarioBairro" id="usuarioBairro">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="state"><h5>Estado*:</h5></label><br>
