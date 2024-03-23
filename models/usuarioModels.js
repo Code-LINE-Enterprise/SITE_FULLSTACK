@@ -2,141 +2,150 @@ const Database = require("../utils/database");
 
 const banco = new Database();
 
-class UsuarioModel {
+class voluntarioModel {
 
-    #usuarioId;
-    #usuarioNome;
-    #usuarioEmail;
-    #usuarioTelefone;
-    #usuarioCpf;
-    #usuarioGenero;
-    #usuarioDataNasc;
-    #usuarioCEP;
-    #usuarioRua;
-    #usuarioNum;
-    #usuarioBairro;
+    #voluntarioId;
+    #voluntarioNome;
+    #voluntarioEmail;
+    #voluntarioTelefone;
+    #voluntarioCpf;
+    #voluntarioGenero;
+    #voluntarioDataNasc;
+    #voluntarioCEP;
+    #voluntarioRua;
+    #voluntarioNum;
+    #voluntarioBairro;
+    #voluntarioEstado;
 
     //implementar getter e setter
-    get usuarioId() {
-        return this.#usuarioId;
+    get voluntarioId() {
+        return this.#voluntarioId;
     }
-    set usuarioId(usuarioId) {
-        this.#usuarioId = usuarioId
+    set voluntarioId(voluntarioId) {
+        this.#voluntarioId = voluntarioId
     }
-    get usuarioNome() {
-        return this.#usuarioNome;
+    get voluntarioNome() {
+        return this.#voluntarioNome;
     }
-    set usuarioNome(usuarioNome) {
-        this.#usuarioNome = usuarioNome;
-    }
-
-    get usuarioEmail() {
-        return this.#usuarioEmail;
-    }
-    set usuarioEmail(usuarioEmail) {
-        this.#usuarioEmail = usuarioEmail;
+    set voluntarioNome(voluntarioNome) {
+        this.#voluntarioNome = voluntarioNome;
     }
 
-    get usuarioTelefone() {
-        return this.#usuarioTelefone;
+    get voluntarioEmail() {
+        return this.#voluntarioEmail;
+    }
+    set voluntarioEmail(voluntarioEmail) {
+        this.#voluntarioEmail = voluntarioEmail;
     }
 
-    set usuarioTelefone(usuarioTelefone) {
-        this.#usuarioTelefone = usuarioTelefone;
-    }
-    get usuarioGenero() {
-        return this.#usuarioGenero;
+    get voluntarioTelefone() {
+        return this.#voluntarioTelefone;
     }
 
-    set usuarioGenero(usuarioGenero){
-        this.#usuarioGenero = usuarioGenero;
+    set voluntarioTelefone(voluntarioTelefone) {
+        this.#voluntarioTelefone = voluntarioTelefone;
+    }
+    get voluntarioGenero() {
+        return this.#voluntarioGenero;
     }
 
-    get usuarioCpf() {
-        return this.#usuarioCpf;
-    }
-    set usuarioCpf(usuarioCpf) {
-        this.#usuarioCpf = usuarioCpf;
+    set voluntarioGenero(voluntarioGenero){
+        this.#voluntarioGenero = voluntarioGenero;
     }
 
-    get usuarioDataNasc() {
-        return this.#usuarioDataNasc;
+    get voluntarioCpf() {
+        return this.#voluntarioCpf;
     }
-    set usuarioDataNasc(usuarioDataNasc) {
-        this.#usuarioDataNasc = usuarioDataNasc;
-    }
-
-    get usuarioCEP() {
-        return this.#usuarioCEP;
-    }
-    set usuarioCEP(usuarioCEP) {
-        this.#usuarioCEP = usuarioCEP;
+    set voluntarioCpf(voluntarioCpf) {
+        this.#voluntarioCpf = voluntarioCpf;
     }
 
-    get usuarioRua() {
-        return this.#usuarioRua;
+    get voluntarioDataNasc() {
+        return this.#voluntarioDataNasc;
     }
-    set usuarioRua(usuarioRua) {
-        this.#usuarioRua = usuarioRua;
-    }
-
-    get usuarioNum() {
-        return this.#usuarioNum;
-    }
-    set usuarioNum(usuarioNum) {
-        this.#usuarioNum = usuarioNum;
+    set voluntarioDataNasc(voluntarioDataNasc) {
+        this.#voluntarioDataNasc = voluntarioDataNasc;
     }
 
-    get usuarioBairro() {
-        return this.#usuarioBairro;
+    get voluntarioCEP() {
+        return this.#voluntarioCEP;
     }
-    set usuarioBairro(usuarioBairro) {
-        this.#usuarioBairro = usuarioBairro;
+    set voluntarioCEP(voluntarioCEP) {
+        this.#voluntarioCEP = voluntarioCEP;
+    }
+
+    get voluntarioRua() {
+        return this.#voluntarioRua;
+    }
+    set voluntarioRua(voluntarioRua) {
+        this.#voluntarioRua = voluntarioRua;
+    }
+
+    get voluntarioNum() {
+        return this.#voluntarioNum;
+    }
+    set voluntarioNum(voluntarioNum) {
+        this.#voluntarioNum = voluntarioNum;
+    }
+
+    get voluntarioBairro() {
+        return this.#voluntarioBairro;
+    }
+    set voluntarioBairro(voluntarioBairro) {
+        this.#voluntarioBairro = voluntarioBairro;
+    }
+
+    get voluntarioEstado() {
+        return this.#voluntarioEstado;
+    }
+    set voluntarioEstado(voluntarioEstado) {
+        this.#voluntarioEstado = voluntarioEstado;
     }
 
     //implementar construtor
-    constructor(usuarioId, usuarioNome, usuarioEmail, usuarioTelefone, usuarioCpf, usuarioGenero, usuarioDataNasc, usuarioCEP, usuarioRua, usuarioNum, usuarioBairro) {
-        this.#usuarioId = usuarioId;
-        this.#usuarioNome = usuarioNome;
-        this.#usuarioEmail = usuarioEmail;
-        this.#usuarioTelefone = usuarioTelefone;
-        this.#usuarioCpf = usuarioCpf;
-        this.#usuarioGenero = usuarioGenero;
-        this.#usuarioDataNasc = usuarioDataNasc;
-        this.#usuarioCEP = usuarioCEP;
-        this.#usuarioRua = usuarioRua;
-        this.#usuarioNum = usuarioNum;
-        this.#usuarioBairro = usuarioBairro;
+    constructor(voluntarioId, voluntarioNome, voluntarioEmail, voluntarioTelefone, voluntarioCpf, voluntarioGenero, voluntarioDataNasc, voluntarioCEP, voluntarioRua, voluntarioNum, voluntarioBairro, voluntarioEstado) {
+        this.#voluntarioId = voluntarioId;
+        this.#voluntarioNome = voluntarioNome;
+        this.#voluntarioEmail = voluntarioEmail;
+        this.#voluntarioTelefone = voluntarioTelefone;
+        this.#voluntarioCpf = voluntarioCpf;
+        this.#voluntarioGenero = voluntarioGenero;
+        this.#voluntarioDataNasc = voluntarioDataNasc;
+        this.#voluntarioCEP = voluntarioCEP;
+        this.#voluntarioRua = voluntarioRua;
+        this.#voluntarioNum = voluntarioNum;
+        this.#voluntarioBairro = voluntarioBairro;
+        this.#voluntarioEstado = voluntarioEstado;
     }
 
     //implementar as funções para manipulação das informações no banco
     async listar() {
 
-        let sql = "select * from tb_usuario";
+        let sql = "select * from tb_voluntario";
 
         let rows = await banco.ExecutaComando(sql);
         let lista = [];
 
         for(let i = 0; i < rows.length; i++) {
-            lista.push(new UsuarioModel(rows[i]["usu_id"], rows[i]["usu_nome"], rows[i]["usu_email"], rows[i]["usu_tel"], rows[i]["usu_cpf"], rows[i]["usu_gen"], rows[i]["usu_dataNasc"], rows[i]["usu_cep"], rows[i]["usu_rua"], rows[i]["usu_num"], rows[i]["usu_bairro"]));
+            lista.push(new voluntarioModel(rows[i]["vol_id"], rows[i]["vol_nome"], rows[i]["vol_email"], rows[i]["vol_tel"], rows[i]["vol_cpf"], rows[i]["vol_gen"], rows[i]["vol_dataNasc"], rows[i]["vol_cep"], rows[i]["vol_rua"], rows[i]["vol_num"], rows[i]["vol_bairro"], rows[i]["vol_estado"]));
         }
         return lista;
     }
 
     async cadastrar() {
-        if(this.#usuarioId == 0) {
-            let sql = "insert into tb_usuario (usu_email, usu_nome, usu_tel, usu_cpf, usu_gen, usu_dataNasc, usu_cep, usu_rua, usu_num, usu_bairro) values (?,?,?,?,?,?,?,?,?,?)";
+        if(this.#voluntarioId == 0) {
+            let sql = "insert into tb_voluntario (vol_email, vol_nome, vol_tel, vol_cpf, vol_gen, vol_dataNasc, vol_cep, vol_rua, vol_num, vol_bairro, vol_estado) values (?,?,?,?,?,?,?,?,?,?,?)";
 
-            let valores = [this.#usuarioEmail, this.#usuarioNome, this.#usuarioTelefone, this.#usuarioCpf, this.#usuarioGenero, this.#usuarioDataNasc, this.#usuarioCEP, this.#usuarioRua, this.#usuarioNum, this.#usuarioBairro];
+            let valores = [this.#voluntarioEmail, this.#voluntarioNome, this.#voluntarioTelefone, this.#voluntarioCpf, this.#voluntarioGenero, this.#voluntarioDataNasc, this.#voluntarioCEP, this.#voluntarioRua, this.#voluntarioNum, this.#voluntarioBairro, this.#voluntarioEstado];
     
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
     
             return result;
         }
         else{
-            let sql = "update tb_usuario set usu_email = ?, usu_nome = ?, usu_tel = ?, usu_cpf = ?, usu_gen = ?, usu_dataNasc = ?, usu_cep = ?, usu_rua = ?, usu_num = ?, usu_bairro = ? where usu_id = ?";
+            let sql = "update tb_voluntario set vol_email = ?, vol_nome = ?, vol_tel = ?, vol_cpf = ?, vol_gen = ?, vol_dataNasc = ?, vol_cep = ?, vol_rua = ?, vol_num = ?, vol_bairro = ?, vol_estado = ? where vol_id = ?";
 
-            let valores = [this.#usuarioEmail, this.#usuarioNome, this.#usuarioTelefone, this.#usuarioCpf, this.#usuarioGenero, this.#usuarioDataNasc, this.#usuarioCEP, this.#usuarioRua, this.#usuarioNum, this.#usuarioBairro, this.#usuarioId];
+            let valores = [this.#voluntarioEmail, this.#voluntarioNome, this.#voluntarioTelefone, this.#voluntarioCpf, this.#voluntarioGenero, this.#voluntarioDataNasc, this.#voluntarioCEP, this.#voluntarioRua, this.#voluntarioNum, this.#voluntarioBairro, this.#voluntarioEstado, this.#voluntarioId];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;
@@ -144,7 +153,7 @@ class UsuarioModel {
     }
 
     async obter(id) {
-        let sql = "select * from tb_usuario where usu_id = ?";
+        let sql = "select * from tb_voluntario where vol_id = ?";
 
         let valores = [id];
 
@@ -152,14 +161,14 @@ class UsuarioModel {
 
         if(rows.length > 0) {
             let row = rows[0];
-            return new UsuarioModel(row["usu_id"], row["usu_nome"], row["usu_email"], row["usu_tel"], row["usu_cpf"], row["usu_gen"], row["usu_dataNasc"], row["usu_cep"], row["usu_rua"], row["usu_num"], row["usu_bairro"]);
+            return new voluntarioModel(row["vol_id"], row["vol_nome"], row["vol_email"], row["vol_tel"], row["vol_cpf"], row["vol_gen"], row["vol_dataNasc"], row["vol_cep"], row["vol_rua"], row["vol_num"], row["vol_bairro"], row["vol_estado"]);
         }
 
         return null;
     }
 
     async excluir(id) {
-        let sql = "delete from tb_usuario where usu_id = ?";
+        let sql = "delete from tb_voluntario where vol_id = ?";
 
         let valores = [id];
         
@@ -169,4 +178,4 @@ class UsuarioModel {
     }
 }
 
-module.exports = UsuarioModel;
+module.exports = voluntarioModel;

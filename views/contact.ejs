@@ -46,16 +46,16 @@
               <form action="/public/php/contact.php" method="post" role="form" class="php-email-form" id="formPrincipal">
                 <div class="col-md-6 form-group">
                   <label for="name"><h5>Nome Completo*:</h5></label>
-                  <input type="text" class="form-control" placeholder="Ex: José Silva" name="usuarioNome" id="usuarioNome">
+                  <input type="text" class="form-control" placeholder="Ex: José Silva" name="voluntarioNome" id="voluntarioNome">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="email"><h5>Email*:</h5></label>
-                  <input type="email" class="form-control" placeholder="Ex: exemplo@email.com" name="usuarioEmail" id="usuarioEmail" >
+                  <input type="email" class="form-control" placeholder="Ex: exemplo@email.com" name="voluntarioEmail" id="voluntarioEmail" >
                   <p id="emailError" class="error-message"></p>
               </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="genero"><h5>Gênero*:</h5></label>
-                    <select name="usuarioGenero" id="usuarioGenero" required>
+                    <select name="voluntarioGenero" id="voluntarioGenero" required>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                         <option value="outro">Prefiro não dizer</option>
@@ -63,36 +63,36 @@
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="phone"><h5>Celular*:</h5></label>
-                  <input type="phone" class="form-control" placeholder="Ex: (12)93456-7890" required onblur="validacaoCel(event)" maxlength="11" name="usuarioTelefone" id="usuarioTelefone">
+                  <input type="phone" class="form-control" placeholder="Ex: (12)93456-7890" required onblur="validacaoCel(event)" maxlength="11" name="voluntarioTelefone" id="voluntarioTelefone">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="email"><h5>CPF*:</h5></label>
                   <input type="text" class="form-control" placeholder="Ex: 000.000.000-00" onblur="mascaraCpf(event)"
-                  onblur="validacaoCPF(event)" maxlength="14" name="usuarioCpf" id="usuarioCpf">
+                  onblur="validacaoCPF(event)" maxlength="14" name="voluntarioCpf" id="voluntarioCpf">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="birth"><h5>Data de nascimento*:</h5></label>
-                  <input type="date" class="form-control" placeholder="DD/MM/AAAA" name="usuarioDataNasc" id="usuarioDataNasc">
+                  <input type="date" class="form-control" placeholder="DD/MM/AAAA" name="voluntarioDataNasc" id="voluntarioDataNasc">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="zip-code"><h5>CEP*:</h5></label>
-                    <input type="text" class="form-control" placeholder="XXXXX-XXX" style="padding-right: 50px;" onblur="mascaraCEP()" maxlength="8" name="usuarioCEP" id="usuarioCEP">
+                    <input type="text" class="form-control" placeholder="XXXXX-XXX" style="padding-right: 50px;" onblur="mascaraCEP()" maxlength="8" name="voluntarioCEP" id="voluntarioCEP">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="address"><h5>Rua*:</h5></label>
-                  <input type="text" class="form-control" placeholder="Ex: Rua José da Silva" name="usuarioRua" id="usuarioRua" >
+                  <input type="text" class="form-control" placeholder="Ex: Rua José da Silva" name="voluntarioRua" id="voluntarioRua" >
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="number"><h5>Número*:</h5></label>
-                  <input type="text" class="form-control" placeholder="Ex: 90" name="usuarioNum" id="usuarioNum">
+                  <input type="text" class="form-control" placeholder="Ex: 90" name="voluntarioNum" id="voluntarioNum">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="neighborhood"><h5>Bairro*:</h5></label>
-                  <input type="text" class="form-control" placeholder="Ex: Centro" name="usuarioBairro" id="usuarioBairro">
+                  <input type="text" class="form-control" placeholder="Ex: Centro" name="voluntarioBairro" id="voluntarioBairro">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="state"><h5>Estado*:</h5></label><br>
-                  <select id="estado" name="estado" required>
+                  <select id="voluntarioEstado" name="voluntarioEstado" required>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -416,5 +416,5 @@
   
     </main><!-- End #main -->
     
-    <script src="/public/js/usuarios/validacao.js"></script>
-    <script src="/public/js/usuarios/tabela.js"></script>
+    <script src="/public/js/voluntarios/validacao.js"></script>
+    <script src="/public/js/voluntarios/tabela.js"></script>
