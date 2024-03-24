@@ -16,6 +16,9 @@ class voluntarioModel {
     #voluntarioNum;
     #voluntarioBairro;
     #voluntarioEstado;
+    #voluntarioCidade;
+    #voluntarioPais;
+    #voluntarioComplemento;
 
     //implementar getter e setter
     get voluntarioId() {
@@ -101,9 +104,27 @@ class voluntarioModel {
     set voluntarioEstado(voluntarioEstado) {
         this.#voluntarioEstado = voluntarioEstado;
     }
+    get voluntarioCidade() {
+        return this.#voluntarioCidade;
+    }
+    set voluntarioCidade(voluntarioCidade) {
+        this.#voluntarioCidade = voluntarioCidade;
+    }
+    get voluntarioPais() {
+        return this.#voluntarioPais;
+    }
+    set voluntarioPais(voluntarioPais) {
+        this.#voluntarioPais = voluntarioPais;
+    }
+    get voluntarioComplemento() {
+        return this.#voluntarioComplemento;
+    }
+    set voluntarioComplemento(voluntarioComplemento) {
+        this.#voluntarioComplemento = voluntarioComplemento;
+    }
 
     //implementar construtor
-    constructor(voluntarioId, voluntarioNome, voluntarioEmail, voluntarioTelefone, voluntarioCpf, voluntarioGenero, voluntarioDataNasc, voluntarioCEP, voluntarioRua, voluntarioNum, voluntarioBairro, voluntarioEstado) {
+    constructor(voluntarioId, voluntarioNome, voluntarioEmail, voluntarioTelefone, voluntarioCpf, voluntarioGenero, voluntarioDataNasc, voluntarioCEP, voluntarioRua, voluntarioNum, voluntarioBairro, voluntarioEstado, voluntarioCidade, voluntarioPais, voluntarioComplemento) {
         this.#voluntarioId = voluntarioId;
         this.#voluntarioNome = voluntarioNome;
         this.#voluntarioEmail = voluntarioEmail;
@@ -116,6 +137,9 @@ class voluntarioModel {
         this.#voluntarioNum = voluntarioNum;
         this.#voluntarioBairro = voluntarioBairro;
         this.#voluntarioEstado = voluntarioEstado;
+        this.#voluntarioCidade = voluntarioCidade;
+        this.#voluntarioPais = voluntarioPais;
+        this.#voluntarioComplemento = voluntarioComplemento;
     }
 
     //implementar as funções para manipulação das informações no banco
@@ -127,25 +151,25 @@ class voluntarioModel {
         let lista = [];
 
         for(let i = 0; i < rows.length; i++) {
-            lista.push(new voluntarioModel(rows[i]["vol_id"], rows[i]["vol_nome"], rows[i]["vol_email"], rows[i]["vol_tel"], rows[i]["vol_cpf"], rows[i]["vol_gen"], rows[i]["vol_dataNasc"], rows[i]["vol_cep"], rows[i]["vol_rua"], rows[i]["vol_num"], rows[i]["vol_bairro"], rows[i]["vol_estado"]));
+            lista.push(new voluntarioModel(rows[i]["vol_id"], rows[i]["vol_nome"], rows[i]["vol_email"], rows[i]["vol_tel"], rows[i]["vol_cpf"], rows[i]["vol_gen"], rows[i]["vol_dataNasc"], rows[i]["vol_cep"], rows[i]["vol_rua"], rows[i]["vol_num"], rows[i]["vol_bairro"], rows[i]["vol_estado"], rows[i]["vol_cidade"], rows[i]["vol_pais"], rows[i]["vol_complemento"]));
         }
         return lista;
     }
 
     async cadastrar() {
         if(this.#voluntarioId == 0) {
-            let sql = "insert into tb_voluntario (vol_email, vol_nome, vol_tel, vol_cpf, vol_gen, vol_dataNasc, vol_cep, vol_rua, vol_num, vol_bairro, vol_estado) values (?,?,?,?,?,?,?,?,?,?,?)";
+            let sql = "insert into tb_voluntario (vol_email, vol_nome, vol_tel, vol_cpf, vol_gen, vol_dataNasc, vol_cep, vol_rua, vol_num, vol_bairro, vol_estado, vol_cidade, vol_pais, vol_complemento) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            let valores = [this.#voluntarioEmail, this.#voluntarioNome, this.#voluntarioTelefone, this.#voluntarioCpf, this.#voluntarioGenero, this.#voluntarioDataNasc, this.#voluntarioCEP, this.#voluntarioRua, this.#voluntarioNum, this.#voluntarioBairro, this.#voluntarioEstado];
+            let valores = [this.#voluntarioEmail, this.#voluntarioNome, this.#voluntarioTelefone, this.#voluntarioCpf, this.#voluntarioGenero, this.#voluntarioDataNasc, this.#voluntarioCEP, this.#voluntarioRua, this.#voluntarioNum, this.#voluntarioBairro, this.#voluntarioEstado, this.#voluntarioCidade, this.#voluntarioPais, this.#voluntarioComplemento];
     
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
     
             return result;
         }
         else{
-            let sql = "update tb_voluntario set vol_email = ?, vol_nome = ?, vol_tel = ?, vol_cpf = ?, vol_gen = ?, vol_dataNasc = ?, vol_cep = ?, vol_rua = ?, vol_num = ?, vol_bairro = ?, vol_estado = ? where vol_id = ?";
+            let sql = "update tb_voluntario set vol_email = ?, vol_nome = ?, vol_tel = ?, vol_cpf = ?, vol_gen = ?, vol_dataNasc = ?, vol_cep = ?, vol_rua = ?, vol_num = ?, vol_bairro = ?, vol_estado = ?, vol_cidade = ?, vol_pais = ?, vol_complemento = ? where vol_id = ?";
 
-            let valores = [this.#voluntarioEmail, this.#voluntarioNome, this.#voluntarioTelefone, this.#voluntarioCpf, this.#voluntarioGenero, this.#voluntarioDataNasc, this.#voluntarioCEP, this.#voluntarioRua, this.#voluntarioNum, this.#voluntarioBairro, this.#voluntarioEstado, this.#voluntarioId];
+            let valores = [this.#voluntarioEmail, this.#voluntarioNome, this.#voluntarioTelefone, this.#voluntarioCpf, this.#voluntarioGenero, this.#voluntarioDataNasc, this.#voluntarioCEP, this.#voluntarioRua, this.#voluntarioNum, this.#voluntarioBairro, this.#voluntarioEstado, this.#voluntarioCidade, this.#voluntarioPais, this.#voluntarioComplemento, this.#voluntarioId];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;
@@ -161,7 +185,7 @@ class voluntarioModel {
 
         if(rows.length > 0) {
             let row = rows[0];
-            return new voluntarioModel(row["vol_id"], row["vol_nome"], row["vol_email"], row["vol_tel"], row["vol_cpf"], row["vol_gen"], row["vol_dataNasc"], row["vol_cep"], row["vol_rua"], row["vol_num"], row["vol_bairro"], row["vol_estado"]);
+            return new voluntarioModel(row["vol_id"], row["vol_nome"], row["vol_email"], row["vol_tel"], row["vol_cpf"], row["vol_gen"], row["vol_dataNasc"], row["vol_cep"], row["vol_rua"], row["vol_num"], row["vol_bairro"], row["vol_estado"], row["vol_cidade"], row["vol_pais"], row["vol_complemento"]);
         }
 
         return null;
