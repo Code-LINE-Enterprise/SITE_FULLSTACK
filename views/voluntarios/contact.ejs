@@ -40,7 +40,13 @@
               </div>
   
             </div>
-  
+            
+            <div>
+              <% if (typeof msg != "undefined") { %>             
+                  <span  ><%= msg %></span>
+              <% } %>
+            </div>
+
             <div class="col-lg-8 mt-5 mt-lg-0">
   
               <form action="/public/php/contact.php" method="post" role="form" class="php-email-form" id="formPrincipal">
@@ -416,5 +422,6 @@
   
     </main><!-- End #main -->
     
+    <script src="/js/voluntarios/cadastrar.js"></script>
     <script src="/public/js/voluntarios/validacao.js"></script>
     <script src="/public/js/voluntarios/tabela.js"></script>
