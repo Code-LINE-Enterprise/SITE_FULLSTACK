@@ -142,33 +142,28 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <h1>Eventos cadastrados</h1>
-<a class="btn btn-secondary" style="max-width: 200px;" href="admin/addEvento">Novo Evento</a>
+<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/addEvento">Novo Evento</a>
 
 <hr>
     <div>
         <table class="table table-striped">
             <thead>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Nome</th>
-                <th>Perfil</th>
-                <th>Ativo</th>
-                <th>Ações</th>
+                <th>Codigo Evento</th>
+                <th>Data Evento</th>
+                <th>Local Evento</th>
             </thead>
             <tbody>
-                
+                <% for (let i = 0; i < listaEvento.length; i++)  { %>
                     <tr>
-                        <td>Id</td>
-                        <td>Email</td>
-                        <td>Nome</td>
-                        <td>PerID</td>
-                        <td>ativo</td>
+                        <td><%= listaEvento[i].eventoId %></td>
+                        <td><%= listaEvento[i].dataEvento %></td>
+                        <td><%= listaEvento[i].localEvento %></td>
                         <td>
-                            <a href="/admin/alterarEvento" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <a href="/admin/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button data-codigoexclusao="" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
-                
+                <% } %>
             </tbody>
         </table>
     </div>
