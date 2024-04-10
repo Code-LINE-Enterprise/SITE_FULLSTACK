@@ -2,6 +2,7 @@ const express = require('express')
 const expressEjsLayout = require('express-ejs-layouts');
 let homeRoute = require("./routes/homeRoute");
 let voluntarioRoute = require("./routes/voluntarioRoute");
+let adminRoute = require("./routes/adminRoute");
 const app = express();
 
 //configura o ejs como view engine da nossa aplicação
@@ -20,6 +21,7 @@ app.use(expressEjsLayout);
 //configura as rotas existentes no nosso sistema
 app.use("/",  homeRoute);
 app.use("/voluntarios", voluntarioRoute);
+app.use("/admin", adminRoute);
 
 
 //inicia o nosso servidor web
