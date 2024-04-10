@@ -77,7 +77,7 @@ class AdmController {
         let evento = new EventoModel();
         let eventoSelecionado = await evento.obterIdEvento(req.params.id);
 
-        res.render('admin/alterarEvento', {evento: eventoSelecionado, layout: 'admin/alterarEvento'});
+        res.render('admin/eventoAdm/alterarEvento', {evento: eventoSelecionado, layout: 'admin/eventoAdm/alterarEvento'});
     }
 
     async alterarEvento(req, resp){
@@ -110,6 +110,27 @@ class AdmController {
                 msg: "Parâmetros preenchidos incorretamente!"
             });
         }
+    }
+
+    async excluirEvento(req, resp){
+        let id = req.params.id;
+        let evento = new EventoModel(id, null, null, null);
+
+        let result = await evento.excluirEvento();
+        
+        if(result){
+            resp.send({
+                ok: true,
+                msg: "Evento excluido com sucesso!"
+            });
+        }
+        else{
+            resp.send({
+                ok: false,
+                msg: "Erro ao excluir evento!"
+            })
+        }
+
     }
 }
 

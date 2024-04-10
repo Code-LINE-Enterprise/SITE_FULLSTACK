@@ -160,7 +160,7 @@
                         <td><%= listaEvento[i].localEvento %></td>
                         <td>
                             <a href="/admin/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                            <button data-codigoexclusao="" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                            <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 <% } %>
@@ -194,6 +194,6 @@
     <script src="/admin/js/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="/admin/js/sb-admin-2.min.js"></script>
-    <script src="/js/admin/(nomeDoArquivo).js"></script>
+    <script src="/js/admin/excluirEvento.js"></script>
 </body>
 </html>

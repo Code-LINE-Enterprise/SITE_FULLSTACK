@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    window.location.href="/admin/home";
+                    window.location.href="/admin/listarEvento";
                 }   
                 else {
                     alert(r.msg);

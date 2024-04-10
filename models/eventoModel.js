@@ -63,7 +63,7 @@ class EventoModel {
         
             let sql = "update Evento set data_evento = ?, local_evento = ? where evento_cad = ?";
 
-            let valores = [this.#localEvento, this.#dataEvento, this.#eventoId];
+            let valores = [this.#dataEvento, this.#localEvento, this.#eventoId];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;
@@ -85,10 +85,10 @@ class EventoModel {
         return null;
     }
 
-    async excluirEvento(id) {
+    async excluirEvento() {
         let sql = "delete from Evento where evento_cad = ?";
 
-        let valores = [id];
+        let valores = [this.#eventoId];
         
         let result = await banco.ExecutaComandoNonQuery(sql, valores);
 

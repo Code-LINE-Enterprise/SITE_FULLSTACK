@@ -18,7 +18,8 @@ router.get('/listarDoacao', ctrl.listagemDoacaoView);
 router.get('/listarEvento', ctrl.listagemEventoView);
 router.get('/addEvento',ctrl.cadastroEventoView);
 router.post('/addEvento',ctrl.cadastrarEvento);
-router.get('/alterarEvento', ctrl.alterarEventoView);
+router.get('/alterarEvento/:id', ctrl.alterarEventoView);
 router.put('/alterarEvento/:id', ctrl.alterarEvento);
+router.delete('/excluirEvento/:id', ctrl.excluirEvento);
 
 module.exports = router;
