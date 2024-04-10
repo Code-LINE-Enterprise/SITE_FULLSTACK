@@ -142,33 +142,30 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <h1>Patrimônios cadastrados</h1>
-<a class="btn btn-secondary" style="max-width: 200px;" href="admin/addPatrimonio">Novo Patrimônio</a>
+<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/addPatrimonio">Novo Patrimônio</a>
 
 <hr>
     <div>
         <table class="table table-striped">
             <thead>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Nome</th>
-                <th>Perfil</th>
-                <th>Ativo</th>
-                <th>Ações</th>
+                <th>Código Patrimônio</th>
+                <th>Patrimônio quantidade</th>
+                <th>Tipo de patrimônio</th>
+                <th>Nome do patrimônio</th>
             </thead>
             <tbody>
-                
+                <% for (let i = 0; i < listaPatrimonio.length; i++)  { %>
                     <tr>
-                        <td>Id</td>
-                        <td>Email</td>
-                        <td>Nome</td>
-                        <td>PerID</td>
-                        <td>ativo</td>
+                        <td><%= listaPatrimonio[i].patrimonioId %></td>
+                        <td><%= listaPatrimonio[i].quantidadePatrimonio %></td>
+                        <td><%= listaPatrimonio[i].tipoPatrimonio %></td>
+                        <td><%= listaPatrimonio[i].nomePatrimonio %></td>
                         <td>
-                            <a href="/admin/alterarPatrimonio" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                            <button data-codigoexclusao="" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                            <a href="/admin/alterarPatrimonio/<%= listaPatrimonio[i].patrimonioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <button onclick="excluirPatrimonio('<%= listaPatrimonio[i].patrimonioId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
-                
+                <% } %>
             </tbody>
         </table>
     </div>
@@ -199,6 +196,6 @@
     <script src="/admin/js/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="/admin/js/sb-admin-2.min.js"></script>
-    <script src="/js/admin/(nomeDoArquivo).js"></script>
+    <script src="/js/admin/excluirPatrimonio.js"></script>
 </body>
 </html>
