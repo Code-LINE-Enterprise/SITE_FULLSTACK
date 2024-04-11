@@ -18,6 +18,8 @@ router.delete('/excluirPatrimonio/:id', ctrl.excluirPatrimonio);
 
 //ROTAS DOAÇÕES
 router.get('/listarDoacao', ctrl.listagemDoacaoView);
+router.get('/doacaoAdm', ctrl.cadastroDoacaoView);
+router.post('/doacaoAdm', ctrl.cadastrarDoacao);
 
 //ROTAS EVENTO
 router.get('/listarEvento', ctrl.listagemEventoView);

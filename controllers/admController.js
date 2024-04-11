@@ -1,5 +1,7 @@
 const EventoModel = require("../models/eventoModel");
 const PatrimonioModel = require("../models/patrimonioModel");
+const DoacaoModel = require("../models/doacaoModel");
+const TipoDoacaoModel = require("../models/tipoDoacaoModel");
 
 class AdmController {
 
@@ -22,22 +24,13 @@ class AdmController {
         res.render('admin/home', {layout: 'admin/home'});
     }
 
-    async listagemPatrimonioView(req, res){
-        let patrimonio = new PatrimonioModel();
-        let listaPatrimonio = await patrimonio.listarPatrimonio();
-
-        res.render('admin/patrimonioAdm/listarPatrimonio', {layout: 'admin/patrimonioAdm/listarPatrimonio', listaPatrimonio: listaPatrimonio})
-    }
+    //EVENTO
 
     async listagemEventoView(req, res){
         let evento = new EventoModel();
         let listaEvento = await evento.listarEvento();
 
         res.render('admin/eventoAdm/listarEvento', {layout: 'admin/eventoAdm/listarEvento', listaEvento: listaEvento})
-    }
-
-    listagemDoacaoView(req, res){
-        res.render('admin/doacaoAdm/listarDoacaoAdm', {layout: 'admin/doacaoAdm/listarDoacaoAdm'})
     }
 
     cadastroEventoView(req, resp){
@@ -140,6 +133,13 @@ class AdmController {
 
     //PATRIMONIOS
 
+    async listagemPatrimonioView(req, res){
+        let patrimonio = new PatrimonioModel();
+        let listaPatrimonio = await patrimonio.listarPatrimonio();
+
+        res.render('admin/patrimonioAdm/listarPatrimonio', {layout: 'admin/patrimonioAdm/listarPatrimonio', listaPatrimonio: listaPatrimonio})
+    }
+
     cadastroPatrimonioView(req, resp){
         resp.render("admin/patrimonioAdm/addPatrimonio", {layout: 'admin/patrimonioAdm/addPatrimonio'});
     }
@@ -233,6 +233,54 @@ class AdmController {
                 ok: false,
                 msg: "Erro ao excluir patrimonio!"
             })
+        }
+
+    }
+
+    //DOACAO
+
+    async listagemDoacaoView(req, res){
+
+        let doacao = new DoacaoModel();
+        let listaDoacao = await doacao.listarDoacao();
+        res.render('admin/doacaoAdm/listarDoacaoAdm', {layout: 'admin/doacaoAdm/listarDoacaoAdm', listaDoacao: listaDoacao})
+    }
+
+    async cadastroDoacaoView(req, res){
+        let tipo = new TipoDoacaoModel();
+        let listaTipo = await tipo.listarTipo();
+
+        res.render('admin/doacaoAdm/doacaoAdm', {layout: 'admin/doacaoAdm/doacaoAdm', listaTipo: listaTipo});
+    }
+
+    async cadastrarDoacao(req, resp){
+        let msg = "";
+        let cor = "";
+        if(req.body.tipoDoacaoId != "" && req.body.quantDoacao != "" && req.body.valorDoacao != '0' &&
+        req.body.descDoacao != '0') {
+            let doacao = new DoacaoModel(0, req.body.tipoDoacaoId, req.body.quantDoacao, req.body.valorDoacao, req.body.descDoacao);
+
+            let result = await doacao.cadastrarDoacao();
+
+            if(result) {
+                resp.send({
+                    ok: true,
+                    msg: "Doação cadastrada com sucesso!"
+                });
+            }   
+            else{
+                resp.send({
+                    ok: false,
+                    msg: "Erro ao cadastrar doação!"
+                });
+            }
+        }
+        else
+        {
+            resp.send({
+                ok: false,
+                msg: "Parâmetros preenchidos incorretamente!"
+            });
         }
 
     }
