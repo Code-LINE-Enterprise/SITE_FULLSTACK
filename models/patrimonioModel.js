@@ -47,7 +47,7 @@ class PatrimonioModel {
     //implementar as funções para manipulação das informações no banco
     async listarPatrimonio() {
 
-        let sql = "select * from Patrimonio";
+        let sql = "select * from Patrimonio order by pat_etiqueta desc";
 
         let rows = await banco.ExecutaComando(sql);
         let listaPatrimonio = [];

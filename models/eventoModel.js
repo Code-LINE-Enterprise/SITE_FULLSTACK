@@ -38,7 +38,7 @@ class EventoModel {
     //implementar as funções para manipulação das informações no banco
     async listarEvento() {
 
-        let sql = "select * from Evento";
+        let sql = "select * from Evento order by evento_cad desc";
 
         let rows = await banco.ExecutaComando(sql);
         let listaEvento = [];

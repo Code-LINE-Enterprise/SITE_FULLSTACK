@@ -58,7 +58,7 @@ class DoacaoModel {
     //implementar as funções para manipulação das informações no banco
     async listarDoacao() {
 
-        let sql = "select * from Doacao";
+        let sql = "select * from Doacao order by cod_doacao desc";
 
         let rows = await banco.ExecutaComando(sql);
         let listaDoacao = [];
