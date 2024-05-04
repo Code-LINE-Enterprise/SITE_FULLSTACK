@@ -1,8 +1,10 @@
 const express = require('express')
 const expressEjsLayout = require('express-ejs-layouts');
+const cookieParser = require("cookie-parser");
 let homeRoute = require("./routes/homeRoute");
 let voluntarioRoute = require("./routes/voluntarioRoute");
 let adminRoute = require("./routes/adminRoute");
+
 const app = express();
 
 //configura o ejs como view engine da nossa aplicação
@@ -14,8 +16,9 @@ app.set("layout", "./layout");
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static("public"));
 app.use(expressEjsLayout);
+app.use(cookieParser());
 
 
 //configura as rotas existentes no nosso sistema

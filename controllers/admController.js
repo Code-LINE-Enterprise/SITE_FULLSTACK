@@ -2,30 +2,153 @@ const EventoModel = require("../models/eventoModel");
 const PatrimonioModel = require("../models/patrimonioModel");
 const DoacaoModel = require("../models/doacaoModel");
 const TipoDoacaoModel = require("../models/tipoDoacaoModel");
+const UsuarioModel = require("../models/usuarioModel");
+const PerfilModel = require("../models/perfilModel");
 
 class AdmController {
 
+    //LOGIN
+
     loginView(req, res) {
-        res.render('admin/login', {layout: 'admin/login'});
+        res.render('admin/login', { layout: 'admin/login' });
     }
 
-    login(req, res) {
+    async login(req, res) {
         let msg = "";
-        if(req.body.AdmEmail == "admin@teste.br" && req.body.AdmPassword == "123abc") {
-            res.redirect('home');
+        if(req.body.email != null && req.body.password != null) {
+            let usuario = new UsuarioModel();
+            usuario = await usuario.obterPorEmailSenha(req.body.email, req.body.password);
+            if(usuario != null) {
+                res.cookie("usuarioLogado", usuario.usuarioId);
+                res.redirect("/admin/home");
+            }
+            else {
+                msg = "Usuário/Senha incorretos!";
+            }
         }
         else {
             msg = "Usuário/Senha incorretos!";
         }
-        res.render('admin/login', {msg: msg, layout: 'admin/login'});
+
+        res.render('admin/login', { msg: msg, layout: 'admin/login' });
     }
 
+    //PERFIL
+    async listagemPerfilView(req, res) {
+        let perfilModel = new PerfilModel();
+        let lista = await perfilModel.listar();
+
+        res.render('admin/perfilAdm/listarPerfil', { layout: 'admin/perfilAdm/listarPerfil', listaPerfil: lista })
+    }
+
+    //USUARIO
+    async listagemView(req, resp){
+        let usuario = new UsuarioModel();
+        let listaUsuarios = await usuario.listar()
+        
+        resp.render("admin/usuariosAdm/listarUsuario", { layout:'admin/usuariosAdm/listarUsuario', lista: listaUsuarios });
+    }
+
+    async cadastroView(req, resp){
+        let perfil = new PerfilModel(); 
+        let listaPerfil = await perfil.listar();
+        resp.render("admin/usuariosAdm/addUsuario", {layout:'admin/usuariosAdm/addUsuario', listaPerfil: listaPerfil});
+    }
+
+    async cadastrar(req, resp){
+        let msg = "";
+        let cor = "";
+        if(req.body.email != "" && req.body.senha != "" && req.body.nome != "" &&
+        req.body.perfil != '0') {
+            let usuario = new UsuarioModel(0, req.body.nome, req.body.email, req.body.senha, req.body.ativo, req.body.perfil);
+
+            let result = await usuario.cadastrar();
+
+            if(result) {
+                resp.send({
+                    ok: true,
+                    msg: "Usuário cadastrado com sucesso!"
+                });
+            }   
+            else{
+                resp.send({
+                    ok: false,
+                    msg: "Erro ao cadastrar usuário!"
+                });
+            }
+        }
+        else
+        {
+            resp.send({
+                ok: false,
+                msg: "Parâmetros preenchidos incorretamente!"
+            });
+        }
+
+    }
+
+    async alterarView(req, res) {
+        console.log(req.params);
+        let perfil = new PerfilModel(); 
+        let listaPerfil = await perfil.listar();
+        let usuario = new UsuarioModel();
+        usuario = await usuario.obter(req.params.id);
+        res.render('admin/usuariosAdm/alterarUsuario', { usuario: usuario, listaPerfil: listaPerfil });
+    }
+
+    async excluir(req, res) {
+        if(req.body.id != null) {
+            let usuario = new UsuarioModel();
+            let ok = await usuario.excluir(req.body.id);
+            if(ok) {
+                res.send({ok: true});
+            }
+            else{
+                res.send({ok: false, msg: "Erro ao excluir usuário"})
+            }
+        }
+        else{
+            res.send({ok: false, msg: "O id para exclusão não foi enviado"})
+        }
+    }
+
+    async alterar(req, res) {
+        let msg = "";
+        let cor = "";
+        if(req.body.id > 0 && req.body.email != "" && req.body.senha != "" && req.body.nome != "" &&
+        req.body.perfil != '0') {
+            let usuario = new UsuarioModel(req.body.id, req.body.nome, req.body.email, req.body.senha, req.body.ativo, req.body.perfil);
+
+            let result = await usuario.cadastrar();
+
+            if(result) {
+                res.send({
+                    ok: true,
+                    msg: "Usuário alterado com sucesso!"
+                });
+            }   
+            else{
+                res.send({
+                    ok: false,
+                    msg: "Erro ao alterar usuário!"
+                });
+            }
+        }
+        else
+        {
+            res.send({
+                ok: false,
+                msg: "Parâmetros preenchidos incorretamente!"
+            });
+        }
+    }
+
+    //HOME
     homeView(req, res){
         res.render('admin/home', {layout: 'admin/home'});
     }
 
     //EVENTO
-
     async listagemEventoView(req, res){
         let evento = new EventoModel();
         let listaEvento = await evento.listarEvento();
@@ -132,7 +255,6 @@ class AdmController {
 
 
     //PATRIMONIOS
-
     async listagemPatrimonioView(req, res){
         let patrimonio = new PatrimonioModel();
         let listaPatrimonio = await patrimonio.listarPatrimonio();
@@ -238,7 +360,6 @@ class AdmController {
     }
 
     //DOACAO
-
     async listagemDoacaoView(req, res){
 
         let doacao = new DoacaoModel();

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Patrimonio ADMIN</title>
+    <title>Home ADMIN</title>
     <!-- Custom fonts for this template-->
     <link href="/admin/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -149,40 +149,41 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div class="container">
-                    <h1>Alterar Patrimonio</h1>
-                    <div>
-                        <% if (typeof msg != "undefined") { %>             
-                            <span><%= msg %></span>
-                        <% } %>
-                    </div>
-                    <div>
-                        <div>
-                            <div>
-                                <div class="form-group">
-                                    <label for="quantidadePatrimonio" class="form-label">Quantidade do patrimonio:</label>
-                                    <input type="number" class="form-control" id="quantidadePatrimonio" name="quantidadePatrimonio" value="<%= patrimonio.quantidadePatrimonio %>">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group">
-                                    <label for="tipoPatrimonio" class="form-label">Tipo de patrimonio:</label>
-                                    <input type="text" maxlength="45" class="form-control" id="tipoPatrimonio" name="local" value="<%= patrimonio.tipoPatrimonio %>">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group">
-                                    <label for="nomePatrimonio" class="form-label">Nome do patrimonio:</label>
-                                    <input type="text" maxlength="45" class="form-control" id="nomePatrimonio" name="local" value="<%= patrimonio.nomePatrimonio %>">
-                                </div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary" id="btnAlterarPatrimonio" type="button">Alterar</button>
-                                <a class="btn btn-secondary" href="/admin/home">Voltar</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container-fluid">
+                    <h1>Usuarios cadastrados</h1>
+<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/addUsuario">Novo Usuario</a>
+
+<hr>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Nome</th>
+            <th>Perfil</th>
+            <th>Ativo</th>
+            <th>Ações</th>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < lista.length; i++)  { %>
+                <tr>
+                    <td><%= lista[i].usuarioId %></td>
+                    <td><%= lista[i].usuarioEmail %></td>
+                    <td><%= lista[i].usuarioNome %></td>
+                    <td><%= lista[i].perfilId %></td>
+                    <td><%= lista[i].usuarioAtivo %></td>
+                    <td>
+                        <a href="/admin/alterarUsuario/<%= lista[i].usuarioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <button data-codigoexclusao="<%= lista[i].usuarioId %>" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
                 </div>
+                <!-- /.container-fluid -->
+            </div>
             <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -207,6 +208,6 @@
     <script src="/admin/js/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="/admin/js/sb-admin-2.min.js"></script>
-    <script src="/js/admin/alterarPatrimonio.js"></script>
+    <script src="/js/admin/excluirUsuario.js"></script>
 </body>
 </html>

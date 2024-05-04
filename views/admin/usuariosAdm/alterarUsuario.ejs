@@ -158,26 +158,55 @@
                     </div>
                     <div>
                         <div>
+                            <input id="usuarioId" hidden value="<%= usuario.usuarioId %>">
                             <div>
                                 <div class="form-group">
-                                    <label for="quantidadePatrimonio" class="form-label">Quantidade do patrimonio:</label>
-                                    <input type="number" class="form-control" id="quantidadePatrimonio" name="quantidadePatrimonio" value="<%= patrimonio.quantidadePatrimonio %>">
+                                    <label for="usuarioEmail" class="form-label">Email</label>
+                                    <input value="<%= usuario.usuarioEmail %>" type="text" class="form-control" id="usuarioEmail" name="usuarioEmail">
                                 </div>
                             </div>
                             <div>
                                 <div class="form-group">
-                                    <label for="tipoPatrimonio" class="form-label">Tipo de patrimonio:</label>
-                                    <input type="text" maxlength="45" class="form-control" id="tipoPatrimonio" name="local" value="<%= patrimonio.tipoPatrimonio %>">
+                                    <label for="usuarioSenha" class="form-label">Senha</label>
+                                    <input value="<%= usuario.usuarioSenha %>" type="password" class="form-control" id="usuarioSenha" name="usuarioSenha">
                                 </div>
                             </div>
                             <div>
                                 <div class="form-group">
-                                    <label for="nomePatrimonio" class="form-label">Nome do patrimonio:</label>
-                                    <input type="text" maxlength="45" class="form-control" id="nomePatrimonio" name="local" value="<%= patrimonio.nomePatrimonio %>">
+                                    <label for="usuarioNome" class="form-label">Nome</label>
+                                    <input value="<%= usuario.usuarioNome %>" type="text" class="form-control" id="usuarioNome" name="usuarioNome">
                                 </div>
                             </div>
                             <div>
-                                <button class="btn btn-primary" id="btnAlterarPatrimonio" type="button">Alterar</button>
+                                <div class="form-group">
+                                    <label for="usuarioPerfil" class="form-label">Perfil:</label>
+                                    <select class="form-control" id="usuarioPerfil" name="usuarioPerfil">
+                                        <option value="0">Selecione...</option>
+                                        <% for(let i = 0; i<listaPerfil.length; i++) { %>
+                                            <% if(usuario.perfilId == listaPerfil[i].perfilId) { %>
+                                                <option selected value="<%= listaPerfil[i].perfilId %>"><%= listaPerfil[i].perfilDescricao %></option>
+                                            <% } else { %>
+                                                <option value="<%= listaPerfil[i].perfilId %>"><%= listaPerfil[i].perfilDescricao %></option>
+                                            <% } %>
+                                        <% } %>
+                
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-check">
+                                    <% if (usuario.usuarioAtivo == 1) { %>
+                                        <input checked class="form-check-input" type="checkbox" id="usuarioAtivo" name="usuarioAtivo">
+                                    <% } else { %>
+                                        <input class="form-check-input" type="checkbox" id="usuarioAtivo" name="usuarioAtivo">
+                                    <% } %>
+                                    <label class="form-check-label" for="usuarioAtivo">
+                                        Ativo
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" id="btnAlterar" type="button">Alterar</button>
                                 <a class="btn btn-secondary" href="/admin/home">Voltar</a>
                             </div>
                         </div>
@@ -207,6 +236,6 @@
     <script src="/admin/js/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="/admin/js/sb-admin-2.min.js"></script>
-    <script src="/js/admin/alterarPatrimonio.js"></script>
+    <script src="/js/admin/alterarUsuario.js"></script>
 </body>
 </html>
