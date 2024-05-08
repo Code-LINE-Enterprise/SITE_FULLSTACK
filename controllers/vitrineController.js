@@ -7,7 +7,7 @@ class VitrineController {
         let produto = new ProdutoModel();
         let listaProdutos = await produto.listarProdutos();
 
-        res.render('vitrine/index', { layout: 'vitrine/index', produtos: listaProdutos });
+        res.render('vitrine/index', { produtos: listaProdutos });
     }
 
 }

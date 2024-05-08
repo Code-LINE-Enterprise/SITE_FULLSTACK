@@ -7,7 +7,7 @@ class AuthMiddleware {
             let usuarioId = req.cookies.usuarioLogado;
             let usuario = new UsuarioModel();
             usuario = await usuario.obter(usuarioId);
-            if(usuario != null && usuario.usuarioAtivo == 1) {
+            if(usuario != null && usuario.usuarioAtivo == 1 && usuario.perfilId == 1) {
                 next();
             }
             else{

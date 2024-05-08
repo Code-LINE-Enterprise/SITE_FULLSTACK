@@ -17,7 +17,7 @@ app.set("layout", "./layout");
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"))
 app.use(expressEjsLayout);
 app.use(cookieParser());
 
@@ -28,6 +28,8 @@ app.use("/loja", vitrineRoute);
 app.use("/voluntarios", voluntarioRoute);
 app.use("/admin", adminRoute);
 
+global.CAMINHO_IMG_BROWSER = "/img/produtos/"
+global.RAIZ_PROJETO = __dirname;
 
 //inicia o nosso servidor web
 app.listen(5000, function() {
