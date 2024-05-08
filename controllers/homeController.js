@@ -6,11 +6,11 @@ class HomeController {
     }
 
     contactView(req, res){
-        res.render('contact');
+        res.render('contact' );
     }
 
     coursesView(req, res){
-        res.render('courses');
+        res.render('courses' );
     }
 
     eventsView(req, res){

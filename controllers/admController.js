@@ -91,7 +91,7 @@ class AdmController {
 
     }
 
-    async alterarView(req, res) {
+    async alterarUsuarioView(req, res) {
         console.log(req.params);
         let perfil = new PerfilModel(); 
         let listaPerfil = await perfil.listar();

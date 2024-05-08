@@ -56,7 +56,7 @@ router.delete('/excluirEvento/:id', auth.verificarUsuarioLogado, ctrl.excluirEve
 router.get('/listarUsuario', auth.verificarUsuarioLogado, ctrl.listagemView);
 router.get('/addUsuario', auth.verificarUsuarioLogado, ctrl.cadastroView);
 router.post('/addUsuario', auth.verificarUsuarioLogado, ctrl.cadastrar);
-router.get('/alterarUsuario/:id', auth.verificarUsuarioLogado, ctrl.alterarView);
+router.get('/alterarUsuario/:id', auth.verificarUsuarioLogado, ctrl.alterarUsuarioView);
 router.post("/alterarUsuario", auth.verificarUsuarioLogado, ctrl.alterar);
 router.post("/excluirUsuario", auth.verificarUsuarioLogado, ctrl.excluir);
 
@@ -68,7 +68,7 @@ router.get('/listarProduto', auth.verificarUsuarioLogado, ctrl.listarProdutoView
 router.get('/cadastroProduto', auth.verificarUsuarioLogado, ctrl.cadastroProdutoView);
 router.post("/cadastroProduto", auth.verificarUsuarioLogado, upload.single("imagem"), ctrl.cadastrarProduto);
 router.post("/excluirProduto", auth.verificarUsuarioLogado, ctrl.excluirProduto);
-router.get("/alterarProduto/:id", auth.verificarUsuarioLogado, ctrl.alterarProdutoView);
+router.get("/alterarProduto/:id", auth.verificarUsuarioLogado, ctrl.alterarView);
 router.post("/alterarProduto", auth.verificarUsuarioLogado, upload.single("imagem"), ctrl.alterarProdutoView);
 router.get("/obter/:produto", ctrl.obter)
 
