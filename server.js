@@ -3,6 +3,7 @@ const expressEjsLayout = require('express-ejs-layouts');
 const cookieParser = require("cookie-parser");
 let homeRoute = require("./routes/homeRoute");
 let voluntarioRoute = require("./routes/voluntarioRoute");
+const vitrineRoute = require("./routes/vitrineRoute");
 let adminRoute = require("./routes/adminRoute");
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 //configura as rotas existentes no nosso sistema
 app.use("/",  homeRoute);
+app.use("/loja", vitrineRoute);
 app.use("/voluntarios", voluntarioRoute);
 app.use("/admin", adminRoute);
 

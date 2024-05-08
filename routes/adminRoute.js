@@ -1,6 +1,23 @@
 const express = require('express');
+const multer = require('multer');
 const AdmController = require('../controllers/admController');
 const AuthMiddleware = require('../middlewares/authMiddleware');
+
+let storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "public/img/produtos");
+    },
+    filename: function(req, file, cb) {
+        let ext = file.originalname.split(".").pop();
+        //ou
+        //
+        //let ext = file.originalname.split(".").slice(-1)[0]
+        let novoNome = Date.now().toString() + "." + ext;
+        cb(null, novoNome);
+    }
+})
+
+let upload = multer({storage});
 
 const router = express.Router();
 
@@ -45,5 +62,14 @@ router.post("/excluirUsuario", auth.verificarUsuarioLogado, ctrl.excluir);
 
 //ROTAS PERFIL
 router.get('/listarPerfil', auth.verificarUsuarioLogado, ctrl.listagemPerfilView);
+
+//ROTAS PRODUTO
+router.get('/listarProduto', auth.verificarUsuarioLogado, ctrl.listarProdutoView);
+router.get('/cadastroProduto', auth.verificarUsuarioLogado, ctrl.cadastroProdutoView);
+router.post("/cadastroProduto", auth.verificarUsuarioLogado, upload.single("imagem"), ctrl.cadastrarProduto);
+router.post("/excluirProduto", auth.verificarUsuarioLogado, ctrl.excluirProduto);
+router.get("/alterarProduto/:id", auth.verificarUsuarioLogado, ctrl.alterarProdutoView);
+router.post("/alterarProduto", auth.verificarUsuarioLogado, upload.single("imagem"), ctrl.alterarProdutoView);
+router.get("/obter/:produto", ctrl.obter)
 
 module.exports = router;
