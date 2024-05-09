@@ -78,7 +78,7 @@ class ProdutoModel {
                     where prd_id = ? order by prd_id`;
         let valores = [id];
         var rows = await conexao.ExecutaComando(sql, valores);
-
+ 
         let produto = null;
 
         if(rows.length > 0){

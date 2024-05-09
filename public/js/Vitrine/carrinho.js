@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var btnAddCarrinho = document.querySelectorAll(".btnAddCarrinho");
 
-    let carrinho = [];
+    let carrinho = []; 
 
     if(localStorage.getItem("carrinho") != null) {
         carrinho = JSON.parse(localStorage.getItem("carrinho"));
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let id = this.dataset.produtoid;
         console.log(id);
 
-        fetch("/produto/obter/" + id)
+        fetch("/admin/obter/" + id)
         .then(r=> {
             return r.json();
         })
