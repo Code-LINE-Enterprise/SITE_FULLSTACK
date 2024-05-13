@@ -43,6 +43,9 @@ router.delete('/excluirPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.exclui
 router.get('/listarDoacao', auth.verificarUsuarioLogado, ctrl.listagemDoacaoView);
 router.get('/doacaoAdm', auth.verificarUsuarioLogado, ctrl.cadastroDoacaoView);
 router.post('/doacaoAdm', auth.verificarUsuarioLogado, ctrl.cadastrarDoacao);
+router.get('/alterarDoacao/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoView);
+router.put('/alterarDoacao/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacao);
+router.delete('/excluirDoacao/:id', auth.verificarUsuarioLogado, ctrl.excluirDoacao);
 
 //ROTAS EVENTO
 router.get('/listarEvento', auth.verificarUsuarioLogado, ctrl.listagemEventoView);

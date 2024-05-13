@@ -409,6 +409,71 @@ class AdmController {
         }
 
     }
+
+    async alterarDoacaoView(req, res){
+        console.log(req.params.id);
+
+        let tipo = new TipoDoacaoModel();
+        let listaTipo = await tipo.listarTipo();
+        let doacao = new DoacaoModel();
+        let doacaoSelecionado = await doacao.obterIdDoacao(req.params.id);
+
+        res.render('admin/doacaoAdm/alterarDoacao', {doacao: doacaoSelecionado, listaTipo: listaTipo, layout: 'admin/layoutAdm'});
+    }
+
+    async alterarDoacao(req, resp){
+        let msg = "";
+        let cor = "";
+        let id = req.params.id;
+
+        if(req.body.tipoDoacaoId != "" && req.body.quantDoacao != "" && req.body.valorDoacao != '0' &&
+        req.body.descDoacao != '0') {
+            let doacao = new DoacaoModel(id, req.body.tipoDoacaoId, req.body.quantDoacao, req.body.valorDoacao, req.body.descDoacao);
+
+            let result = await doacao.alterarDoacao();
+
+            if(result){
+                resp.send({
+                    ok: true,
+                    msg: "Doação editada com sucesso!"
+                });
+            }
+            else{
+                resp.send({
+                    ok: false,
+                    msg: "Erro ao editar doação!"
+                })
+            }
+        }
+        else
+        {
+            resp.send({
+                ok: false,
+                msg: "Parâmetros preenchidos incorretamente!"
+            });
+        }
+    }
+
+    async excluirDoacao(req, resp){
+        let id = req.params.id;
+        let doacao = new DoacaoModel(id, null, null, null, null);
+
+        let result = await doacao.excluirDoacao();
+        
+        if(result){
+            resp.send({
+                ok: true,
+                msg: "Doação excluida com sucesso!"
+            });
+        }
+        else{
+            resp.send({
+                ok: false,
+                msg: "Erro ao excluir doação!"
+            })
+        }
+
+    }
     
     // PRODUTO
 

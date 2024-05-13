@@ -1,0 +1,50 @@
+<div class="container">
+    <h1>Alteração de Doação</h1>
+    <div>
+        <% if (typeof msg != "undefined") { %>             
+            <span><%= msg %></span>
+        <% } %>
+    </div>
+    <div>
+        <div>
+            <div>
+                <div class="form-group">
+                    <label for="tipoDoacaoId" class="form-label">Tipo de doação:</label>
+                    <select class="form-control" id="tipoDoacaoId" name="tipoDoacaoId">
+                        <option selected value="0">Selecione...</option>
+                        <% for(let i = 0; i<listaTipo.length; i++) { %>
+                            <% if(doacao.tipodoacaoId == listaTipo[i].tipodoacaoId) { %>
+                                <option selected value="<%= listaTipo[i].tipodoacaoId %>"><%= listaTipo[i].tipodoacaoNome %></option>
+                            <% } else { %>
+                                <option value="<%= listaTipo[i].tipodoacaoId %>"><%= listaTipo[i].tipodoacaoNome %></option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="quantDoacao" class="form-label">Quantidade de doaçao:</label>
+                    <input type="number" class="form-control" id="quantDoacao" value="<%= doacao.quantDoacao %>" name="quantDoacao">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="valorDoacao" class="form-label">Valor da doaçao:</label>
+                    <input type="number" class="form-control" id="valorDoacao" value="<%= doacao.valorDoacao %>" name="valorDoacao">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="descDoacao" class="form-label">Descrição da doação:</label>
+                    <input type="text" maxlength="45" placeholder="Nome do patrimonio aqui" value="<%= doacao.descDoacao %>" class="form-control" id="descDoacao" name="descDoacao">
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnAlterarDoacao" type="button">Alterar</button>
+                <a class="btn btn-secondary" href="/admin/home">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/admin/alterarDoacao.js"></script>

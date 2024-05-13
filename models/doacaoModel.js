@@ -78,6 +78,42 @@ class DoacaoModel {
     
             return result;
     }
+
+    async alterarDoacao(){
+        
+        let sql = "update Doacao set tipodoacao_id = ?, quant_doacao = ?, valor_doacao = ?, desc_doacao = ? where cod_doacao = ?";
+
+        let valores = [this.#tipoDoacaoId, this.#quantDoacao, this.#valorDoacao, this.#descDoacao, this.#doacaoId];
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+        return result;
+    
+}
+
+    async obterIdDoacao(id) {
+        let sql = "select * from Doacao where cod_doacao = ?";
+
+        let valores = [id];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        if(rows.length > 0) {
+            let row = rows[0];
+            return new DoacaoModel(row["cod_doacao"], row["tipodoacao_id"], row["quant_doacao"], row["valor_doacao"], row["desc_doacao"]);
+        }
+
+        return null;
+    }
+
+    async excluirDoacao() {
+        let sql = "delete from Doacao where cod_doacao = ?";
+
+        let valores = [this.#doacaoId];
+        
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
 }
 
 module.exports = DoacaoModel;

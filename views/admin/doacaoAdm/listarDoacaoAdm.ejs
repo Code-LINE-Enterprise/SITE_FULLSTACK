@@ -21,10 +21,15 @@
                         <td><%= listaDoacao[i].quantDoacao %></td>
                         <td><%= listaDoacao[i].valorDoacao %></td>
                         <td><%= listaDoacao[i].descDoacao %></td>
+                        <td>
+                            <a href="/admin/alterarDoacao/<%= listaDoacao[i].doacaoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <button onclick="excluirDoacao('<%= listaDoacao[i].doacaoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                 <% } %>
             </tbody>
         </table>
     </div>
     </div>         
+    <script src="/js/admin/excluirDoacao.js"></script>
              
