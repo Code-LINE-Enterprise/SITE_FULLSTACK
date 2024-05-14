@@ -432,22 +432,22 @@ class AdmController {
         let cor = "";
         let id = req.params.id;
 
-        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao != '0') {
-            let doacaoMonetaria = new DoacaoMonetariaModel(0, req.body.tipoDoacaoMonetariaId, req.body.valorDoacao);
+        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao != "") {
+            let doacaoMonetaria = new DoacaoMonetariaModel(id, req.body.tipoDoacaoMonetariaId, req.body.valorDoacao);
 
             let result = await doacaoMonetaria.alterarDoacaoMonetaria();
 
-            if(result) {
+            if(result){
                 resp.send({
                     ok: true,
-                    msg: "Doação monetária alterada com sucesso!"
+                    msg: "Doação editada com sucesso!"
                 });
-            }   
+            }
             else{
                 resp.send({
                     ok: false,
-                    msg: "Erro ao alterar doação!"
-                });
+                    msg: "Erro ao editar doação!"
+                })
             }
         }
         else
