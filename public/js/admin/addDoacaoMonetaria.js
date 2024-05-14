@@ -1,46 +1,34 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    document.getElementById("btnCadastrarDoacao").addEventListener("click", cadastrar);
+    document.getElementById("btnCadastrarDoacaoMonetaria").addEventListener("click", cadastrarMonetario);
 
     function limparValidacao() {
-        document.getElementById("tipoDoacaoId").style["border-color"] = "#ced4da";
-        document.getElementById("quantDoacao").style["border-color"] = "#ced4da";
+        document.getElementById("tipoDoacaoMonetariaId").style["border-color"] = "#ced4da"
         document.getElementById("valorDoacao").style["border-color"] = "#ced4da";
-        document.getElementById("descDoacao").style["border-color"] = "#ced4da";
     }
 
-    function cadastrar() {
+    function cadastrarMonetario() {
         limparValidacao();
-        let tipoDoacaoId = document.querySelector("#tipoDoacaoId").value;
-        let quantDoacao = document.querySelector("#quantDoacao").value;
+        let tipoDoacaoMonetariaId = document.querySelector("#tipoDoacaoMonetariaId").value;
         let valorDoacao = document.querySelector("#valorDoacao").value;
-        let descDoacao = document.querySelector("#descDoacao").value;
 
         let listaErros = [];
-        if(tipoDoacaoId == "") {
-            listaErros.push("tipoDoacaoId");
-        }
-        if(quantDoacao == "") {
-            listaErros.push("quantDoacao");
+        if(tipoDoacaoMonetariaId == "") {
+            listaErros.push("tipoDoacaoMonetariaId");
         }
         if(valorDoacao == "") {
             listaErros.push("valorDoacao");
-        }
-        if(descDoacao == "") {
-            listaErros.push("descDoacao");
         }
 
         if(listaErros.length == 0) {
             //enviar ao backend com fetch
 
             let obj = {
-                tipoDoacaoId: tipoDoacaoId,
-                quantDoacao: quantDoacao,
+                tipoDoacaoMonetariaId: tipoDoacaoMonetariaId,
                 valorDoacao: valorDoacao,
-                descDoacao: descDoacao,
             }
 
-            fetch("/admin/doacaoAdm", {
+            fetch("/admin/doacaoMonetariaAdm", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -52,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    window.location.href="/admin/listarDoacao";
+                    window.location.href="/admin/listarDoacaoMonetaria";
                 }   
                 else {
                     alert(r.msg);

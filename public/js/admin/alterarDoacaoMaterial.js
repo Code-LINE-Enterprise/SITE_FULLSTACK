@@ -1,48 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let cod_doacao = window.location.pathname.split("/")[3];
-    console.log({ cod_doacao });
+    let cod_DoacaoMaterial = window.location.pathname.split("/")[3];
+    console.log({ cod_DoacaoMaterial });
 
-        document.getElementById("btnAlterarDoacao").addEventListener("click", alterar);
+        document.getElementById("btnAlterarDoacaoMaterial").addEventListener("click", alterarMaterial);
     
         function limparValidacao() {
-            document.getElementById("tipoDoacaoId").style["border-color"] = "#ced4da";
+            document.getElementById("tipoDoacaoMaterialId").style["border-color"] = "#ced4da"
             document.getElementById("quantDoacao").style["border-color"] = "#ced4da";
-            document.getElementById("valorDoacao").style["border-color"] = "#ced4da";
-            document.getElementById("descDoacao").style["border-color"] = "#ced4da";
         }
     
-        function alterar() {
+        function alterarMaterial() {
             limparValidacao();
-            let tipoDoacaoId = document.querySelector("#tipoDoacaoId").value;
+            let tipoDoacaoMaterialId = document.querySelector("#tipoDoacaoMaterialId").value;
             let quantDoacao = document.querySelector("#quantDoacao").value;
-            let valorDoacao = document.querySelector("#valorDoacao").value;
-            let descDoacao = document.querySelector("#descDoacao").value;
     
             let listaErros = [];
-            if(tipoDoacaoId == "") {
-                listaErros.push("tipoDoacaoId");
+            if(tipoDoacaoMaterialId == "") {
+                listaErros.push("tipoDoacaoMaterialId");
             }
             if(quantDoacao == "") {
                 listaErros.push("quantDoacao");
-            }
-            if(valorDoacao == "") {
-                listaErros.push("valorDoacao");
-            }
-            if(descDoacao == "") {
-                listaErros.push("descDoacao");
             }
     
             if(listaErros.length == 0) {
                 //enviar ao backend com fetch
     
                 let obj = {
-                    tipoDoacaoId: tipoDoacaoId,
+                    tipoDoacaoMaterialId: tipoDoacaoMaterialId,
                     quantDoacao: quantDoacao,
-                    valorDoacao: valorDoacao,
-                    descDoacao: descDoacao,
                 }
 
-            fetch(`/admin/alterarDoacao/${cod_doacao}`, {
+            fetch(`/admin/alterarDoacaoMaterial/${cod_DoacaoMaterial}`, {
                 method: 'PUT',
                 body: JSON.stringify(obj),
                 headers: {
@@ -55,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     alert(r.msg);
                     if (r.ok) {
-                        window.location.href = "/admin/listarDoacao";
+                        window.location.href = "/admin/listarDoacaoMaterial";
                     }
                 })
         }

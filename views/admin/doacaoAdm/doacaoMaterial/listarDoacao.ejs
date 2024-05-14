@@ -1,0 +1,30 @@
+
+<div class="container-fluid">
+    <h1>Doações monetárias cadastradas</h1>
+<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/doacaoMaterialAdm">Nova Doação Monetária</a>
+
+<hr>
+<div>
+<table class="table table-striped">
+<thead>
+<th>Id doação</th>
+<th>Tipo doação</th>
+<th>Valor Doação</th>
+</thead>
+<tbody>
+<% for (let i = 0; i < listaDoacao.length; i++)  { %>
+    <tr>
+        <td><%= listaDoacao[i].doacaoMaterialId %></td>
+        <td><%= listaDoacao[i].tipoDoacaoMaterialId %></td>
+        <td><%= listaDoacao[i].valorDoacao %></td>
+        <td>
+            <a href="/admin/alterarDoacaoMaterial/<%= listaDoacao[i].doacaoMaterialId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+            <button onclick="excluirDoacaoMaterial('<%= listaDoacao[i].doacaoMaterialId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+        </td>
+    </tr>
+<% } %>
+</tbody>
+</table>
+</div>
+</div>         
+<script src="/js/admin/excluirDoacaoMaterial.js"></script>

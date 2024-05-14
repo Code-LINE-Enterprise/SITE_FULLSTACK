@@ -1,10 +1,10 @@
-function excluirDoacao(cod_doacao) {
+function excluirDoacaoMonetaria(cod_DoacaoMonetaria) {
     // Exibe um diálogo de confirmação
-    let confirmacao = confirm("Tem certeza que deseja excluir este doação?");
+    let confirmacao = confirm("Tem certeza que deseja excluir esta doação?");
 
     // Se o usuário clicar em "OK" no diálogo de confirmação
     if (confirmacao) {
-        fetch(`/admin/excluirDoacao/${cod_doacao}`, {
+        fetch(`/admin/excluirDoacaoMonetaria/${cod_DoacaoMonetaria}`, {
             method: "DELETE"
         })
         .then((r) => r.json())

@@ -1,7 +1,9 @@
 const EventoModel = require("../models/eventoModel");
 const PatrimonioModel = require("../models/patrimonioModel");
-const DoacaoModel = require("../models/doacaoModel");
-const TipoDoacaoModel = require("../models/tipoDoacaoModel");
+const DoacaoMaterialModel = require("../models/doacaoMaterialModel");
+const DoacaoMonetariaModel = require("../models/doacaoMonetariaModel");
+const TipoDoacaoMaterialModel = require("../models/tipoDoacaoMaterialModel");
+const TipoDoacaoMonetariaModel = require("../models/tipoDoacaoMonetariaModel");
 const UsuarioModel = require("../models/usuarioModel");
 const PerfilModel = require("../models/perfilModel");
 const CategoriaModel = require("../models/categoriaModel");
@@ -364,33 +366,37 @@ class AdmController {
     }
 
     //DOACAO
-    async listagemDoacaoView(req, res){
-
-        let doacao = new DoacaoModel();
-        let listaDoacao = await doacao.listarDoacao();
-        res.render('admin/doacaoAdm/listarDoacaoAdm', {layout: 'admin/layoutAdm', listaDoacao: listaDoacao})
+    async escolherDoacaoView(req, res){
+        res.render('admin/doacaoAdm/escolherDoacao', {layout: 'admin/layoutAdm'})
     }
 
-    async cadastroDoacaoView(req, res){
-        let tipo = new TipoDoacaoModel();
-        let listaTipo = await tipo.listarTipo();
+    //DOAÇÃO MONETÁRIA
+    async listagemDoacaoMonetariaView(req, res){
 
-        res.render('admin/doacaoAdm/doacaoAdm', {layout: 'admin/layoutAdm', listaTipo: listaTipo});
+        let doacaoMonetaria = new DoacaoMonetariaModel();
+        let listaDoacaoMonetaria = await doacaoMonetaria.listarDoacaoMonetaria();
+        res.render('admin/doacaoAdm/doacaoMonetaria/listarDoacaoMonetaria', {layout: 'admin/layoutAdm', listaDoacaoMonetaria: listaDoacaoMonetaria})
     }
 
-    async cadastrarDoacao(req, resp){
+    async cadastroDoacaoMonetariaView(req, res){
+        let tipoMonetario = new TipoDoacaoMonetariaModel();
+        let listaTipoMonetario = await tipoMonetario.listarTipoMonetario();
+
+        res.render('admin/doacaoAdm/doacaoMonetaria/addDoacaoMonetaria', {layout: 'admin/layoutAdm', listaTipoMonetario: listaTipoMonetario});
+    }
+
+    async cadastrarDoacaoMonataria(req, resp){
         let msg = "";
         let cor = "";
-        if(req.body.tipoDoacaoId != "" && req.body.quantDoacao != "" && req.body.valorDoacao != '0' &&
-        req.body.descDoacao != '0') {
-            let doacao = new DoacaoModel(0, req.body.tipoDoacaoId, req.body.quantDoacao, req.body.valorDoacao, req.body.descDoacao);
+        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao != '0') {
+            let doacaoMonetaria = new DoacaoMonetariaModel(0, req.body.tipoDoacaoMonetariaId, req.body.valorDoacao);
 
-            let result = await doacao.cadastrarDoacao();
+            let result = await doacaoMonetaria.cadastrarDoacaoMonetaria();
 
             if(result) {
                 resp.send({
                     ok: true,
-                    msg: "Doação cadastrada com sucesso!"
+                    msg: "Doação monetária cadastrada com sucesso!"
                 });
             }   
             else{
@@ -410,27 +416,135 @@ class AdmController {
 
     }
 
-    async alterarDoacaoView(req, res){
+    async alterarDoacaoMonetariaView(req, res){
         console.log(req.params.id);
 
-        let tipo = new TipoDoacaoModel();
-        let listaTipo = await tipo.listarTipo();
-        let doacao = new DoacaoModel();
-        let doacaoSelecionado = await doacao.obterIdDoacao(req.params.id);
+        let tipoMonetario = new TipoDoacaoMonetariaModel();
+        let listaTipoMonetario = await tipoMonetario.listarTipoMonetario();
+        let doacaoMonetaria = new DoacaoMonetariaModel();
+        let doacaoSelecionado = await doacaoMonetaria.obterIdDoacaoMonetaria(req.params.id);
 
-        res.render('admin/doacaoAdm/alterarDoacao', {doacao: doacaoSelecionado, listaTipo: listaTipo, layout: 'admin/layoutAdm'});
+        res.render('admin/doacaoAdm/doacaoMonetaria/alterarDoacaoMonetaria', {doacaoMonetaria: doacaoSelecionado, listaTipoMonetario: listaTipoMonetario, layout: 'admin/layoutAdm'});
     }
 
-    async alterarDoacao(req, resp){
+    async alterarDoacaoMonetaria(req, resp){
         let msg = "";
         let cor = "";
         let id = req.params.id;
 
-        if(req.body.tipoDoacaoId != "" && req.body.quantDoacao != "" && req.body.valorDoacao != '0' &&
-        req.body.descDoacao != '0') {
-            let doacao = new DoacaoModel(id, req.body.tipoDoacaoId, req.body.quantDoacao, req.body.valorDoacao, req.body.descDoacao);
+        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao != '0') {
+            let doacaoMonetaria = new DoacaoMonetariaModel(0, req.body.tipoDoacaoMonetariaId, req.body.valorDoacao);
 
-            let result = await doacao.alterarDoacao();
+            let result = await doacaoMonetaria.alterarDoacaoMonetaria();
+
+            if(result) {
+                resp.send({
+                    ok: true,
+                    msg: "Doação monetária alterada com sucesso!"
+                });
+            }   
+            else{
+                resp.send({
+                    ok: false,
+                    msg: "Erro ao alterar doação!"
+                });
+            }
+        }
+        else
+        {
+            resp.send({
+                ok: false,
+                msg: "Parâmetros preenchidos incorretamente!"
+            });
+        }
+    }
+
+    async excluirDoacaoMonetaria(req, resp){
+        let id = req.params.id;
+        let doacaoMonetaria = new DoacaoMonetariaModel(id, null, null, null);
+
+        let result = await doacaoMonetaria.excluirDoacaoMonetaria();
+        
+        if(result){
+            resp.send({
+                ok: true,
+                msg: "Doação monetária excluida com sucesso!"
+            });
+        }
+        else{
+            resp.send({
+                ok: false,
+                msg: "Erro ao excluir doação!"
+            })
+        }
+
+    }
+
+    //DOAÇÃO MATERIAL
+    async listagemDoacaoMaterialView(req, res){
+        let doacao = new DoacaoMaterialModel();
+        let listaDoacao = await doacao.listarDoacaoMaterial();
+        res.render('admin/doacaoAdm/doacaoMaterial/listarDoacao', {layout: 'admin/layoutAdm', listaDoacao: listaDoacao})
+    }
+
+    async cadastroDoacaoMaterialView(req, res){
+        let tipo = new TipoDoacaoMaterialModel();
+        let listaTipo = await tipo.listarTipoMaterial();
+
+        res.render('admin/doacaoAdm/doacaoMaterial/addDoacaoMaterial', {layout: 'admin/layoutAdm', listaTipo: listaTipo});
+    }
+
+    async cadastrarDoacaoMaterial(req, resp){
+        let msg = "";
+        let cor = "";
+        if(req.body.tipoDoacaoMaterialId != "" && req.body.quantDoacao != "") {
+            let doacao = new DoacaoMaterialModel(0, req.body.tipoDoacaoMaterialId, req.body.quantDoacao);
+
+            let result = await doacao.cadastrarDoacaoMaterial();
+
+            if(result) {
+                resp.send({
+                    ok: true,
+                    msg: "Doação material cadastrada com sucesso!"
+                });
+            }   
+            else{
+                resp.send({
+                    ok: false,
+                    msg: "Erro ao cadastrar doação!"
+                });
+            }
+        }
+        else
+        {
+            resp.send({
+                ok: false,
+                msg: "Parâmetros preenchidos incorretamente!"
+            });
+        }
+
+    }
+
+    async alterarDoacaoMaterialView(req, res){
+        console.log(req.params.id);
+
+        let tipo = new TipoDoacaoMaterialModel();
+        let listaTipo = await tipo.listarTipoMaterial();
+        let doacao = new DoacaoMaterialModel();
+        let doacaoSelecionado = await doacao.obterIdDoacaoMaterial(req.params.id);
+
+        res.render('admin/doacaoAdm/doacaoMaterial/alterarDoacaoMaterial', {doacao: doacaoSelecionado, listaTipo: listaTipo, layout: 'admin/layoutAdm'});
+    }
+
+    async alterarDoacaoMaterial(req, resp){
+        let msg = "";
+        let cor = "";
+        let id = req.params.id;
+
+        if(req.body.tipoDoacaoMaterialId != "" && req.body.quantDoacao != "") {
+            let doacao = new DoacaoMaterialModel(id, req.body.tipoDoacaoMaterialId, req.body.quantDoacao);
+
+            let result = await doacao.alterarDoacaoMaterial();
 
             if(result){
                 resp.send({
@@ -454,11 +568,11 @@ class AdmController {
         }
     }
 
-    async excluirDoacao(req, resp){
+    async excluirDoacaoMaterial(req, resp){
         let id = req.params.id;
-        let doacao = new DoacaoModel(id, null, null, null, null);
+        let doacao = new DoacaoMaterialModel(id, null, null, null);
 
-        let result = await doacao.excluirDoacao();
+        let result = await doacao.excluirDoacaoMaterial();
         
         if(result){
             resp.send({

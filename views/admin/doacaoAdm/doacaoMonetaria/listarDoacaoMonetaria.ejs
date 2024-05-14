@@ -1,0 +1,30 @@
+
+<div class="container-fluid">
+    <h1>Doações monetárias cadastradas</h1>
+<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/doacaoMonetariaAdm">Nova Doação Monetária</a>
+
+<hr>
+<div>
+<table class="table table-striped">
+<thead>
+<th>Id doação</th>
+<th>Tipo doação</th>
+<th>Valor Doação</th>
+</thead>
+<tbody>
+<% for (let i = 0; i < listaDoacaoMonetaria.length; i++)  { %>
+    <tr>
+        <td><%= listaDoacaoMonetaria[i].doacaoMonetariaId %></td>
+        <td><%= listaDoacaoMonetaria[i].tipoDoacaoMonetariaId %></td>
+        <td><%= listaDoacaoMonetaria[i].valorDoacao %></td>
+        <td>
+            <a href="/admin/alterarDoacaoMonetaria/<%= listaDoacaoMonetaria[i].doacaoMonetariaId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+            <button onclick="excluirDoacaoMonetaria('<%= listaDoacaoMonetaria[i].doacaoMonetariaId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+        </td>
+    </tr>
+<% } %>
+</tbody>
+</table>
+</div>
+</div>         
+<script src="/js/admin/excluirDoacaoMonetaria.js"></script>

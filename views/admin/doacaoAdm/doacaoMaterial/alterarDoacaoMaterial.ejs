@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>Alteração de Doação</h1>
+    <div>
+        <% if (typeof msg != "undefined") { %>             
+            <span><%= msg %></span>
+        <% } %>
+    </div>
+    <div>
+        <div>
+            <div>
+                <div class="form-group">
+                    <label for="tipoDoacaoMaterialId" class="form-label">Tipo de doação:</label>
+                    <select class="form-control" id="tipoDoacaoMaterialId" name="tipoDoacaoMaterialId">
+                        <option selected value="0">Selecione...</option>
+                        <% for(let i = 0; i<listaTipo.length; i++) { %>
+                            <% if(doacao.tipoDoacaoMaterialId == listaTipo[i].tipoDoacaoMaterialId) { %>
+                                <option selected value="<%= listaTipo[i].tipoDoacaoMaterialId %>"><%= listaTipo[i].tipoDoacaoMaterialNome %></option>
+                            <% } else { %>
+                                <option value="<%= listaTipo[i].tipoDoacaoMaterialId %>"><%= listaTipo[i].tipoDoacaoMaterialNome %></option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="quantDoacao" class="form-label">Quantidade de doaçao:</label>
+                    <input type="number" class="form-control" id="quantDoacao" value="<%= doacao.quantDoacao %>" name="quantDoacao">
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnAlterarDoacaoMaterial" type="button">Alterar</button>
+                <a class="btn btn-secondary" href="/admin/home">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/admin/alterarDoacaoMaterial.js"></script>

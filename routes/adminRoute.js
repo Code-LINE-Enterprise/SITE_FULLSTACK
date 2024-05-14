@@ -39,13 +39,24 @@ router.get('/alterarPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.alterarPa
 router.put('/alterarPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.alterarPatrimonio);
 router.delete('/excluirPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.excluirPatrimonio);
 
-//ROTAS DOAÇÕES
-router.get('/listarDoacao', auth.verificarUsuarioLogado, ctrl.listagemDoacaoView);
-router.get('/doacaoAdm', auth.verificarUsuarioLogado, ctrl.cadastroDoacaoView);
-router.post('/doacaoAdm', auth.verificarUsuarioLogado, ctrl.cadastrarDoacao);
-router.get('/alterarDoacao/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoView);
-router.put('/alterarDoacao/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacao);
-router.delete('/excluirDoacao/:id', auth.verificarUsuarioLogado, ctrl.excluirDoacao);
+//ROTA DOAÇÃO
+router.get('/escolherDoacao', auth.verificarUsuarioLogado, ctrl.escolherDoacaoView);
+
+//ROTAS DOAÇÕES MONETÁRIAS
+router.get('/listarDoacaoMonetaria', auth.verificarUsuarioLogado, ctrl.listagemDoacaoMonetariaView);
+router.get('/doacaoMonetariaAdm', auth.verificarUsuarioLogado, ctrl.cadastroDoacaoMonetariaView);
+router.post('/doacaoMonetariaAdm', auth.verificarUsuarioLogado, ctrl.cadastrarDoacaoMonataria);
+router.get('/alterarDoacaoMonetaria/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoMonetariaView);
+router.put('/alterarDoacaoMonetaria/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoMonetaria);
+router.delete('/excluirDoacaoMonetaria/:id', auth.verificarUsuarioLogado, ctrl.excluirDoacaoMonetaria);
+
+//ROTAS DOAÇÕES MATERIAIS
+router.get('/listarDoacao', auth.verificarUsuarioLogado, ctrl.listagemDoacaoMaterialView);
+router.get('/doacaoMaterialAdm', auth.verificarUsuarioLogado, ctrl.cadastroDoacaoMaterialView);
+router.post('/doacaoMaterialAdm', auth.verificarUsuarioLogado, ctrl.cadastrarDoacaoMaterial);
+router.get('/alterarDoacaoMaterial/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoMaterialView);
+router.put('/alterarDoacaoMaterial/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoMaterial);
+router.delete('/excluirDoacaoMaterial/:id', auth.verificarUsuarioLogado, ctrl.excluirDoacaoMaterial);
 
 //ROTAS EVENTO
 router.get('/listarEvento', auth.verificarUsuarioLogado, ctrl.listagemEventoView);

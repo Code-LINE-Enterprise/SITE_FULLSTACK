@@ -1,0 +1,39 @@
+
+<div class="container">
+    <h1>Alteração de Doação Monetária</h1>
+    <div>
+        <% if (typeof msg != "undefined") { %>             
+            <span><%= msg %></span>
+        <% } %>
+    </div>
+    <div>
+        <div>
+            <div>
+                <div class="form-group">
+                    <label for="tipoDoacaoMonetariaId" class="form-label">Tipo de doação:</label>
+                    <select class="form-control" id="tipoDoacaoMonetariaId" name="tipoDoacaoMonetariaId">
+                        <option selected value="0">Selecione...</option>
+                        <% for(let i = 0; i<listaTipoMonetario.length; i++) { %>
+                            <% if(doacaoMonetaria.tipoDoacaoMonetariaId == listaTipoMonetario[i].tipoDoacaoMonetariaId) { %>
+                                <option selected value="<%= listaTipoMonetario[i].tipoDoacaoMonetariaId %>"><%= listaTipoMonetario[i].tipoDoacaoMonetariaNome %></option>
+                            <% } else { %>
+                                <option value="<%= listaTipoMonetario[i].tipoDoacaoMonetariaId %>"><%= listaTipoMonetario[i].tipoDoacaoMonetariaNome %></option>
+                            <% } %>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="valorDoacao" class="form-label">Valor da doaçao:</label>
+                    <input type="number" value="<%= doacaoMonetaria.valorDoacao %>" class="form-control" id="valorDoacao" name="valorDoacao">
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnAlterarDoacaoMonetaria" type="button">Alterar</button>
+                <a class="btn btn-secondary" href="/admin/home">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/admin/alterarDoacaoMonetaria.js"></script>
