@@ -51,7 +51,7 @@ router.put('/alterarDoacaoMonetaria/:id', auth.verificarUsuarioLogado, ctrl.alte
 router.delete('/excluirDoacaoMonetaria/:id', auth.verificarUsuarioLogado, ctrl.excluirDoacaoMonetaria);
 
 //ROTAS DOAÇÕES MATERIAIS
-router.get('/listarDoacao', auth.verificarUsuarioLogado, ctrl.listagemDoacaoMaterialView);
+router.get('/listarDoacaoMaterial', auth.verificarUsuarioLogado, ctrl.listagemDoacaoMaterialView);
 router.get('/doacaoMaterialAdm', auth.verificarUsuarioLogado, ctrl.cadastroDoacaoMaterialView);
 router.post('/doacaoMaterialAdm', auth.verificarUsuarioLogado, ctrl.cadastrarDoacaoMaterial);
 router.get('/alterarDoacaoMaterial/:id', auth.verificarUsuarioLogado, ctrl.alterarDoacaoMaterialView);

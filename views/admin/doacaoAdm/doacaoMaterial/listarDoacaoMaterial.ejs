@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
-    <h1>Doações monetárias cadastradas</h1>
-<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/doacaoMaterialAdm">Nova Doação Monetária</a>
+    <h1>Doações materiais cadastradas</h1>
+<a class="btn btn-secondary" style="max-width: 200px;" href="/admin/doacaoMaterialAdm">Nova Doação Material</a>
 
 <hr>
 <div>
@@ -9,14 +9,14 @@
 <thead>
 <th>Id doação</th>
 <th>Tipo doação</th>
-<th>Valor Doação</th>
+<th>Quantidade Doação</th>
 </thead>
 <tbody>
 <% for (let i = 0; i < listaDoacao.length; i++)  { %>
     <tr>
         <td><%= listaDoacao[i].doacaoMaterialId %></td>
         <td><%= listaDoacao[i].tipoDoacaoMaterialId %></td>
-        <td><%= listaDoacao[i].valorDoacao %></td>
+        <td><%= listaDoacao[i].quantidadeDoacao %></td>
         <td>
             <a href="/admin/alterarDoacaoMaterial/<%= listaDoacao[i].doacaoMaterialId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
             <button onclick="excluirDoacaoMaterial('<%= listaDoacao[i].doacaoMaterialId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>

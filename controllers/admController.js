@@ -484,7 +484,7 @@ class AdmController {
     async listagemDoacaoMaterialView(req, res){
         let doacao = new DoacaoMaterialModel();
         let listaDoacao = await doacao.listarDoacaoMaterial();
-        res.render('admin/doacaoAdm/doacaoMaterial/listarDoacao', {layout: 'admin/layoutAdm', listaDoacao: listaDoacao})
+        res.render('admin/doacaoAdm/doacaoMaterial/listarDoacaoMaterial', {layout: 'admin/layoutAdm', listaDoacao: listaDoacao})
     }
 
     async cadastroDoacaoMaterialView(req, res){
