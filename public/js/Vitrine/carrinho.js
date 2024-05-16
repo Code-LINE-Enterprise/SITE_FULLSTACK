@@ -34,16 +34,19 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td><img width="100" src="${carrinho[i].produtoImagem}" /></td>
                         <td>${carrinho[i].produtoNome}</td>
                         <td>R$${carrinho[i].produtoValor}</td>
-                        <td><button class="btnAdicionar" data-produto="${carrinho[i].produtoId}">+</button><input type="number" class="digitar" id="prodId-${carrinho[i].produtoId}" value="${carrinho[i].quantidade}"></input><button class="btnDiminuir" data-produto="${carrinho[i].produtoId}">-</button></td>
+                        <td>
+                            <button style="border: 1px solid black; border-radius: 5px;" class="btnAdicionar btn btn-dark" data-produto="${carrinho[i].produtoId}">+</button> 
+                            <input type="number" style="width:80px; height: 35px; border-radius: 5px;border: 1px solid black;" class="digitar" id="prodId-${carrinho[i].produtoId}" value="${carrinho[i].quantidade}"></input> 
+                            <button style="border: 1px solid black; border-radius: 5px;" class="btnDiminuir btn btn-dark" data-produto="${carrinho[i].produtoId}">-</button>
+                        </td>
                         <td id="produto-${carrinho[i].produtoId}">R$${valorTotalItem}</td>
-                        <td><button class="btnExcluir" data-cod="${carrinho[i].produtoId}"><i class="fas fa-trash"></i></button></td>
+                        <td><button class="btnExcluir btn btn-danger" data-cod="${carrinho[i].produtoId}"><i class="fas fa-trash">EXCLUIR</i></button></td>
                     </tr>`;
 
             html += ``
         }
         let total = valorTotal();
         document.getElementById("valorTotal").innerText = `Total: R$${total}`;
-
         document.querySelector("#tabelaCarrinho > tbody").innerHTML = html;
         carregaBotao();
 

@@ -16,6 +16,7 @@
   <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
   <!-- Template Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">
   <link href="/css/modal.css" rel="stylesheet">
@@ -40,12 +41,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
           <a href="/loja" class="get-started-btn">Doe agora</a>
-          <form class="d-flex">
-            <button data-bs-toggle="modal" data-bs-target="#modalCarrinho" class="btn btn-outline-dark" type="button">
-                <i class="bi-cart-fill me-1"></i>
-                <span id="contadorCarrinho" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
-        </form>
+         
           <a href="/admin" class="btn btn-info" style="margin-left: 40px; border-radius: 20px;">Administração</a>
     
         </div>
@@ -56,37 +52,7 @@
           <%- body %>
         </div>
       </div>
-      <section class="py-5">
-      <div class="modal fade modal-xl" id="modalCarrinho" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title"><i class="bi-cart-fill me-1"></i> Carrinho</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped" id="tabelaCarrinho">
-                    <thead>
-                        <th>Código</th>
-                        <th>Imagem</th>
-                        <th>Nome</th>
-                        <th>Valor</th>
-                        <th>Quantidade</th>
-                        <th>Valor total</th>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-              <p id="valorTotal" class="p-1" style="border: 1px solid black; border-radius: 25px;"></p>
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-success">Confirmar pedido</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      
       <!-- ======= Footer ======= -->
       <footer id="footer">
     

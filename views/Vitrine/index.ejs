@@ -1,88 +1,200 @@
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Loja ABPA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Compre os nossos produtos</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Torne-se um verdadeiro desenvolvedor fullstack com eles!</p>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABPA</title>
+     <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-                    <% produtos.map(function(value, index) { %>
-                        <div class="col mb-5">
-                            <div class="card h-100">
-                                <!-- Product image-->
-                                <img class="card-img-top" src="<%= value.imagem %>" alt="Imagem do produto" />
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <div class="d-flex justify-content-center small mb-2">
-                                            <%= value.marcaNome %>
-                                        </div>
-                                        <h5 class="fw-bolder"><%= value.produtoNome %></h5>
-                                        <div class="d-flex justify-content-center small mb-2">
-                                            <%= value.categoriaNome %>
-                                        </div>
-                                        <!-- Product price-->
-                                        R$<%= value.produtoValor %> 
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/modal.css" rel="stylesheet">
+  <link href="/img/logo.svg" rel="icon">
+</head>
+<body>
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+    
+          <h1 class="logo me-auto"><a href="/"><img src="img/logo.svg" alt=""></a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/courses">Notícias</a></li>
+              <li><a href="/events">Projetos</a></li>
+              <li><a href="/voluntarios/contact">Participe</a></li>
+            </ul>
+          
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+          <a href="/loja" class="get-started-btn">Doe agora</a>
+          <a href="/admin" class="btn btn-info" style="margin-left: 20px; border-radius: 20px;">Administração</a>
+          <form class="d-flex" style="margin-left: 40px;">
+            <button data-bs-toggle="modal" data-bs-target="#modalCarrinho" class="btn btn-outline-dark" type="button">
+                <i class="bi-cart-fill me-1"></i>Carrinho
+                <span id="contadorCarrinho" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+          </form>
+    
+        </div>
+       
+    </header><!-- End Header -->
+    <div class="bg-success py-5" style="height: 350px;">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white" style="margin-top: 100px;">
+                <h1 class="display-4 fw-bolder">Adquira os nossos produtos </h1>
+                <p class="lead fw-normal text-white mb-0">Além de estar adquirindo os nossos produtos, você vai estar DOANDO!!</p>
+            </div>
+        </div>
+    </div>
+      
+      </div>
+      <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                <% produtos.map(function(value, index) { %>
+                    <div class="col mb-5">
+                        <div class="card h-100" style="background-color: rgba(153, 235, 121, 0.123);border-color: green;">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="<%= value.imagem %>" alt="Imagem do produto" style="padding: 10px;"/>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <div class="d-flex justify-content-center small mb-2">
+                                        <%= value.marcaNome %>
                                     </div>
+                                    <h5 class="fw-bolder"><%= value.produtoNome %></h5>
+                                    <div class="d-flex justify-content-center small mb-2">
+                                        <%= value.categoriaNome %>
+                                    </div>
+                                    <!-- Product price-->
+                                    R$<%= value.produtoValor %> 
                                 </div>
-                                <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center">
-                                        <button data-produtoid="<%= value.produtoId %>" class="btn btn-outline-dark mt-auto btnAddCarrinho"><i     class="bi-cart-fill me-1"></i> Adicionar ao carrinho</button>
-                                    </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <button data-produtoid="<%= value.produtoId %>" class="btn btn-outline-dark mt-auto btnAddCarrinho"><i     class="bi-cart-fill me-1"></i> Adicionar ao carrinho</button>
                                 </div>
                             </div>
                         </div>
-                    <% }) %>
-                </div>
+                    </div>
+                <% }) %>
             </div>
-            <div class="modal fade modal-xl" id="modalCarrinho" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title"><i class="bi-cart-fill me-1"></i> Carrinho</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-striped" id="tabelaCarrinho">
-                            <thead>
-                                <th>Código</th>
-                                <th>Imagem</th>
-                                <th>Nome</th>
-                                <th>Valor</th>
-                                <th>Quantidade</th>
-                                <th>Valor total</th>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                      <p id="valorTotal" class="p-1" style="border: 1px solid black; border-radius: 25px;"></p>
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                      <button type="button" class="btn btn-success">Confirmar pedido</button>
-                    </div>
-                  </div>
+        </div>
+        <div class="modal fade modal-xl" id="modalCarrinho" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><i class="bi-cart-fill me-1"></i> Carrinho</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="tabelaCarrinho">
+                        <thead>
+                            <th>Código</th>
+                            <th>Imagem</th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th>Quantidade</th>
+                            <th>Valor total</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                  <p id="valorTotal" class="p-1" style="border: 1px solid black; border-radius: 25px;"></p>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-success">Confirmar pedido</button>
+                </div>
+              </div>
             </div>
-        </section>
-        <!-- Footer-->
-        
+        </div>
+    </section>
+      <!-- ======= Footer ======= -->
+      <footer id="footer">
+    
+        <div class="footer-top">
+          <div class="container">
+            <div class="row">
+    
+              <div class="col-lg-3 col-md-6 footer-contact">
+                <h3>ABPA</h3>
+                <p>
+                  R. José Bongiovani, 700<br>
+                  Presidente Prudente, SP 19050-920<br>
+                  Brasil <br><br>
+                  <strong>Telefone:</strong> 18 98123-4567<br>
+                  <strong>Email:</strong> abpa@email.com<br>
+                </p>
+              </div>
+    
+              <div class="col-lg-2 col-md-6 footer-links">
+                <h4>Links rápidos</h4>
+                <ul>
+                  <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="#about">Sobre nós</a></li>
+                </ul>
+              </div>
+    
+              <div class="col-lg-4 col-md-6 footer-newsletter">
+                <h4>Junte-se a nós</h4>
+                <p>Nos envie um e-mail expressando seu desejo de ser voluntário.</p>
+                <form action="" method="post">
+                  <input type="email" name="email"><input type="submit" value="Junte-se a nós">
+                </form>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+    
+        <div class="container d-md-flex py-4">
+    
+          <div class="me-md-auto text-center text-md-start">
+            <div class="copyright">
+              &copy; Copyright <strong><span>ABPA</span></strong>. Todos os direitos reservados.
+            </div>
+          </div>
+          <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          </div>
+        </div>
+      </footer><!-- End Footer -->
+
+      <div id="preloader"></div>
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    
+
+        <!-- Vendor JS Files -->
+  <script src="/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+  <script src="/js/Vitrine/js/scripts.js"></script>
+  <script src="/js/Vitrine/carrinho.js"></script>
+    </body>
+</html>
