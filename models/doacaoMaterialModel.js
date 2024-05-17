@@ -40,13 +40,13 @@ class DoacaoMaterialModel {
     //implementar as funções para manipulação das informações no banco
     async listarDoacaoMaterial() {
 
-        let sql = "select * from Doacao_Material order by cod_DoacaoMaterial desc";
+        let sql = "select * from Doacao_Material  inner join tipoDoacao_Material on Doacao_Material.tipoDoacaoMaterial_id = tipoDoacao_Material.tipoDoacaoMaterial_id order by cod_DoacaoMaterial desc";
 
         let rows = await banco.ExecutaComando(sql);
         let listaDoacaoMaterial = [];
 
         for(let i = 0; i < rows.length; i++) {
-            listaDoacaoMaterial.push(new DoacaoMaterialModel(rows[i]["cod_DoacaoMaterial"], rows[i]["tipoDoacaoMaterial_id"], rows[i]["quant_doacao"]));
+            listaDoacaoMaterial.push(new DoacaoMaterialModel(rows[i]["cod_DoacaoMaterial"], rows[i]["tipoDoacaoMaterial_nome"], rows[i]["quant_doacao"]));
         }
         return listaDoacaoMaterial;
     }

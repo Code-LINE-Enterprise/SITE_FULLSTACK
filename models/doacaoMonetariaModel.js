@@ -40,13 +40,14 @@ class DoacaoMonetariaModel {
     //implementar as funções para manipulação das informações no banco
     async listarDoacaoMonetaria() {
 
-        let sql = "select * from Doacao_Monetaria order by cod_DoacaoMonetaria desc";
+        let sql = 'select * from Doacao_Monetaria  inner join tipoDoacao_Monetaria on Doacao_Monetaria.tipoDoacaoMonetaria_id = tipoDoacao_Monetaria.tipoDoacaoMonetaria_id order by cod_DoacaoMonetaria desc'
+        // let sql = "select * from Doacao_Monetaria order by cod_DoacaoMonetaria desc";
 
         let rows = await banco.ExecutaComando(sql);
         let listaDoacaoMonetaria = [];
 
         for(let i = 0; i < rows.length; i++) {
-            listaDoacaoMonetaria.push(new DoacaoMonetariaModel(rows[i]["cod_DoacaoMonetaria"], rows[i]["tipoDoacaoMonetaria_id"], rows[i]["valor_doacao"]));
+            listaDoacaoMonetaria.push(new DoacaoMonetariaModel(rows[i]["cod_DoacaoMonetaria"], rows[i]["tipoDoacaoMonetaria_nome"], rows[i]["valor_doacao"]));
         }
         return listaDoacaoMonetaria;
     }
