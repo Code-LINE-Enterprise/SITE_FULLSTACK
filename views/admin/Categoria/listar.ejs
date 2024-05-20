@@ -1,8 +1,10 @@
 <div>
     <h1>Categorias cadastradas</h1>
-
-    <div class="table-responsive" style="margin-top: 15px;">
-        <table class="table table-striped table-hover">
+    <div>
+        <button id="btnExportarExcel">Exportar para excel</button>
+    </div>
+    <div  class="table-responsive" style="margin-top: 15px;">
+        <table id="tableCategoria" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Código</th>
@@ -20,3 +22,5 @@
         </table>
     </div>
 </div>
+<script src="/js/produto/listarCategoria.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>

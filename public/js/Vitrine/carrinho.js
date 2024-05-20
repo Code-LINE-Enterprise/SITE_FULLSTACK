@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var btnAddCarrinho = document.querySelectorAll(".btnAddCarrinho");
 
+    var btnConfirmar = document.querySelector("#btnConfirmarPedido");
+
+    btnConfirmar.addEventListener("click", gravarPedido);
+
     let carrinho = [];
 
     if(localStorage.getItem("carrinho") != null) {
@@ -19,147 +23,180 @@ document.addEventListener("DOMContentLoaded", function() {
         carregarCarrinho();
     })
 
+    function gravarPedido() {
+
+        let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+        if(listaCarrinho.length > 0) {
+
+            fetch("/admin/gravarPedido", {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(listaCarrinho)
+            })
+            .then(r=> {
+                return r.json();
+            })
+            .then(r=> {
+                console.log(r);
+            })
+
+        }
+        else{
+            alert("O carrinho está vazio!");
+        }
+    }
+
+    function remover() {
+        let produto = this.dataset.produto;
+        let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+
+        listaCarrinho = listaCarrinho.filter(x=> x.produtoId != produto);
+
+        localStorage.setItem("carrinho", JSON.stringify(listaCarrinho));
+
+        carregarCarrinho();
+    }
+
+    function iniciarEventos() {
+
+        let inputQtde = document.querySelectorAll(".inputQtde");
+
+        let btnIncrementar = document.querySelectorAll(".incrementar");
+
+        let btnDecrementar = document.querySelectorAll(".decrementar");
+
+        let btnRemover = document.querySelectorAll(".remover");
+
+        for(let i = 0; i < inputQtde.length; i++) {
+            inputQtde[i].addEventListener("change", alterarValor);
+            btnIncrementar[i].addEventListener("click", incrementar);
+            btnDecrementar[i].addEventListener("click", decrementar);
+            btnRemover[i].addEventListener("click", remover);
+        }
+
+    }
+
+    function incrementar() {
+        let produto = this.dataset.produto;
+        let valor = document.querySelector(`input[data-produto='${produto}']`).value;
+        valor++;
+        if(valor > 0 && valor < 999) {
+
+            let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+    
+            for(let i = 0; i<listaCarrinho.length; i++) {
+                if(produto == listaCarrinho[i].produtoId) {
+                    listaCarrinho[i].quantidade = valor;
+                }
+            }
+    
+            localStorage.setItem("carrinho", JSON.stringify(listaCarrinho));
+    
+            carregarCarrinho();
+        }
+        else {
+            alert("Valor incorreto, selecione entre 0 e 999");
+        }
+    }
+
+    function decrementar() {
+        let produto = this.dataset.produto;
+        let valor = document.querySelector(`input[data-produto='${produto}']`).value;
+        valor--;
+        if(valor > 0 && valor < 999) {
+
+            let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+    
+            for(let i = 0; i<listaCarrinho.length; i++) {
+                if(produto == listaCarrinho[i].produtoId) {
+                    listaCarrinho[i].quantidade = valor;
+                }
+            }
+    
+            localStorage.setItem("carrinho", JSON.stringify(listaCarrinho));
+    
+            carregarCarrinho();
+        }
+        else {
+            alert("Valor incorreto, selecione entre 0 e 999");
+        }
+    }
+
+    function alterarValor() {
+
+
+        let valor = this.value;
+        if(valor > 0 && valor < 999) {
+            let produto = this.dataset.produto;
+
+            let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+    
+            for(let i = 0; i<listaCarrinho.length; i++) {
+                if(produto == listaCarrinho[i].produtoId) {
+                    listaCarrinho[i].quantidade = valor;
+                }
+            }
+    
+            localStorage.setItem("carrinho", JSON.stringify(listaCarrinho));
+    
+            carregarCarrinho();
+        }
+        else{
+            alert("Valor incorreto, selecione entre 0 e 999");
+        }
+
+    }
+
     function carregarCarrinho() {
 
         let html = "";
 
         let carrinhoModal = JSON.parse(localStorage.getItem("carrinho"));
+        let valorTotalCarrinho = 0;
+        if(carrinhoModal.length > 0) {
+            for(let i = 0; i<carrinhoModal.length; i++) {
 
-        for(let i = 0; i<carrinhoModal.length; i++) {
+                let valorTotalItem = carrinhoModal[i].produtoValor * carrinhoModal[i].quantidade;
+                valorTotalCarrinho += valorTotalItem;
+                html += `<tr>
+                            <td>${carrinhoModal[i].produtoId}</td>                       
+                            <td><img width="100" src="${carrinhoModal[i].produtoImagem}" /></td>
+                            <td>${carrinhoModal[i].produtoNome}</td>
+                            <td>R$${carrinhoModal[i].produtoValor}</td>
+                            <td>
+                                <div style="display:flex;">
+                                    <button class="btn btn-default incrementar" data-produto="${carrinhoModal[i].produtoId}" >+</button>
+                                    <input style="width:100px;" type="number" class="form-control inputQtde" data-produto="${carrinhoModal[i].produtoId}" value="${carrinhoModal[i].quantidade}" />
+                                    <button class="btn btn-default decrementar" data-produto="${carrinhoModal[i].produtoId}">-</button>
+                                </div>
+                            </td>
+                            <td>R$${valorTotalItem}</td>
+                            <td>
+                                <button class="btn btn-danger remover" data-produto="${carrinhoModal[i].produtoId}"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>`;
+            }
+            
+            document.querySelector("#tabelaCarrinho > tbody").innerHTML = html;
 
-            let valorTotalItem = carrinho[i].produtoValor * carrinho[i].quantidade;
-
-            html += `<tr>
-                        <td>${carrinho[i].produtoId}</td>                       
-                        <td><img width="100" src="${carrinho[i].produtoImagem}" /></td>
-                        <td>${carrinho[i].produtoNome}</td>
-                        <td>R$${carrinho[i].produtoValor}</td>
-                        <td>
-                            <button style="border: 1px solid black; border-radius: 5px;" class="btnAdicionar btn btn-dark" data-produto="${carrinho[i].produtoId}">+</button> 
-                            <input type="number" style="width:80px; height: 35px; border-radius: 5px;border: 1px solid black;" class="digitar" id="prodId-${carrinho[i].produtoId}" value="${carrinho[i].quantidade}"></input> 
-                            <button style="border: 1px solid black; border-radius: 5px;" class="btnDiminuir btn btn-dark" data-produto="${carrinho[i].produtoId}">-</button>
-                        </td>
-                        <td id="produto-${carrinho[i].produtoId}">R$${valorTotalItem}</td>
-                        <td><button class="btnExcluir btn btn-danger" data-cod="${carrinho[i].produtoId}"><i class="fas fa-trash">EXCLUIR</i></button></td>
-                    </tr>`;
-
-            html += ``
-        }
-        let total = valorTotal();
-        document.getElementById("valorTotal").innerText = `Total: R$${total}`;
-        document.querySelector("#tabelaCarrinho > tbody").innerHTML = html;
-        carregaBotao();
-
-    }
-
-    function carregaBotao(){
-        let adicionar = document.querySelectorAll(".btnAdicionar");
-        let diminuir = document.querySelectorAll(".btnDiminuir");
-        let digitar = document.querySelectorAll(".digitar");
-        let excluir = document.querySelectorAll(".btnExcluir")
-
-        for(let i = 0; i < adicionar.length; i++){
-            adicionar[i].addEventListener("click", aumentarItemCarrinho);
-            diminuir[i].addEventListener("click", diminuirItemCarrinho);
-            digitar[i].addEventListener("input", digitarValor);
-            excluir[i].addEventListener("click", excluirItem);
-        }
-    }
-
-    function valorTotal(){
-        let valor = 0;
-        for(let i=0; i < carrinho.length; i++){
-            let valorTotalItem = carrinho[i].produtoValor * carrinho[i].quantidade;
-            valor += valorTotalItem;
-        }
-        return valor;
-    }
-
-    function excluirItem(){
-        if(confirm("Tem certeza que deseja excluir o item do carrinho?")){
-            carrinho = JSON.parse(localStorage.getItem("carrinho"));
-            id = this.dataset.cod
-            let posicao = posicaoCarrinho(id);
-            carrinho.splice(posicao, 1);
-            localStorage.setItem("carrinho", JSON.stringify(carrinho));
-            carregarCarrinho();
-            document.getElementById("contadorCarrinho").innerText = carrinho.length;
-        }
-    }
-
-    function posicaoCarrinho(id){
-        let posicao = -1;
-
-        for(let i = 0; i < carrinho.length; i++){
-            if(carrinho[i].produtoId == id)
-                {
-                    posicao = i;
-                }
-        }
-        return posicao;
-    }
-
-    function mudarValor(produtoId, quantidade, valorAtual){
-        id= document.querySelector(`#prodId-${produtoId}`);
-        valorItem = document.querySelector(`#produto-${produtoId}`);
-        totalFinal = document.querySelector("#valorTotal")
-        
-        id.value = quantidade;
-        valorItem.innerText = valorAtual;
-
-        let total = valorTotal();
-        totalFinal.innerText = `Total: R$${total}`;
-    }
-
-    function digitarValor(){
-        let recebeValor = document.querySelector(`#${this.id}`);
-        carrinho = JSON.parse(localStorage.getItem("carrinho"));
-        let id = recebeValor.id.replace(/\bprodId-\b/, "");
-        let posicao = posicaoCarrinho(id);
-
-        if(recebeValor.value > 999){
-            carrinho[posicao].quantidade = 999;
-        }
-        else if(recebeValor.value < 0){
-            carrinho[posicao].quantidade = 0;
+            if(valorTotalCarrinho > 0) {
+                document.querySelector("#valorTotal").innerHTML = `<h2>Valor total do pedido: R$ ${valorTotalCarrinho}</h2>`
+            }
+            document.querySelector("#msgCarrinhoVazio").style["display"] = "none";
+            document.querySelector("#tabelaCarrinho").style["display"] = "inline-table";
+            document.querySelector("#valorTotal").style["display"] = "block";
+            
+            iniciarEventos();
         }
         else{
-            carrinho[posicao].quantidade = recebeValor.value;
+            document.querySelector("#msgCarrinhoVazio").style["display"] = "block";
+            document.querySelector("#tabelaCarrinho").style["display"] = "none";
+            document.querySelector("#valorTotal").style["display"] = "none";
         }
 
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        let valorAtual = "R$" + carrinho[posicao].quantidade * carrinho[posicao].produtoValor;
-        mudarValor(id, carrinho[posicao].quantidade, valorAtual);
     }
-
-    function aumentarItemCarrinho(){
-        id = this.dataset.produto;
-        carrinho = JSON.parse(localStorage.getItem("carrinho"));
-        let posicao = posicaoCarrinho(id);
-
-        if(carrinho[posicao].quantidade < 999){
-            carrinho[posicao].quantidade++;
-            localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        }
-
-        let valorAtual = "R$" + carrinho[posicao].quantidade * carrinho[posicao].produtoValor;
-        mudarValor(id, carrinho[posicao].quantidade, valorAtual);
-    }
-
-    function diminuirItemCarrinho(){
-        id = this.dataset.produto;
-        carrinho = JSON.parse(localStorage.getItem("carrinho"));
-        let posicao = posicaoCarrinho(id);
-
-        if(carrinho[posicao].quantidade > 0){
-            carrinho[posicao].quantidade--;
-            localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        }
-
-        let valorAtual = "R$" + carrinho[posicao].quantidade * carrinho[posicao].produtoValor;
-        mudarValor(id, carrinho[posicao].quantidade, valorAtual);
-    }
-
 
     function adicionarItemCarrinho(item) {
         let lista = localStorage.getItem("carrinho");
@@ -212,6 +249,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }, 5000);
             }
         })
-    }    
+    }
 
 })

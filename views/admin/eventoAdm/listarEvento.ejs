@@ -4,8 +4,11 @@
 <a class="btn btn-info" style="max-width: 200px;" href="/admin/addEvento">Novo Evento</a>
 
 <hr>
+<div>
+    <button id="btnExportarExcel">Exportar para excel</button>
+</div>
     <div>
-        <table class="table table-striped">
+        <table id="tableEvento" class="table table-striped">
             <thead>
                 <th>Codigo Evento</th>
                 <th>Data Evento</th>
@@ -29,3 +32,4 @@
                 </div>
                 
     <script src="/js/admin/excluirEvento.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>

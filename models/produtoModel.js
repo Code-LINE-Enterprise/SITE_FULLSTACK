@@ -50,6 +50,26 @@ class ProdutoModel {
         return result;
     }
 
+    async atualizarEstoque(produtoQuantidade, produtoId){
+        let sql = "update tb_produto set prd_quantidade = prd_quantidade - ? where prd_id = ?";
+        let valores = [produtoQuantidade, produtoId];
+
+        var result = await conexao.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
+
+    async validarEstoque(produtoId, quantidade) {
+
+        let sql = "select * from tb_produto where prd_id = ? and prd_quantidade >= ?";
+        let valores = [produtoId, quantidade];
+
+        let rows = await conexao.ExecutaComando(sql, valores);
+        
+        return rows.length > 0;
+    }
+
     async gravar() {
         if(this.#produtoId == 0){
             let sql = "insert into tb_produto (prd_cod, prd_nome, prd_quantidade, cat_id, mar_id, prd_imagem, prd_valor) values (?, ?, ?, ?, ?, ?, ?)";

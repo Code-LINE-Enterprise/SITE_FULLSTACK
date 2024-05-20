@@ -14,3 +14,16 @@ function excluirPatrimonio(pat_etiqueta){
         });
     }
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function(){
+    let btnExport = document.getElementById("btnExportarExcel");
+    btnExport.addEventListener('click', exportarExcel);
+
+    function exportarExcel(){
+        var wb = XLSX.utils.table_to_book(document.getElementById("tablePatrimonio"));
+        /* Export to file (start a download) */
+        XLSX.writeFile(wb, "SheetJSTable.xlsx");
+    }
+})

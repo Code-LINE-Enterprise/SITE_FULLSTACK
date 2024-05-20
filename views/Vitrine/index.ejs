@@ -105,6 +105,9 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                  <div id="msgCarrinhoVazio" style="text-align: center;display: none;">
+                    O carrinho está vazio!
+                </div>
                     <table class="table table-striped" id="tabelaCarrinho">
                         <thead>
                             <th>Código</th>
@@ -121,7 +124,7 @@
                 <div class="modal-footer">
                   <p id="valorTotal" class="p-1" style="border: 1px solid black; border-radius: 25px;"></p>
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                  <button type="button" class="btn btn-success">Confirmar pedido</button>
+                  <button type="button" id="btnConfirmarPedido" class="btn btn-success">Confirmar pedido</button>
                 </div>
               </div>
             </div>

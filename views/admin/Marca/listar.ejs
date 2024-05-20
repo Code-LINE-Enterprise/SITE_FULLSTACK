@@ -1,8 +1,10 @@
 <div>
     <h1>Marcas cadastradas</h1>
-
+    <div>
+        <button id="btnExportarExcel">Exportar para excel</button>
+    </div>
     <div class="table-responsive" style="margin-top: 15px;">
-        <table class="table table-striped table-hover">
+        <table  id="tableMarcas" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Código</th>
@@ -20,4 +22,6 @@
         </table>
     </div>
 </div>
+<script src="/js/produto/listarMarca.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 

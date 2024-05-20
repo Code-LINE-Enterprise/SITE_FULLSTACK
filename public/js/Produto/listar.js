@@ -5,8 +5,19 @@ document.addEventListener("DOMContentLoaded", function(){
     for(var i = 0; i<listaBtns.length; i++) {
         listaBtns[i].addEventListener("click", excluirProduto);
     }
+
+    let btnExport = document.getElementById("btnExportarExcel");
+    btnExport.addEventListener('click', exportarExcel);
+
+    function exportarExcel(){
+        var wb = XLSX.utils.table_to_book(document.getElementById("tableProduto"));
+        /* Export to file (start a download) */
+        XLSX.writeFile(wb, "SheetJSTable.xlsx");
+    }
     
 })
+
+
 
 function excluirProduto() {
     var codigo = this.dataset.codigo;

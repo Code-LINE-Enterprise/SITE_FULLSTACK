@@ -84,6 +84,9 @@ router.post("/cadastroProduto", auth.verificarUsuarioLogado, upload.single("imag
 router.post("/excluirProduto", auth.verificarUsuarioLogado, ctrl.excluirProduto);
 router.get("/alterarProduto/:id", auth.verificarUsuarioLogado, ctrl.alterarView);
 router.post("/alterarProduto", auth.verificarUsuarioLogado, upload.single("imagem"), ctrl.alterarProdutoView);
-router.get("/obter/:produto", ctrl.obter)
+router.get("/obter/:produto", ctrl.obter);
+
+// ROTAS PEDIDO
+router.post('/gravarPedido', ctrl.gravar);
 
 module.exports = router;

@@ -6,6 +6,15 @@ document.addEventListener("DOMContentLoaded", function() {
         btns[i].addEventListener("click", excluir);
     }
 
+    let btnExport = document.getElementById("btnExportarExcel");
+    btnExport.addEventListener('click', exportarExcel);
+
+    function exportarExcel(){
+        var wb = XLSX.utils.table_to_book(document.getElementById("tableUsuario"));
+        /* Export to file (start a download) */
+        XLSX.writeFile(wb, "SheetJSTable.xlsx");
+    }
+
     function excluir() {
         let id = this.dataset.codigoexclusao;
 
