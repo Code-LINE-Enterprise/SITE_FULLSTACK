@@ -6,7 +6,7 @@ class HomeController {
     }
 
     contactView(req, res){
-        res.render('contact' );
+        res.render('/voluntarios/contact' );
     }
 
     coursesView(req, res){
