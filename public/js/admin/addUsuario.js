@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 perfil: perfil,
             }
 
-            fetch("/admin/addUsuario", {
+            fetch("/usuario/addUsuario", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    window.location.href="/admin/listarUsuario";
+                    window.location.href="/usuario";
                 }   
                 else {
                     alert(r.msg);

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nomePatrimonio: nomePatrimonio,
             }
 
-            fetch(`/admin/alterarPatrimonio/${pat_etiqueta}`, {
+            fetch(`/patrimonio/alterarPatrimonio/${pat_etiqueta}`, {
                 method: 'PUT',
                 body: JSON.stringify(obj),
                 headers: {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     alert(r.msg);
                     if (r.ok) {
-                        window.location.href = "/admin/listarPatrimonio";
+                        window.location.href = "/patrimonio";
                     }
                 })
         }

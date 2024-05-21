@@ -4,7 +4,7 @@ function excluirDoacaoMonetaria(cod_DoacaoMonetaria) {
 
     // Se o usuário clicar em "OK" no diálogo de confirmação
     if (confirmacao) {
-        fetch(`/admin/excluirDoacaoMonetaria/${cod_DoacaoMonetaria}`, {
+        fetch(`/doacao/excluirDoacaoMonetaria/${cod_DoacaoMonetaria}`, {
             method: "DELETE"
         })
         .then((r) => r.json())

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     quantDoacao: quantDoacao,
                 }
 
-            fetch(`/admin/alterarDoacaoMaterial/${cod_DoacaoMaterial}`, {
+            fetch(`/doacao/alterarDoacaoMaterial/${cod_DoacaoMaterial}`, {
                 method: 'PUT',
                 body: JSON.stringify(obj),
                 headers: {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     alert(r.msg);
                     if (r.ok) {
-                        window.location.href = "/admin/listarDoacaoMaterial";
+                        window.location.href = "/doacao/listarDoacaoMaterial";
                     }
                 })
         }

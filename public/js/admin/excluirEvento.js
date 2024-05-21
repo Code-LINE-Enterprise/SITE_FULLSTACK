@@ -5,7 +5,7 @@ function excluirEvento(evento_cad) {
 
     // Se o usuário clicar em "OK" no diálogo de confirmação
     if (confirmacao) {
-        fetch(`/admin/excluirEvento/${evento_cad}`, {
+        fetch(`/evento/excluirEvento/${evento_cad}`, {
             method: "DELETE"
         })
         .then((r) => r.json())

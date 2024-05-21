@@ -61,7 +61,7 @@ function alterarProduto() {
         formData.append("imagem", arquivos[0]);
         formData.append("valor", inputValor);
 
-        fetch('/admin/alterarProduto', {
+        fetch('/produto/alterarProduto', {
             method: "POST",
             body: formData
         })
@@ -71,7 +71,7 @@ function alterarProduto() {
         .then(r=> {
             if(r.ok) {
                 alert("Produto alterado!");
-                window.location.href = "/admin/listarProduto";
+                window.location.href = "/produto";
             }
             else{
                 alert("Erro ao alterar produto");

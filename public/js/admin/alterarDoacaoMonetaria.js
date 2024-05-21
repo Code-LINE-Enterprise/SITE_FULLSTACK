@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     valorDoacao: valorDoacao,
                 }
 
-            fetch(`/admin/alterarDoacaoMonetaria/${cod_DoacaoMonetaria}`, {
+            fetch(`/doacao/alterarDoacaoMonetaria/${cod_DoacaoMonetaria}`, {
                 method: 'PUT',
                 body: JSON.stringify(obj),
                 headers: {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     alert(r.msg);
                     if (r.ok) {
-                        window.location.href = "/admin/listarDoacaoMonetaria";
+                        window.location.href = "/doacao/listarDoacaoMonetaria";
                     }
                 })
         }

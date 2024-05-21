@@ -1,7 +1,7 @@
 
                 <div class="container-fluid">
                     <h1>Eventos cadastrados</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/admin/addEvento">Novo Evento</a>
+<a class="btn btn-info" style="max-width: 200px;" href="/evento/addEvento">Novo Evento</a>
 
 <hr>
 <div>
@@ -21,7 +21,7 @@
                         <td><%= listaEvento[i].dataEvento.toLocaleDateString() %></td>
                         <td><%= listaEvento[i].localEvento %></td>
                         <td>
-                            <a href="/admin/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>

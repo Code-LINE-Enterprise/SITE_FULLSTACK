@@ -26,7 +26,7 @@ function excluirProduto() {
             var data = {
                 codigo: codigo
             }
-            fetch("/admin/excluirProduto", {
+            fetch("/produto/excluirProduto", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

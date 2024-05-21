@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <h1>Produtos</h1>
     <div>
-        <a href="/admin/cadastroProduto" class="btn btn-info"><i class="fas fa-plus"></i> Cadastrar</a>
+        <a href="/produto/cadastroProduto" class="btn btn-info"><i class="fas fa-plus"></i> Cadastrar</a>
     </div>
     <div>
         <button id="btnExportarExcel">Exportar para excel</button>
@@ -41,7 +41,7 @@
                         <td><%= value.marcaNome %></td>                   
                         <td>
                             <div>
-                                <a href="/admin/alterarProduto/<%= value.produtoId %>" class="btn btn-primary"> <i class="fas fa-pen"></i></a>
+                                <a href="/produto/alterarProduto/<%= value.produtoId %>" class="btn btn-primary"> <i class="fas fa-pen"></i></a>
                                 <button data-codigo="<%=value.produtoId %>" class="btn btn-danger btnExcluir"><i class="fas fa-trash"></i></button>
                             </div>
                         </td>

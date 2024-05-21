@@ -63,7 +63,7 @@ function gravarProduto() {
         formData.append("imagem", arquivos[0]);
         formData.append("valor", inputValor);
 
-        fetch('/admin/cadastroProduto', {
+        fetch('/produto/cadastroProduto', {
             method: "POST",
             body: formData
         })
@@ -73,6 +73,7 @@ function gravarProduto() {
         .then(r=> {
             if(r.ok) {
                 alert("Produto cadastrado!");
+                window.location.href = "/produto";
             }
             else{
                 alert("Erro ao cadastrar produto");

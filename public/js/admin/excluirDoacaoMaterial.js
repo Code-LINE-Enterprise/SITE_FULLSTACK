@@ -4,7 +4,7 @@ function excluirDoacaoMaterial(cod_DoacaoMaterial) {
 
     // Se o usuário clicar em "OK" no diálogo de confirmação
     if (confirmacao) {
-        fetch(`/admin/excluirDoacaoMaterial/${cod_DoacaoMaterial}`, {
+        fetch(`/doacao/excluirDoacaoMaterial/${cod_DoacaoMaterial}`, {
             method: "DELETE"
         })
         .then((r) => r.json())

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 local: local,
             }
 
-            fetch(`/admin/alterarEvento/${evento_cad}`, {
+            fetch(`/evento/alterarEvento/${evento_cad}`, {
                 method: 'PUT',
                 body: JSON.stringify(obj),
                 headers: {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(r => {
                     alert(r.msg);
                     if (r.ok) {
-                        window.location.href = "/admin/listarEvento";
+                        window.location.href = "/evento";
                     }
                 })
         }

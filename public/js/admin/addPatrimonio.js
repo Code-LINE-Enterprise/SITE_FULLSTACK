@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 nomePatrimonio: nomePatrimonio,
             }
 
-            fetch("/admin/addPatrimonio", {
+            fetch("/patrimonio/addPatrimonio", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    window.location.href="/admin/listarPatrimonio";
+                    window.location.href="/patrimonio";
                 }   
                 else {
                     alert(r.msg);

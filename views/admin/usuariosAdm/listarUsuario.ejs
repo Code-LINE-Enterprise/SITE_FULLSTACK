@@ -1,7 +1,7 @@
 
                 <div class="container-fluid">
                     <h1>Usuarios cadastrados</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/admin/addUsuario">Novo Usuario</a>
+<a class="btn btn-info" style="max-width: 200px;" href="/usuario/addUsuario">Novo Usuario</a>
 
 <hr>
 <div>
@@ -26,7 +26,7 @@
                     <td><%= lista[i].perfilId %></td>
                     <td><%= lista[i].usuarioAtivo %></td>
                     <td>
-                        <a href="/admin/alterarUsuario/<%= lista[i].usuarioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="/usuario/alterarUsuario/<%= lista[i].usuarioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                         <button data-codigoexclusao="<%= lista[i].usuarioId %>" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>

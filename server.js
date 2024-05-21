@@ -5,6 +5,12 @@ let homeRoute = require("./routes/homeRoute");
 let voluntarioRoute = require("./routes/voluntarioRoute");
 const vitrineRoute = require("./routes/vitrineRoute");
 let adminRoute = require("./routes/adminRoute");
+let pedidoRoute = require("./routes/pedidoRoute");
+let doacaoRoute = require("./routes/doacaoRoute");
+let produtoRoute = require("./routes/produtoRoute");
+let eventoRoute = require("./routes/eventoRoute");
+let usuarioRoute = require("./routes/usuarioRoute");
+let patrimonioRoute = require("./routes/patrimoniosRoute");
 
 const app = express();
 
@@ -27,6 +33,12 @@ app.use("/",  homeRoute);
 app.use("/loja", vitrineRoute);
 app.use("/voluntarios", voluntarioRoute);
 app.use("/admin", adminRoute);
+app.use("/pedido", pedidoRoute);
+app.use("/doacao", doacaoRoute);
+app.use("/produto", produtoRoute);
+app.use("/evento", eventoRoute);
+app.use("/usuario", usuarioRoute);
+app.use("/patrimonio", patrimonioRoute);
 
 global.CAMINHO_IMG_BROWSER = "/img/produtos/"
 global.RAIZ_PROJETO = __dirname;

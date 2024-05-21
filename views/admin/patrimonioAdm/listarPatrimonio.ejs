@@ -1,7 +1,7 @@
 
                 <div class="container-fluid">
                     <h1>Patrimônios cadastrados</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/admin/addPatrimonio">Novo Patrimônio</a>
+<a class="btn btn-info" style="max-width: 200px;" href="/patrimonio/addPatrimonio">Novo Patrimônio</a>
 
 <hr>
 <div>
@@ -23,7 +23,7 @@
                         <td><%= listaPatrimonio[i].tipoPatrimonio %></td>
                         <td><%= listaPatrimonio[i].nomePatrimonio %></td>
                         <td>
-                            <a href="/admin/alterarPatrimonio/<%= listaPatrimonio[i].patrimonioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <a href="/patrimonio/alterarPatrimonio/<%= listaPatrimonio[i].patrimonioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button onclick="excluirPatrimonio('<%= listaPatrimonio[i].patrimonioId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>

@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 local: local,
             }
 
-            fetch("/admin/addEvento", {
+            fetch("/evento/addEvento", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    window.location.href="/admin/listarEvento";
+                    window.location.href="/evento";
                 }   
                 else {
                     alert(r.msg);

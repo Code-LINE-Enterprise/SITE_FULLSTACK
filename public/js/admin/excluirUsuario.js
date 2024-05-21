@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     id: id
                 }
 
-                fetch('/admin/excluirUsuario', {
+                fetch('/usuario/excluirUsuario', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

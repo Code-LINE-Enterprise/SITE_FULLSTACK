@@ -1,8 +1,8 @@
 
 <div class="container-fluid">
     <h1>Doações monetárias cadastradas</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/admin/doacaoMonetariaAdm">Nova Doação Monetária</a>
-<a class="btn btn-danger" href="/admin/escolherDoacao">Voltar</a>
+<a class="btn btn-info" style="max-width: 200px;" href="/doacao/doacaoMonetariaAdm">Nova Doação Monetária</a>
+<a class="btn btn-danger" href="/doacao">Voltar</a>
 
 <hr>
 <div>
@@ -22,7 +22,7 @@
         <td><%= listaDoacaoMonetaria[i].tipoDoacaoMonetariaId %></td>
         <td><%= listaDoacaoMonetaria[i].valorDoacao %></td>
         <td>
-            <a href="/admin/alterarDoacaoMonetaria/<%= listaDoacaoMonetaria[i].doacaoMonetariaId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+            <a href="/doacao/alterarDoacaoMonetaria/<%= listaDoacaoMonetaria[i].doacaoMonetariaId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
             <button onclick="excluirDoacaoMonetaria('<%= listaDoacaoMonetaria[i].doacaoMonetariaId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
         </td>
     </tr>
