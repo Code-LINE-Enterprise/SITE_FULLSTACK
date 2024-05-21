@@ -8,6 +8,7 @@ class AuthMiddleware {
             let usuario = new UsuarioModel();
             usuario = await usuario.obter(usuarioId);
             if(usuario != null && usuario.usuarioAtivo == 1 && usuario.perfilId == 1) {
+                res.locals.usuarioLogado = usuario;
                 next();
             }
             else{

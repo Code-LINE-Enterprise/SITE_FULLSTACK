@@ -29,7 +29,9 @@
                 <div class="sidebar-brand-text mx-2">AREA ADMIN </div>
                 <img src="/img/logo.png" alt="" style="width: 50px;border-radius: 5px;">
             </a>
-            <!-- COLOCAR NOME E ID DO USUARIO AQUI -->
+            <div style="text-align: center;">
+                Ola <%= locals.usuarioLogado.usuarioNome %> (<%= locals.usuarioLogado.perfilId %>)
+              </div>
               <div style="text-align: center;">
                 <a href="">Sair</a>
               </div>
