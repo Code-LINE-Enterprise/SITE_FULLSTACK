@@ -10,6 +10,12 @@
                         <div>
                             <div>
                                 <div class="form-group">
+                                    <label for="nome" class="form-label">Nome do Evento:</label>
+                                    <input type="text" maxlength="45" class="form-control" id="nome" name="nome" value="<%= evento.nomeEvento %>">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
                                     <label for="data" class="form-label">Data do Evento</label>
                                     <input type="date" maxlength="10" class="form-control" id="data" name="data" value="<%= evento.dataEvento %>">
                                 </div>
@@ -18,6 +24,27 @@
                                 <div class="form-group">
                                     <label for="local" class="form-label">Local do Evento</label>
                                     <input type="text"maxlength="45" class="form-control" id="local" name="local" value="<%= evento.localEvento %>">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="patrimonio" class="form-label">Tipo de patrtmonio:</label>
+                                    <select class="form-control" id="patrimonio" name="patrimonio">
+                                        <option selected value="0">Selecione...</option>
+                                        <% for(let i = 0; i<listaPatrimonio.length; i++) { %>
+                                            <% if(evento.patrimonioId == listaPatrimonio[i].patrimonioId) { %>
+                                                <option selected value="<%= listaPatrimonio[i].patrimonioId %>"><%= listaPatrimonio[i].nomePatrimonio %></option>
+                                            <% } else { %>
+                                                <option value="<%= listaPatrimonio[i].patrimonioId %>"><%= listaPatrimonio[i].nomePatrimonio %></option>
+                                            <% } %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="quantidade" class="form-label">Quantidade:</label>
+                                    <input style="width: 100px;" type="number" class="form-control" id="quantidade" name="quantidade" value="<%= evento.quantidadePatrimonio %>">
                                 </div>
                             </div>
                             <div>

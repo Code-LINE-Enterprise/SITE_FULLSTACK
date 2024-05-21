@@ -103,6 +103,28 @@ class PatrimonioModel {
 
         return result;
     }
+
+    //TENTANDO FAZER ATUALIZAÇÃO DO ESTOQUE DE PATRIMONIO
+
+    async atualizarPatrimonio(quantidadePatrimonio, patrimonioId){
+        let sql = "update Patrimonio set pat_quant = pat_quant - ? where pat_etiqueta = ?";
+        let valores = [quantidadePatrimonio, patrimonioId];
+
+        var result = await conexao.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
+
+    async validarPatrimonio(patrimonioId, quantidadePatrimonio) {
+
+        let sql = "select * from Patrimonio where pat_etiqueta = ? and pat_quant >= ?";
+        let valores = [patrimonioId, quantidadePatrimonio];
+
+        let rows = await conexao.ExecutaComando(sql, valores);
+        
+        return rows.length > 0;
+    }
 }
 
 module.exports = PatrimonioModel;

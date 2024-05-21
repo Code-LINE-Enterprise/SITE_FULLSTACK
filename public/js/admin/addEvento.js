@@ -3,29 +3,47 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("btnCadastrarEvento").addEventListener("click", cadastrar);
 
     function limparValidacao() {
+        document.getElementById("nome").style["border-color"] = "#ced4da";
         document.getElementById("data").style["border-color"] = "#ced4da";
         document.getElementById("local").style["border-color"] = "#ced4da";
+        document.getElementById("patrimonio").style["border-color"] = "#ced4da";
+        document.getElementById("quantidade").style["border-color"] = "#ced4da";
     }
 
     function cadastrar() {
         limparValidacao();
+        let nome = document.querySelector("#nome").value;
         let data = document.querySelector("#data").value;
         let local = document.querySelector("#local").value;
+        let patrimonio = document.querySelector("#patrimonio").value;
+        let quantidade = document.querySelector("#quantidade").value;
 
         let listaErros = [];
+        if(nome == "") {
+            listaErros.push("nome");
+        }
         if(data == "") {
             listaErros.push("data");
         }
         if(local == "") {
             listaErros.push("local");
         }
+        if(patrimonio == "") {
+            listaErros.push("patrimonio");
+        }
+        if(quantidade == "") {
+            listaErros.push("quantidade");
+        }
 
         if(listaErros.length == 0) {
             //enviar ao backend com fetch
 
             let obj = {
+                nome: nome,
                 data: data,
                 local: local,
+                patrimonio: patrimonio,
+                quantidade: quantidade,
             }
 
             fetch("/evento/addEvento", {
@@ -55,6 +73,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             alert("Preencha corretamente os campos indicados!");
         }
+    }
+
+    function validacaoPatrimonio(){
+        
     }
 
 })

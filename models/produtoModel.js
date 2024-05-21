@@ -85,7 +85,10 @@ class ProdutoModel {
             let valores = [this.#produtoCodigo, this.#produtoNome, 
                 this.#produtoQuantidade, 
                 this.#categoriaId, 
-                this.#marcaId, this.#imagem, this.#produtoValor, this.#produtoId];
+                this.#marcaId, 
+                this.#imagem, 
+                this.#produtoValor, 
+                this.#produtoId];
 
             return await conexao.ExecutaComandoNonQuery(sql, valores) > 0;
         }

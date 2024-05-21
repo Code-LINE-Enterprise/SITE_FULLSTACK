@@ -11,15 +11,21 @@
         <table id="tableEvento" class="table table-striped">
             <thead>
                 <th>Codigo Evento</th>
+                <th>Nome Evento</th>
                 <th>Data Evento</th>
                 <th>Local Evento</th>
+                <th>Patrimonio Evento</th>
+                <th>Quantidade Patrimonio</th>
             </thead>
             <tbody>
                 <% for (let i = 0; i < listaEvento.length; i++)  { %>
                     <tr>
                         <td><%= listaEvento[i].eventoId %></td>
+                        <td><%= listaEvento[i].nomeEvento%></td>
                         <td><%= listaEvento[i].dataEvento.toLocaleDateString() %></td>
                         <td><%= listaEvento[i].localEvento %></td>
+                        <td><%= listaEvento[i].patrimonioId %></td>
+                        <td><%= listaEvento[i].quantidade %></td>
                         <td>
                             <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>

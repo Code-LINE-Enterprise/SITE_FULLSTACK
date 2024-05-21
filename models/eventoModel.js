@@ -4,9 +4,12 @@ const banco = new Database();
 
 class EventoModel {
 
+    
     #eventoId;
+    #nomeEvento;
     #dataEvento;
     #localEvento;
+    #patrimonioId;
     //implementar getter e setter
     get eventoId() {
         return this.#eventoId;
@@ -14,6 +17,14 @@ class EventoModel {
     set eventoId(eventoId) {
         this.#eventoId = eventoId;
     }
+
+    get nomeEvento() {
+        return this.#nomeEvento;
+    }
+    set nomeEvento(nomeEvento) {
+        this.#nomeEvento = nomeEvento;
+    }
+
     get dataEvento() {
         return this.#dataEvento;
     }
@@ -28,31 +39,40 @@ class EventoModel {
         this.#localEvento = localEvento;
     }
 
+    get patrimonioId() {
+        return this.#patrimonioId;
+    }
+    set patrimonioId(patrimonioId) {
+        this.#patrimonioId = patrimonioId;
+    }
+
     //implementar construtor
-    constructor(eventoId, dataEvento, localEvento) {
+    constructor(eventoId, nomeEvento, dataEvento, localEvento, patrimonioId) {
         this.#eventoId = eventoId;
+        this.#nomeEvento = nomeEvento;
         this.#dataEvento = dataEvento;
         this.#localEvento = localEvento;
+        this.#patrimonioId = patrimonioId;
     }
 
     //implementar as funções para manipulação das informações no banco
     async listarEvento() {
 
-        let sql = "select * from Evento order by evento_cad desc";
+        let sql = 'select * from Evento  inner join Patrimonio on Evento.pat_etiqueta = Patrimonio.pat_etiqueta order by evento_cad desc'
 
         let rows = await banco.ExecutaComando(sql);
         let listaEvento = [];
 
         for(let i = 0; i < rows.length; i++) {
-            listaEvento.push(new EventoModel(rows[i]["evento_cad"], rows[i]["data_evento"], rows[i]["local_evento"]));
+            listaEvento.push(new EventoModel(rows[i]["evento_cad"], rows[i]["nome_evento"], rows[i]["data_evento"], rows[i]["local_evento"], rows[i]["pat_nclatura"], rows[i]["pat_quant"]));
         }
         return listaEvento;
     }
 
     async cadastrarEvento() {
-            let sql = "insert into Evento (data_evento, local_evento) values (?,?)";
+            let sql = "insert into Evento (data_evento, nome_evento, local_evento, pat_etiqueta) values (?,?,?,?)";
 
-            let valores = [this.#dataEvento, this.#localEvento];
+            let valores = [this.#dataEvento, this.#nomeEvento, this.#localEvento, this.#patrimonioId];
     
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
     
@@ -61,9 +81,9 @@ class EventoModel {
 
     async alterarEvento(){
         
-            let sql = "update Evento set data_evento = ?, local_evento = ? where evento_cad = ?";
+            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, pat_etiqueta = ? where evento_cad = ?";
 
-            let valores = [this.#dataEvento, this.#localEvento, this.#eventoId];
+            let valores = [this.#dataEvento, this.nomeEvento, this.#localEvento, this.#patrimonioId, this.#eventoId];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;
@@ -71,7 +91,7 @@ class EventoModel {
     }
 
     async obterIdEvento(id) {
-        let sql = "select * from Evento where evento_cad = ?";
+        let sql = "select * from Evento p inner join Patrimonio c on p.pat_etiqueta = c.pat_etiqueta inner join Patrimonio c on p.pat_quant = c.pat_quant where evento_cad = ?";
 
         let valores = [id];
 
@@ -79,7 +99,7 @@ class EventoModel {
 
         if(rows.length > 0) {
             let row = rows[0];
-            return new EventoModel(row["evento_cad"], row["data_evento"], row["local_evento"]);
+            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["pat_nclatura"], row["pat_quant"]);
         }
 
         return null;

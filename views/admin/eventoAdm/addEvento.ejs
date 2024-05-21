@@ -10,14 +10,37 @@
                         <div>
                             <div>
                                 <div class="form-group">
-                                    <label for="data" class="form-label">Data do Evento</label>
+                                    <label for="nome" class="form-label">Nome do Evento:</label>
+                                    <input type="text" maxlength="45" placeholder="Ex: Bingo" class="form-control" id="nome" name="nome">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="data" class="form-label">Data do Evento:</label>
                                     <input type="date" maxlength="10" placeholder="dd/mm/aaaa" class="form-control" id="data" name="data">
                                 </div>
                             </div>
                             <div>
                                 <div class="form-group">
-                                    <label for="local" class="form-label">Local do Evento</label>
-                                    <input type="text" maxlength="45" placeholder="Local do evento aqui" class="form-control" id="local" name="local">
+                                    <label for="local" class="form-label">Local do Evento:</label>
+                                    <input type="text" maxlength="45" placeholder="Ex: Salão Comunitário" class="form-control" id="local" name="local">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="patrimonio" class="form-label">Patrimonio:</label>
+                                    <select lass="form-control" id="patrimonio">
+                                        <option value="0">Selecione</option>
+                                        <% for(let i = 0; i<listaPatrimonio.length; i++) { %>
+                                            <option value="<%=listaPatrimonio[i].patrimonioId %>"><%= listaPatrimonio[i].nomePatrimonio %></option>
+                                        <% } %> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="quantidade" class="form-label">Quantidade:</label>
+                                    <input style="width: 100px;" type="number" class="form-control" id="quantidade" name="quantidade">
                                 </div>
                             </div>
                             <div>
@@ -28,3 +51,5 @@
                     </div>
                 </div>
     <script src="/js/admin/addEvento.js"></script>
+
+
