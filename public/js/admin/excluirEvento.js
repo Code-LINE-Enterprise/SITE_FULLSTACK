@@ -18,13 +18,67 @@ function excluirEvento(evento_cad) {
     }
 }
 
+
 document.addEventListener("DOMContentLoaded", function(){
     let btnExport = document.getElementById("btnExportarExcel");
     btnExport.addEventListener('click', exportarExcel);
+
+    let filtroEscolhido = 0;
+
+    let itemFiltro = document.querySelectorAll(".itemFiltro");
+
+    document.getElementById("btnFiltrar").addEventListener("click", buscar);
+
+    for(let i = 0; i<itemFiltro.length; i++) {
+        itemFiltro[i].addEventListener("click", mudarCriterioFiltragem);
+    }
 
     function exportarExcel(){
         var wb = XLSX.utils.table_to_book(document.getElementById("tableEvento"));
         /* Export to file (start a download) */
         XLSX.writeFile(wb, "SheetJSTable.xlsx");
     }
+
+    function buscar() {
+        let termoFiltro = document.getElementById("filtro").value;
+
+        fetch(`/evento/filtrar/${termoFiltro}/${filtroEscolhido}`)
+        .then(r=> {
+            return r.json();
+        })
+        .then(r=> {
+            //remontar tabela
+            console.log(r);
+            if(r.length > 0) {
+                let htmlCorpo ="";
+                for(let i = 0; i<r.length; i++) {
+                    htmlCorpo += `
+                                <tr>
+                                    <td>${r[i].eventoId}</td>
+                                    <td>${new Date(r[i].dataEvento).toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
+                                    <td>${r[i].nomeEvento}</td>
+                                    <td>${r[i].localEvento}</td>
+                                    <td>${r[i].patrimonioId}</td>
+                                    <td>${r[i].patrimonioQuantidade}</td>
+                                    <td>
+                                        <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                        <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                                        <a href="/evento/relatorioEvento/<%= listaEvento[i].eventoId %>" class="btn btn-secondary"><i class="fas fa-eye"></i></a> <!-- Criar uma tela pra exbição de relatorios -->
+                                     </td>
+                                </tr>
+                                
+                            `;
+                }
+
+                document.querySelector("#tableEvento > tbody").innerHTML = htmlCorpo;
+            }
+        })
+    }
+
+    function mudarCriterioFiltragem(){
+        let nome = this.dataset.nome;
+        document.getElementById("btnEscolherFiltro").innerText = nome;
+        filtroEscolhido = this.dataset.valor;
+    }
 })
+

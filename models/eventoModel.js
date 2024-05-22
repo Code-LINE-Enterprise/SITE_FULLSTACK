@@ -74,11 +74,31 @@ class EventoModel {
     }
 
     //implementar as funções para manipulação das informações no banco
-    async listarEvento() {
+    async listarEvento(termo, filtro) {
 
-        let sql = 'select * from Evento  inner join Patrimonio on Evento.pat_etiqueta = Patrimonio.pat_etiqueta order by evento_cad desc'
+        let sqlFiltro = "";
+        if(termo != "") {
+            if(filtro == "1") {
+                sqlFiltro = ` where nome_evento like ?`
+            }
+            else if(filtro == "2") {
+                sqlFiltro = ` where data_evento like %?%`;
+            }
+            else if(filtro == "3"){
+                sqlFiltro = ` where local_evento like %?%`;
+            };
+        }
 
-        let rows = await banco.ExecutaComando(sql);
+        let sql = `select * from Evento  inner join Patrimonio on Evento.pat_etiqueta = Patrimonio.pat_etiqueta ${sqlFiltro} `  // retirado order by evento_cad desc
+        
+        let valores = [];
+
+        if(sqlFiltro != ""){
+            valores.push(termo);
+        }
+
+        let rows = await banco.ExecutaComando(sql, valores);
+        
         let listaEvento = [];
 
         for(let i = 0; i < rows.length; i++) {
@@ -133,6 +153,17 @@ class EventoModel {
         return result;
     }
 
+    toJSON() {
+        return {
+            "eventoId": this.#eventoId,
+            "dataEvento": this.#dataEvento,
+            "nomeEvento": this.#nomeEvento,
+            "localEvento": this.#localEvento,
+            "patrimonioId": this.#patrimonioId,
+            "patrimonioQuantidade": this.#patrimonioQuantidade,
+            "descEvento": this.#descEvento,           
+        }
+    }
     
 }
 

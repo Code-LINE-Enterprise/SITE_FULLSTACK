@@ -21,6 +21,15 @@ class EventoController {
         res.render('admin/eventoAdm/listarEvento', {layout: 'admin/layoutAdm', listaEvento: listaEvento})
     }
 
+    async filtrar(req, res) {
+        let termo = req.params.termo;
+        let filtro = req.params.filtro;
+        let EventoFiltro = new EventoModel();
+        var lista = await EventoFiltro.listarEvento(termo, filtro);
+
+        res.send(lista);
+    }
+
     async cadastroEventoView(req, resp){
         let listaPatrimonio = [];
         let patrimonio = new PatrimonioModel();

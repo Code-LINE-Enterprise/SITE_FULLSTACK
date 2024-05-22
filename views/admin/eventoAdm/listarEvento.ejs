@@ -7,6 +7,22 @@
 <div>
     <button id="btnExportarExcel">Exportar para excel</button>
 </div>
+<div style="margin-bottom: 15px;">
+    <label for="filtro">Filtro:</label>
+    <div class="input-group">
+        <input id="filtro" type="text" placeholder="Digite um valor a ser filtrado..." class="form-control" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+          <button id="btnEscolherFiltro" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Filtros</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item itemFiltro" data-valor="2" data-nome="Data Evento" href="#">Data Evento</a>
+            <a class="dropdown-item itemFiltro" data-valor="1" data-nome="Nome do Evento" href="#">Nome do Evento</a>
+            <a class="dropdown-item itemFiltro" data-valor="3" data-nome="Local do Evento" href="#">Local do Evento</a>
+          </div>
+          <button id="btnFiltrar" class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+      </div>
+</div>
+
     <div>
         <table id="tableEvento" class="table table-striped">
             <thead>
@@ -16,7 +32,7 @@
                 <th>Local Evento</th>
                 <th>Patrimonio Evento</th>
                 <th>Quantidade Patrimonio</th>
-                <th>desc evento</th>
+                <th>Ações</th>
             </thead>
             <tbody>
                 <% for (let i = 0; i < listaEvento.length; i++)  { %>
@@ -27,7 +43,6 @@
                         <td><%= listaEvento[i].localEvento %></td>
                         <td><%= listaEvento[i].patrimonioId %></td>
                         <td><%= listaEvento[i].patrimonioQuantidade %></td>
-                        <td><%= listaEvento[i].descEvento %></td>
                         <td>
                             <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
