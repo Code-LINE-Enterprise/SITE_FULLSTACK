@@ -10,6 +10,8 @@ class EventoModel {
     #dataEvento;
     #localEvento;
     #patrimonioId;
+    #patrimonioQuantidade;
+    #descEvento;
     //implementar getter e setter
     get eventoId() {
         return this.#eventoId;
@@ -46,13 +48,29 @@ class EventoModel {
         this.#patrimonioId = patrimonioId;
     }
 
+    get patrimonioQuantidade() {
+        return this.#patrimonioQuantidade;
+    }
+    set patrimonioQuantidade(patrimonioQuantidade) {
+        this.#patrimonioQuantidade = patrimonioQuantidade;
+    }
+
+    get descEvento() {
+        return this.#descEvento;
+    }
+    set descEvento(descEvento) {
+        this.#descEvento = descEvento;
+    }
+
     //implementar construtor
-    constructor(eventoId, nomeEvento, dataEvento, localEvento, patrimonioId) {
+    constructor(eventoId, nomeEvento, dataEvento, localEvento, patrimonioId,patrimonioQuantidade, descEvento) {
         this.#eventoId = eventoId;
         this.#nomeEvento = nomeEvento;
         this.#dataEvento = dataEvento;
         this.#localEvento = localEvento;
         this.#patrimonioId = patrimonioId;
+        this.#patrimonioQuantidade = patrimonioQuantidade;
+        this.#descEvento = descEvento;
     }
 
     //implementar as funções para manipulação das informações no banco
@@ -64,15 +82,15 @@ class EventoModel {
         let listaEvento = [];
 
         for(let i = 0; i < rows.length; i++) {
-            listaEvento.push(new EventoModel(rows[i]["evento_cad"], rows[i]["nome_evento"], rows[i]["data_evento"], rows[i]["local_evento"], rows[i]["pat_nclatura"], rows[i]["pat_quant"]));
+            listaEvento.push(new EventoModel(rows[i]["evento_cad"], rows[i]["nome_evento"], rows[i]["data_evento"], rows[i]["local_evento"], rows[i]["pat_nclatura"], rows[i]["pat_quant"], rows[i]["desc_evento"]));
         }
         return listaEvento;
     }
 
     async cadastrarEvento() {
-            let sql = "insert into Evento (data_evento, nome_evento, local_evento, pat_etiqueta) values (?,?,?,?)";
+            let sql = "insert into Evento (data_evento, nome_evento, local_evento, pat_etiqueta, desc_evento) values (?,?,?,?,?)";
 
-            let valores = [this.#dataEvento, this.#nomeEvento, this.#localEvento, this.#patrimonioId];
+            let valores = [this.#dataEvento, this.#nomeEvento, this.#localEvento, this.#patrimonioId, this.#descEvento];
     
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
     
@@ -81,7 +99,7 @@ class EventoModel {
 
     async alterarEvento(){
         
-            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, pat_etiqueta = ? where evento_cad = ?";
+            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, pat_etiqueta = ?, desc_evento = ? where evento_cad = ?";
 
             let valores = [this.#dataEvento, this.nomeEvento, this.#localEvento, this.#patrimonioId, this.#eventoId];
 
@@ -99,7 +117,7 @@ class EventoModel {
 
         if(rows.length > 0) {
             let row = rows[0];
-            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["pat_nclatura"], row["pat_quant"]);
+            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["pat_nclatura"], row["pat_quant"], row["desc_evento"]);
         }
 
         return null;
@@ -114,6 +132,8 @@ class EventoModel {
 
         return result;
     }
+
+    
 }
 
 module.exports = EventoModel;
