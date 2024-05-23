@@ -29,11 +29,11 @@
                 <div class="sidebar-brand-text mx-2">AREA ADMIN </div>
                 <img src="/img/logo.png" alt="" style="width: 50px;border-radius: 5px;">
             </a>
-            <div style="text-align: center;">
-                Ola <%= locals.usuarioLogado.usuarioNome %> (<%= locals.usuarioLogado.perfilId %>)
-              </div>
+            <div style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color: rgb(255, 255, 255);font-weight: 700;">
+                Olá, <%= locals.usuarioLogado.usuarioNome %> [<%= locals.usuarioLogado.perfilId %>]
+            </div>
               <div style="text-align: center;">
-                <a href="">Sair</a>
+                <a href="" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color: rgb(7, 62, 241);font-weight: 500;" >Sair</a>
               </div>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -137,7 +137,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuário</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= locals.usuarioLogado.usuarioNome %></span>
                                 <img class="img-profile rounded-circle"
                                     src="/admin/img/user.png">
                             </a>

@@ -1,9 +1,9 @@
-<div>
-    <div>
-        <button id="btnExportarExcel">Exportar para excel</button>
-    </div>
-    <div class="titulo">
-        <h1>Relatorio do Evento "<%= evento.nomeEvento %>"</h1>
+<div class="container-fluid">
+    <div class="titulo" style="display: flex; justify-content: space-between;">
+        <h1>Relatorio do Evento <span style="color: green;"><%= evento.nomeEvento %></span></h1>
+        <div style="margin-bottom: 15px;">
+            <button id="btnExportarExcel" class="btn btn-primary" >Exportar para Excel</button>
+        </div>
     </div>
     <div class="informacoes">
         <table id="tableRelatorio" class="table table-striped">
@@ -28,6 +28,7 @@
                 </tr>
             </tbody>
         </table>
+        <a class="btn btn-danger" href="/evento" style="margin-bottom: 20px;">Voltar</a>
     </div>
 </div>
 

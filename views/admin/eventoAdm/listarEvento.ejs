@@ -1,20 +1,19 @@
 
                 <div class="container-fluid">
                     <h1>Eventos cadastrados</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/evento/addEvento">Novo Evento</a>
-
-<hr>
-<div>
-    <button id="btnExportarExcel">Exportar para excel</button>
+<div style="margin-bottom: 15px; display: flex;">
+    <a class="btn btn-info" style="max-width: 200px;" href="/evento/addEvento">Novo Evento</a>
+    <button id="btnExportarExcel" class="btn btn-primary" style="margin-left: 30px;">Exportar para Excel</button>
 </div>
+<hr>
+
 <div style="margin-bottom: 15px;">
-    <label for="filtro">Filtro:</label>
+    <label for="filtro" style="font-weight: 700; color: black;">Filtro:</label>
     <div class="input-group">
         <input id="filtro" type="text" placeholder="Digite um valor a ser filtrado..." class="form-control" aria-label="Text input with dropdown button">
         <div class="input-group-append">
           <button id="btnEscolherFiltro" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Filtros</button>
           <div class="dropdown-menu">
-            <a class="dropdown-item itemFiltro" data-valor="2" data-nome="Data Evento" href="#">Data Evento</a>
             <a class="dropdown-item itemFiltro" data-valor="1" data-nome="Nome do Evento" href="#">Nome do Evento</a>
             <a class="dropdown-item itemFiltro" data-valor="3" data-nome="Local do Evento" href="#">Local do Evento</a>
           </div>
@@ -30,8 +29,6 @@
                 <th>Nome Evento</th>
                 <th>Data Evento</th>
                 <th>Local Evento</th>
-                <th>Patrimonio Evento</th>
-                <th>Quantidade Patrimonio</th>
                 <th>Ações</th>
             </thead>
             <tbody>
@@ -41,8 +38,6 @@
                         <td><%= listaEvento[i].nomeEvento%></td>
                         <td><%= listaEvento[i].dataEvento.toLocaleDateString() %></td>
                         <td><%= listaEvento[i].localEvento %></td>
-                        <td><%= listaEvento[i].patrimonioId %></td>
-                        <td><%= listaEvento[i].patrimonioQuantidade %></td>
                         <td>
                             <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>

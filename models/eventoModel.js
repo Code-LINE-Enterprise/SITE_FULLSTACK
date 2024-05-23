@@ -85,11 +85,8 @@ class EventoModel {
             if(filtro == "1") {
                 sqlFiltro = ` where nome_evento like ?`
             }
-            else if(filtro == "2") {
-                sqlFiltro = ` where data_evento like %?%`;
-            }
-            else if(filtro == "3"){
-                sqlFiltro = ` where local_evento like %?%`;
+            else if(filtro == "2"){
+                sqlFiltro = ` where local_evento like ?`;
             };
         }
 
