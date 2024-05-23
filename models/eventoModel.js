@@ -9,9 +9,10 @@ class EventoModel {
     #nomeEvento;
     #dataEvento;
     #localEvento;
+    #descEvento;
     #patrimonioId;
     #patrimonioQuantidade;
-    #descEvento;
+    
     //implementar getter e setter
     get eventoId() {
         return this.#eventoId;
@@ -41,6 +42,13 @@ class EventoModel {
         this.#localEvento = localEvento;
     }
 
+    get descEvento() {
+        return this.#descEvento;
+    }
+    set descEvento(descEvento) {
+        this.#descEvento = descEvento;
+    }
+
     get patrimonioId() {
         return this.#patrimonioId;
     }
@@ -55,22 +63,18 @@ class EventoModel {
         this.#patrimonioQuantidade = patrimonioQuantidade;
     }
 
-    get descEvento() {
-        return this.#descEvento;
-    }
-    set descEvento(descEvento) {
-        this.#descEvento = descEvento;
-    }
+    
 
     //implementar construtor
-    constructor(eventoId, nomeEvento, dataEvento, localEvento, patrimonioId,patrimonioQuantidade, descEvento) {
+    constructor(eventoId, nomeEvento, dataEvento, localEvento, descEvento, patrimonioId,patrimonioQuantidade) {
         this.#eventoId = eventoId;
         this.#nomeEvento = nomeEvento;
         this.#dataEvento = dataEvento;
         this.#localEvento = localEvento;
+        this.#descEvento = descEvento;
         this.#patrimonioId = patrimonioId;
         this.#patrimonioQuantidade = patrimonioQuantidade;
-        this.#descEvento = descEvento;
+        
     }
 
     //implementar as funções para manipulação das informações no banco
@@ -102,15 +106,15 @@ class EventoModel {
         let listaEvento = [];
 
         for(let i = 0; i < rows.length; i++) {
-            listaEvento.push(new EventoModel(rows[i]["evento_cad"], rows[i]["nome_evento"], rows[i]["data_evento"], rows[i]["local_evento"], rows[i]["pat_nclatura"], rows[i]["pat_quant"], rows[i]["desc_evento"]));
+            listaEvento.push(new EventoModel(rows[i]["evento_cad"], rows[i]["nome_evento"], rows[i]["data_evento"], rows[i]["local_evento"], rows[i]["desc_evento"], rows[i]["pat_nclatura"], rows[i]["pat_quant"]));
         }
         return listaEvento;
     }
 
     async cadastrarEvento() {
-            let sql = "insert into Evento (data_evento, nome_evento, local_evento, pat_etiqueta, desc_evento) values (?,?,?,?,?)";
+            let sql = "insert into Evento (data_evento, nome_evento, local_evento, desc_evento, pat_etiqueta) values (?,?,?,?,?)";
 
-            let valores = [this.#dataEvento, this.#nomeEvento, this.#localEvento, this.#patrimonioId, this.#descEvento];
+            let valores = [this.#dataEvento, this.#nomeEvento, this.#localEvento, this.#descEvento, this.#patrimonioId];
     
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
     
@@ -137,7 +141,7 @@ class EventoModel {
 
         if(rows.length > 0) {
             let row = rows[0];
-            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["pat_nclatura"], row["pat_quant"], row["desc_evento"]);
+            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["desc_evento"], row["pat_nclatura"], row["pat_quant"]);
         }
 
         return null;

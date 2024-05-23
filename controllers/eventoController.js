@@ -41,8 +41,8 @@ class EventoController {
     async cadastrarEvento(req, resp){
         let msg = "";
         let cor = "";
-        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.patrimonio  != '0' && req.body.quantidade > '0') {
-            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.patrimonio, req.body.quantidade);
+        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.patrimonio  != '0' && req.body.quantidade > '0') {
+            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.patrimonio, req.body.quantidade);
 
             let result = await evento.cadastrarEvento();
 
@@ -86,8 +86,8 @@ class EventoController {
         let cor = "";
         let id = req.params.id;
 
-        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.patrimonio  != '0' && req.body.quantidade > '0') {
-            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.patrimonio, req.body.quantidade);
+        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.patrimonio  != '0' && req.body.quantidade > '0') {
+            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.patrimonio, req.body.quantidade);
 
             let result = await evento.alterarEvento();
 
@@ -115,7 +115,7 @@ class EventoController {
 
     async excluirEvento(req, resp){
         let id = req.params.id;
-        let evento = new EventoModel(id, null, null, null, null, null, null);
+        let evento = new EventoModel(id, null, null, null, null, null, null, null);
 
         let result = await evento.excluirEvento();
         
