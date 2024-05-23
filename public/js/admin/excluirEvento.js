@@ -59,8 +59,6 @@ document.addEventListener("DOMContentLoaded", function(){
                                     <td>${r[i].nomeEvento}</td>
                                     <td>${new Date(r[i].dataEvento).toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
                                     <td>${r[i].localEvento}</td>
-                                    <td>${r[i].patrimonioId}</td>
-                                    <td>${r[i].patrimonioQuantidade}</td>
                                     <td>
                                         <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                                         <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
