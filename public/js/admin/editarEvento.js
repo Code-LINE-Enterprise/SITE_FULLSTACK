@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("nome").style["border-color"] = "#ced4da";
         document.getElementById("data").style["border-color"] = "#ced4da";
         document.getElementById("local").style["border-color"] = "#ced4da";
+        document.getElementById("desc").style["border-color"] = "#ced4da";
         document.getElementById("patrimonio").style["border-color"] = "#ced4da";
         document.getElementById("quantidade").style["border-color"] = "#ced4da";
-        document.getElementById("desc").style["border-color"] = "#ced4da";
     }
 
     function editarEvento() {
@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let nome = document.querySelector("#nome").value;
         let data = document.querySelector("#data").value;
         let local = document.querySelector("#local").value;
+        let desc = document.querySelector("#desc").value;
         let patrimonio = document.querySelector("#patrimonio").value;
         let quantidade = document.querySelector("#quantidade").value;
-        let desc = document.querySelector("#desc").value;
-        
+
         let listaErros = [];
         if(nome == "") {
             listaErros.push("nome");
@@ -32,26 +32,26 @@ document.addEventListener("DOMContentLoaded", function () {
         if(local == "") {
             listaErros.push("local");
         }
+        if(desc == "") {
+            listaErros.push("desc");
+        }
         if(patrimonio == "") {
             listaErros.push("patrimonio");
         }
         if(quantidade == "") {
             listaErros.push("quantidade");
         }
-        if(desc == "") {
-            listaErros.push("desc");
-        }
-        
-        if (listaErros.length == 0) {
+
+        if(listaErros.length == 0) {
             //enviar ao backend com fetch
 
             let obj = {
                 nome: nome,
                 data: data,
                 local: local,
+                desc: desc,
                 patrimonio: patrimonio,
                 quantidade: quantidade,
-                desc: desc,
             }
 
             fetch(`/evento/alterarEvento/${evento_cad}`, {

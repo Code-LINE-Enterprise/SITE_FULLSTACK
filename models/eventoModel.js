@@ -123,9 +123,9 @@ class EventoModel {
 
     async alterarEvento(){
         
-            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, pat_etiqueta = ?, pat_etiqueta = ?, desc_evento = ? where evento_cad = ?";
+            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, desc_evento = ?, pat_etiqueta = ?, pat_etiqueta = ? where evento_cad = ?";
 
-            let valores = [this.#dataEvento, this.nomeEvento, this.#localEvento, this.#patrimonioId, this.#patrimonioQuantidade, this.#descEvento, this.#eventoId];
+            let valores = [this.#dataEvento, this.nomeEvento, this.#localEvento, this.#descEvento, this.#patrimonioId, this.#patrimonioQuantidade, this.#eventoId];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;
@@ -163,9 +163,10 @@ class EventoModel {
             "dataEvento": this.#dataEvento,
             "nomeEvento": this.#nomeEvento,
             "localEvento": this.#localEvento,
+            "descEvento": this.#descEvento,
             "patrimonioId": this.#patrimonioId,
             "patrimonioQuantidade": this.#patrimonioQuantidade,
-            "descEvento": this.#descEvento,           
+                       
         }
     }
     
