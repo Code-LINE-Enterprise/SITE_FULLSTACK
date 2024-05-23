@@ -1,7 +1,37 @@
+<div>
+    <div>
+        <button id="btnExportarExcel">Exportar para excel</button>
+    </div>
+    <div class="titulo">
+        <h1>Relatorio do Evento "<%= evento.nomeEvento %>"</h1>
+    </div>
+    <div class="informacoes">
+        <table id="tableRelatorio" class="table table-striped">
+            <thead>
+                <th>Codigo</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Local</th>
+                <th>Descrição</th>
+                <th>Patrimonio</th>
+                <th>Quantidade Patrimonio</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th><%= evento.eventoId %></th>
+                    <th><%= evento.nomeEvento %></th>
+                    <th><%= evento.dataEvento.toLocaleDateString() %></th>
+                    <th><%= evento.localEvento %></th>
+                    <th><%= evento.descEvento %></th>
+                    <th><%= evento.patrimonioId %></th>
+                    <th><%= evento.patrimonioQuantidade %></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 
-
-
-<script src="/js/admin/excluirEvento.js"></script>
+<script src="/js/admin/listarRelatorioEvento.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>

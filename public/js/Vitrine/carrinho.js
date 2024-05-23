@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
         if(listaCarrinho.length > 0) {
 
-            fetch("/admin/gravarPedido", {
+            fetch("/pedido/gravarPedido", {
                 method: "POST",
                 headers: {
                     'Content-Type': "application/json"
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let id = this.dataset.produtoid;
         console.log(id);
 
-        fetch("/admin/obter/" + id)
+        fetch("/produto/obter/" + id)
         .then(r=> {
             return r.json();
         })

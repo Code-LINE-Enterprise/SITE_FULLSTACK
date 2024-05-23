@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("local").style["border-color"] = "#ced4da";
         document.getElementById("patrimonio").style["border-color"] = "#ced4da";
         document.getElementById("quantidade").style["border-color"] = "#ced4da";
+        document.getElementById("desc").style["border-color"] = "#ced4da";
     }
 
     function editarEvento() {
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let local = document.querySelector("#local").value;
         let patrimonio = document.querySelector("#patrimonio").value;
         let quantidade = document.querySelector("#quantidade").value;
+        let desc = document.querySelector("#desc").value;
         
         let listaErros = [];
         if(nome == "") {
@@ -36,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if(quantidade == "") {
             listaErros.push("quantidade");
         }
+        if(desc == "") {
+            listaErros.push("desc");
+        }
         
         if (listaErros.length == 0) {
             //enviar ao backend com fetch
@@ -46,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 local: local,
                 patrimonio: patrimonio,
                 quantidade: quantidade,
+                desc: desc,
             }
 
             fetch(`/evento/alterarEvento/${evento_cad}`, {

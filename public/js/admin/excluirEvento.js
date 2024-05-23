@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function(){
         /* Export to file (start a download) */
         XLSX.writeFile(wb, "SheetJSTable.xlsx");
     }
+    
 
     function buscar() {
         let termoFiltro = document.getElementById("filtro").value;
@@ -55,8 +56,8 @@ document.addEventListener("DOMContentLoaded", function(){
                     htmlCorpo += `
                                 <tr>
                                     <td>${r[i].eventoId}</td>
-                                    <td>${new Date(r[i].dataEvento).toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
                                     <td>${r[i].nomeEvento}</td>
+                                    <td>${new Date(r[i].dataEvento).toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
                                     <td>${r[i].localEvento}</td>
                                     <td>${r[i].patrimonioId}</td>
                                     <td>${r[i].patrimonioQuantidade}</td>

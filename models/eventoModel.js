@@ -119,9 +119,9 @@ class EventoModel {
 
     async alterarEvento(){
         
-            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, pat_etiqueta = ?, desc_evento = ? where evento_cad = ?";
+            let sql = "update Evento set data_evento = ?, nome_evento = ?, local_evento = ?, pat_etiqueta = ?, pat_etiqueta = ?, desc_evento = ? where evento_cad = ?";
 
-            let valores = [this.#dataEvento, this.nomeEvento, this.#localEvento, this.#patrimonioId, this.#eventoId];
+            let valores = [this.#dataEvento, this.nomeEvento, this.#localEvento, this.#patrimonioId, this.#patrimonioQuantidade, this.#descEvento, this.#eventoId];
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;
@@ -129,7 +129,7 @@ class EventoModel {
     }
 
     async obterIdEvento(id) {
-        let sql = "select * from Evento p inner join Patrimonio c on p.pat_etiqueta = c.pat_etiqueta inner join Patrimonio c on p.pat_quant = c.pat_quant where evento_cad = ?";
+        let sql = "SELECT * FROM Evento p INNER JOIN Patrimonio c1 ON p.pat_etiqueta = c1.pat_etiqueta WHERE evento_cad = ?";
 
         let valores = [id];
 

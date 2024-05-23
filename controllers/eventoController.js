@@ -5,14 +5,14 @@ class EventoController {
 
     //EVENTO
 
-    // async filtrar(req, res) {
-    //     let termo = req.params.termo;
-    //     let filtro = req.params.filtro;
-    //     let pedidoItem = new PedidoItemModel();
-    //     var lista = await pedidoItem.listarPedidos(termo, filtro);
-    
-    //     res.send(lista);
-    // }
+    async relatorioEventoView(req, res){
+        console.log(req.params.id);
+
+        let evento = new EventoModel();
+        let eventoSelecionado = await evento.obterIdEvento(req.params.id);
+
+        res.render('admin/eventoAdm/relatorioEvento', {evento: eventoSelecionado, layout: 'admin/layoutAdm'});
+    }
 
     async listagemEventoView(req, res){
         let evento = new EventoModel();

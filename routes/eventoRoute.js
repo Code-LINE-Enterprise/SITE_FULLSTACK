@@ -15,5 +15,6 @@ routerEvento.post('/addEvento', auth.verificarUsuarioLogado, ctrl.cadastrarEvent
 routerEvento.get('/alterarEvento/:id', auth.verificarUsuarioLogado, ctrl.alterarEventoView);
 routerEvento.put('/alterarEvento/:id', auth.verificarUsuarioLogado, ctrl.alterarEvento);
 routerEvento.delete('/excluirEvento/:id', auth.verificarUsuarioLogado, ctrl.excluirEvento);
+routerEvento.get('/relatorioEvento/:id', auth.verificarUsuarioLogado, ctrl.relatorioEventoView);
 
 module.exports = routerEvento;
