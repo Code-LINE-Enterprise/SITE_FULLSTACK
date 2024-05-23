@@ -1,10 +1,9 @@
 
                 <div class="container-fluid">
-                    <h1>Patrimônios cadastrados</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/patrimonio/addPatrimonio">Novo Patrimônio</a>
+                    <h1>Gerenciamento de Patrimônios</h1>
 
-<hr>
-<div style="margin-bottom: 15px;">
+<div style="margin-bottom: 15px;display: flex;">
+    <a class="btn btn-info" style="max-width: 200px; margin-right: 20px;" href="/patrimonio/addPatrimonio">Novo Patrimônio</a>
     <button id="btnExportarExcel" class="btn btn-primary" >Exportar para Excel</button>
 </div>
     <div>
@@ -14,6 +13,7 @@
                 <th>Patrimônio quantidade</th>
                 <th>Tipo de patrimônio</th>
                 <th>Nome do patrimônio</th>
+                <th>Ações</th>
             </thead>
             <tbody>
                 <% for (let i = 0; i < listaPatrimonio.length; i++)  { %>
