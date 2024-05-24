@@ -60,13 +60,12 @@ document.addEventListener("DOMContentLoaded", function(){
                                     <td>${new Date(r[i].dataEvento).toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
                                     <td>${r[i].localEvento}</td>
                                     <td>
-                                        <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                                        <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
-                                        <a href="/evento/relatorioEvento/<%= listaEvento[i].eventoId %>" class="btn btn-secondary"><i class="fas fa-eye"></i></a> <!-- Criar uma tela pra exbição de relatorios -->
-                                     </td>
-                                </tr>
-                                
-                            `;
+                                        <a href="/evento/alterarEvento/${r[i].eventoId}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                        <button onclick="excluirEvento('${r[i].eventoId}')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                                        <a href="/evento/relatorioEvento/${r[i].eventoId}" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>`;
+
                 }
 
                 document.querySelector("#tableEvento > tbody").innerHTML = htmlCorpo;
