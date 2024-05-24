@@ -25,38 +25,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function gravarPedido() {
 
-        let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
-        if(listaCarrinho.length > 0) {
+        let confirmacao = confirm("Deseja confirmar o pedido?");
 
-            fetch("/pedido/gravarPedido", {
-                method: "POST",
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify(listaCarrinho)
-            })
-            .then(r=> {
-                return r.json();
-            })
-            .then(r=> {
-                console.log(r);
-            })
+        if (confirmacao) {
 
+            let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+            if(listaCarrinho.length > 0) {
+                
+                fetch("/pedido/gravarPedido", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify(listaCarrinho)
+                })
+                .then(r=> {
+                    return r.json();
+                })
+                .then(r=> {
+                    alert("Pedido confirmado com sucesso!!")
+                    console.log(r);
+                })
+                
+            }
+            else{
+                alert("O carrinho está vazio!");
+            }
+            }
         }
-        else{
-            alert("O carrinho está vazio!");
+        
+        function remover() {
+        
+
+        let confirmacao = confirm("Deseja remover este item do carrinho?");
+
+        // Se o usuário clicar em "OK" no diálogo de confirmação
+        if (confirmacao) {
+            let produto = this.dataset.produto;
+            let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+
+            listaCarrinho = listaCarrinho.filter(x=> x.produtoId != produto);
+
+            localStorage.setItem("carrinho", JSON.stringify(listaCarrinho));
+
+            carregarCarrinho();
+
+            alert("Produto removido com sucesso!");
         }
-    }
-
-    function remover() {
-        let produto = this.dataset.produto;
-        let listaCarrinho = JSON.parse(localStorage.getItem("carrinho"));
-
-        listaCarrinho = listaCarrinho.filter(x=> x.produtoId != produto);
-
-        localStorage.setItem("carrinho", JSON.stringify(listaCarrinho));
-
-        carregarCarrinho();
     }
 
     function iniciarEventos() {
@@ -174,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             </td>
                             <td>R$${valorTotalItem}</td>
                             <td>
-                                <button class="btn btn-danger remover" data-produto="${carrinhoModal[i].produtoId}"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger remover" data-produto="${carrinhoModal[i].produtoId}">REMOVER</button>
                             </td>
                         </tr>`;
             }
@@ -182,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector("#tabelaCarrinho > tbody").innerHTML = html;
 
             if(valorTotalCarrinho > 0) {
-                document.querySelector("#valorTotal").innerHTML = `<h2>Valor total do pedido: R$ ${valorTotalCarrinho}</h2>`
+                document.querySelector("#valorTotal").innerHTML = `<h4 style="padding: 5px"> Valor total do pedido: R$ ${valorTotalCarrinho} </h2>`
             }
             document.querySelector("#msgCarrinhoVazio").style["display"] = "none";
             document.querySelector("#tabelaCarrinho").style["display"] = "inline-table";
