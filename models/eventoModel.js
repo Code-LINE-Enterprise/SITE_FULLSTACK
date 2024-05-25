@@ -77,25 +77,29 @@ class EventoModel {
         
     }
 
+
     //implementar as funções para manipulação das informações no banco
     async listarEvento(termo, filtro) {
 
         let sqlFiltro = "";
         if(termo != "") {
             if(filtro == "1") {
+                termo = "%" + termo + "%"
                 sqlFiltro = ` where nome_evento like ?`
             }
             else if(filtro == "2"){
-                sqlFiltro = ` where data_evento like ?`;
+                console.log(termo)
+                sqlFiltro = ` where data_evento >= ?`;
             }
             else if(filtro == "3"){
+                termo = "%" + termo + "%"
                 sqlFiltro = ` where local_evento like ?`;
             };
         }
 
         let sql = `select * from Evento  inner join Patrimonio on Evento.pat_etiqueta = Patrimonio.pat_etiqueta ${sqlFiltro} `  // retirado order by evento_cad desc
         
-        let valores = [];
+        let valores = [termo];
 
         if(sqlFiltro != ""){
             valores.push(termo);

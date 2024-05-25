@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     let filtroEscolhido = 0;
 
+    
+
     let itemFiltro = document.querySelectorAll(".itemFiltro");
 
     document.getElementById("btnFiltrar").addEventListener("click", buscar);
@@ -42,6 +44,16 @@ document.addEventListener("DOMContentLoaded", function(){
 
     function buscar() {
         let termoFiltro = document.getElementById("filtro").value;
+
+        
+        if(termoFiltro == ""){
+            termoFiltro = "todos";
+            filtroEscolhido = 0;
+        }
+        else if(filtroEscolhido == 2 ){
+            let arr = termoFiltro.split("/");
+            termoFiltro = `${arr[2]}-${arr[1]}-${arr[0]}`;
+        }
 
         fetch(`/evento/filtrar/${termoFiltro}/${filtroEscolhido}`)
         .then(r=> {

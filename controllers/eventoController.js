@@ -24,6 +24,7 @@ class EventoController {
     async filtrar(req, res) {
         let termo = req.params.termo;
         let filtro = req.params.filtro;
+        console.log(termo)
         let EventoFiltro = new EventoModel();
         var lista = await EventoFiltro.listarEvento(termo, filtro);
 
