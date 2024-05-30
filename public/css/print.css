@@ -1,0 +1,10 @@
+
+@media print {
+    #divFiltros, #btnExportarExcel, #btnExportarPdf {
+        display: none !important;
+    }
+
+    body {
+        background-color: yellow;
+    }
+}

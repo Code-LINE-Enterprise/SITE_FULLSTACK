@@ -45,11 +45,29 @@ class PatrimonioModel {
     }
 
     //implementar as funções para manipulação das informações no banco
-    async listarPatrimonio() {
+    async listarPatrimonio(termo, filtro) {
+        let sqlFiltro = "";
+        if(termo != "") {
+            if(filtro == "1") {
+                termo = "%" + termo + "%"
+                sqlFiltro = ` where pat_nclatura like ?`
+            }
+            else if(filtro == "2"){
+                console.log(termo)
+                termo = "%" + termo + "%"
+                sqlFiltro = ` where pat_tipo like ?`;
+            }
+        }
 
-        let sql = "select * from Patrimonio order by pat_etiqueta desc";
+        let sql = `select * from Patrimonio ${sqlFiltro}`;
 
-        let rows = await banco.ExecutaComando(sql);
+        let valores = [termo];
+
+        if(sqlFiltro != ""){
+            valores.push(termo);
+        }
+
+        let rows = await banco.ExecutaComando(sql, valores);
         let listaPatrimonio = [];
 
         for(let i = 0; i < rows.length; i++) {
@@ -124,6 +142,15 @@ class PatrimonioModel {
         let rows = await conexao.ExecutaComando(sql, valores);
         
         return rows.length > 0;
+    }
+
+    toJSON() {
+        return {
+            "patrimonioId": this.#patrimonioId,
+            "quantidadePatrimonio": this.#quantidadePatrimonio,
+            "tipoPatrimonio": this.#tipoPatrimonio,
+            "nomePatrimonio": this.#nomePatrimonio,
+        }
     }
 }
 

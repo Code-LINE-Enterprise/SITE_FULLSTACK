@@ -6,8 +6,17 @@ class PatrimonioController {
 async listagemPatrimonioView(req, res){
     let patrimonio = new PatrimonioModel();
     let listaPatrimonio = await patrimonio.listarPatrimonio();
-
     res.render('admin/patrimonioAdm/listarPatrimonio', {layout: 'admin/layoutAdm', listaPatrimonio: listaPatrimonio})
+}
+
+async filtrar(req, res) {
+    let termo = req.params.termo;
+    let filtro = req.params.filtro;
+    console.log(termo)
+    let PatrimonioFiltro = new PatrimonioModel();
+    var lista = await PatrimonioFiltro.listarPatrimonio(termo, filtro);
+
+    res.send(lista);
 }
 
 cadastroPatrimonioView(req, resp){

@@ -1,11 +1,12 @@
 
+<link rel="stylesheet" type="text/css"  media="print" href="/css/print.css">
                 <div class="container-fluid">
                     <h1>Usuarios cadastrados</h1>
-<a class="btn btn-info" style="max-width: 200px;" href="/usuario/addUsuario">Novo Usuario</a>
-
 <hr>
-<div style="margin-bottom: 15px;">
-    <button id="btnExportarExcel" class="btn btn-primary" >Exportar para Excel</button>
+<div style="margin-bottom: 15px;display: flex;">
+    <a class="btn btn-info" style="max-width: 200px;" href="/usuario/addUsuario">Novo Usuario</a>
+    <button id="btnExportarExcel" class="btn btn-primary" style="margin: 0px 30px 0px 30px;" >Exportar para Excel</button>
+    <button id="btnExportarPdf"  onclick="window.print()" class="btn btn-danger">Exportar para PDF</button>
 </div>
 <div>
     <table class="table table-striped" id="tableUsuario">

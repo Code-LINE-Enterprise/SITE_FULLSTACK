@@ -1,13 +1,15 @@
+<link rel="stylesheet" type="text/css"  media="print" href="/css/print.css">
 
                 <div class="container-fluid">
                     <h1>Gerenciamento de Eventos</h1>
 <div style="margin-bottom: 15px; display: flex;">
     <a class="btn btn-info" style="max-width: 200px;" href="/evento/addEvento">Novo Evento</a>
-    <button id="btnExportarExcel" class="btn btn-primary" style="margin-left: 30px;">Exportar para Excel</button>
+    <button id="btnExportarExcel" class="btn btn-primary" style="margin: 0px 30px 0px 30px;">Exportar para Excel</button>
+    <button id="btnExportarPdf"  onclick="window.print()" class="btn btn-danger">Exportar para PDF</button>
 </div>
 <hr>
 
-<div style="margin-bottom: 15px;">
+<div style="margin-bottom: 15px;" id="divFiltros">
     <label for="filtro" style="font-weight: 700; color: black;">Filtro:</label>
     <div class="input-group">
         <input id="filtro" type="text" placeholder="Digite um valor a ser filtrado..." class="form-control" aria-label="Text input with dropdown button">

@@ -9,6 +9,7 @@ let ctrl = new PatrimonioController();
 
 //ROTAS PATRIMONIOS
 routerPatrimonio.get('/', auth.verificarUsuarioLogado, ctrl.listagemPatrimonioView);
+routerPatrimonio.get("/filtrar/:termo/:filtro", auth.verificarUsuarioLogado, ctrl.filtrar);
 routerPatrimonio.get('/addPatrimonio', auth.verificarUsuarioLogado, ctrl.cadastroPatrimonioView);
 routerPatrimonio.post('/addPatrimonio', auth.verificarUsuarioLogado, ctrl.cadastrarPatrimonio);
 routerPatrimonio.get('/alterarPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.alterarPatrimonioView);

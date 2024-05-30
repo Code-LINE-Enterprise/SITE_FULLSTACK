@@ -1,1 +1,144 @@
-AINDA PRECISA MEXER NA OPÇÃO DE QUANTIDADE (NÃO ESTÁ FUNCIONANDO)
+<main id="main" >
+      
+      <!-- ======= Breadcrumbs ======= -->
+      <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+          <h2>Faça parte do Voluntariado</h2>
+          <p>Para fazer parte da nossa rede de voluntariado é só se cadastrar e se conectar com outros ativistas ao redor do Brasil e começar a participar das discussões e mobilizações. Você poderá encontrar pessoas com interesses comuns, iniciar grupos, eventos, campanhas, além de divulgar suas ações, na internet e nas ruas.</p>
+        </div>
+      </div><!-- End Breadcrumbs -->
+  
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+  
+        <div class="container" data-aos="fade-up" style="display: flex;">
+  
+          <div class="row mt-5">
+            <div class="col-lg-4">
+              <div class="info">
+                <div class="address">
+                  <i class="bi bi-geo-alt"></i>
+                  <h4>Endereço:</h4>
+                  <p>R. José Bongiovani, 700<br>Presidente Prudente, SP 19050-920<br>Brasil</p>
+                </div>
+                <div class="email">
+                  <i class="bi bi-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>abpa@email.com</p>
+                </div>
+                <div class="phone">
+                  <i class="bi bi-phone"></i>
+                  <h4>Telefone:</h4>
+                  <p>18 98123-4567</p>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-8 mt-5 mt-lg-0">
+              <% if (typeof msg != "undefined") { %>             
+                <span><%= msg %></span>
+              <% } %>
+          
+              <form action="/public/php/contact.php" method="post" role="form" class="php-email-form" id="formPrincipal">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="name"><h5>Nome Completo*:</h5></label>
+                    <input type="text" class="form-control" placeholder="Ex: José Silva" name="voluntarioNome" id="voluntarioNome">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="email"><h5>Email*:</h5></label>
+                    <input type="email" class="form-control" placeholder="Ex: exemplo@email.com" name="voluntarioEmail" id="voluntarioEmail">
+                    <p id="emailError" class="error-message"></p>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="genero"><h5>Gênero*:</h5></label>
+                    <select name="voluntarioGenero" id="voluntarioGenero" required>
+                      <option value="masculino">Masculino</option>
+                      <option value="feminino">Feminino</option>
+                      <option value="outro">Prefiro não dizer</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="phone"><h5>Celular*:</h5></label>
+                    <input type="phone" class="form-control" placeholder="Ex: (12)93456-7890" required onblur="validacaoCel(event)" maxlength="11" name="voluntarioTelefone" id="voluntarioTelefone">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="cpf"><h5>CPF*:</h5></label>
+                    <input type="text" class="form-control" placeholder="Ex: 000.000.000-00" onblur="mascaraCpf(event); validacaoCPF(event)" maxlength="14" name="voluntarioCpf" id="voluntarioCpf">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="birth"><h5>Data de nascimento*:</h5></label>
+                    <input type="date" class="form-control" placeholder="DD/MM/AAAA" name="voluntarioDataNasc" id="voluntarioDataNasc">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="zip-code"><h5>CEP*:</h5></label>
+                    <input type="text" class="form-control" placeholder="XXXXX-XXX" style="padding-right: 50px;" onblur="mascaraCEP()" maxlength="8" name="voluntarioCEP" id="voluntarioCEP">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="address"><h5>Rua*:</h5></label>
+                    <input type="text" class="form-control" placeholder="Ex: Rua José da Silva" name="voluntarioRua" id="voluntarioRua">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="number"><h5>Número*:</h5></label>
+                    <input type="text" class="form-control" placeholder="Ex: 90" name="voluntarioNum" id="voluntarioNum">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="neighborhood"><h5>Bairro*:</h5></label>
+                    <input type="text" class="form-control" placeholder="Ex: Centro" name="voluntarioBairro" id="voluntarioBairro">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="state"><h5>Estado*:</h5></label><br>
+                    <select id="voluntarioEstado" name="voluntarioEstado" required>
+                      <option value="AC">Acre</option>
+                      <option value="AL">Alagoas</option>
+                      <option value="AP">Amapá</option>
+                      <option value="AM">Amazonas</option>
+                      <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                        <option value="EX">Estrangeiro</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="extra-info"><h5>Complemento:</h5></label>
+                    <input type="text" class="form-control" name="voluntarioComplemento" id="voluntarioComplemento" placeholder="Ex: Apartamento 101">
+                  </div>
+                </div>
+                <div class="my-3">
+                  <div class="loading">Carregando...</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Seu email foi enviado. Muito obrigado!</div>
+                </div>
+                <div class="text-center"><button type="submit">Quero Fazer Parte</button></div>
+              </form>
+            </div>
+          </div>
+          
+  
+        </div>
+        <div>
+      </section><!-- End Contact Section -->
+  
+    </main><!-- End #main -->
+    
+    <script src="/js/voluntarios/cadastrar.js"></script>

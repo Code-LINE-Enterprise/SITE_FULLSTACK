@@ -1,10 +1,25 @@
-
+<link rel="stylesheet" type="text/css"  media="print" href="/css/print.css">
                 <div class="container-fluid">
                     <h1>Gerenciamento de Patrimônios</h1>
 
 <div style="margin-bottom: 15px;display: flex;">
-    <a class="btn btn-info" style="max-width: 200px; margin-right: 20px;" href="/patrimonio/addPatrimonio">Novo Patrimônio</a>
-    <button id="btnExportarExcel" class="btn btn-primary" >Exportar para Excel</button>
+    <a class="btn btn-info" style="max-width: 200px;" href="/patrimonio/addPatrimonio">Novo Patrimônio</a>
+    <button id="btnExportarExcel" class="btn btn-primary" style="margin: 0px 30px 0px 30px;" >Exportar para Excel</button>
+    <button id="btnExportarPdf"  onclick="window.print()" class="btn btn-danger">Exportar para PDF</button>
+</div>
+<div style="margin-bottom: 15px;" id="divFiltros">
+    <label for="filtro">Filtro:</label>
+    <div class="input-group">
+        <input id="filtro" type="text" placeholder="Digite um valor a ser filtrado..." class="form-control" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+          <button id="btnEscolherFiltro" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Filtros</button>
+       <div class="dropdown-menu">
+            <a class="dropdown-item itemFiltro" data-valor="2" data-nome="Tipo de Patrimônio">Tipo de Patrimônio</a>
+            <a class="dropdown-item itemFiltro" data-valor="1" data-nome="Nome do Produto">Nome do Patrimônio</a>
+          </div>
+          <button id="btnFiltrar" class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+      </div>
 </div>
     <div>
         <table class="table table-striped" id="tablePatrimonio">
