@@ -15,5 +15,8 @@ routerPatrimonio.post('/addPatrimonio', auth.verificarUsuarioLogado, ctrl.cadast
 routerPatrimonio.get('/alterarPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.alterarPatrimonioView);
 routerPatrimonio.put('/alterarPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.alterarPatrimonio);
 routerPatrimonio.delete('/excluirPatrimonio/:id', auth.verificarUsuarioLogado, ctrl.excluirPatrimonio);
+routerPatrimonio.get('/alocacao', auth.verificarUsuarioLogado, ctrl.alocarView);
+routerPatrimonio.get('/listar', auth.verificarUsuarioLogado, ctrl.listarAlocacaoView);
+routerPatrimonio.post('/alocacao', auth.verificarUsuarioLogado, ctrl.alocarPatrimonio);
 
 module.exports = routerPatrimonio;

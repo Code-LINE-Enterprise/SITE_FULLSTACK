@@ -1,5 +1,4 @@
 const EventoModel = require("../models/eventoModel");
-const PatrimonioModel = require("../models/patrimonioModel");
 
 class EventoController {
 
@@ -32,18 +31,18 @@ class EventoController {
     }
 
     async cadastroEventoView(req, resp){
-        let listaPatrimonio = [];
-        let patrimonio = new PatrimonioModel();
-        listaPatrimonio = await patrimonio.listarPatrimonio();
+        
+        let evento = new EventoModel();
+        let eventoStatus = await evento.obterEventoStatus();
 
-        resp.render("admin/eventoAdm/addEvento", {layout: 'admin/layoutAdm', listaPatrimonio: listaPatrimonio});
+        resp.render("admin/eventoAdm/addEvento", {layout: 'admin/layoutAdm', eventoStatus: eventoStatus});
     }
 
     async cadastrarEvento(req, resp){
         let msg = "";
         let cor = "";
-        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.patrimonio  != '0' && req.body.quantidade > '0') {
-            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.patrimonio, req.body.quantidade);
+        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.eventoStatusId  != '0') {
+            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.eventoStatusId);
 
             let result = await evento.cadastrarEvento();
 
@@ -70,16 +69,33 @@ class EventoController {
 
     }
 
+    async obterPossivelStatus(req, res) {
+        let eventoStatus = new EventoModel();
+        let status = await eventoStatus.obterEventoStatus();
+    
+        if (status) {
+          res.send({
+            ok: true,
+            data: status,
+          });
+          return;
+        }
+        res.send({
+          ok: false,
+          message: "Erro",
+        });
+      }
+
     async alterarEventoView(req, res){
         console.log(req.params.id);
 
-        let patrimonio = new PatrimonioModel();
         let evento = new EventoModel();
         let eventoSelecionado = await evento.obterIdEvento(req.params.id);
+        
+        let statusEvento = new EventoModel();
+        let listaStatus = await statusEvento.obterEventoStatus();
 
-        let listaPatrimonio = await patrimonio.listarPatrimonio();
-
-        res.render('admin/eventoAdm/alterarEvento', {evento: eventoSelecionado, listaPatrimonio: listaPatrimonio, layout: 'admin/layoutAdm'});
+        res.render('admin/eventoAdm/alterarEvento', {evento: eventoSelecionado, listaStatus: listaStatus, layout: 'admin/layoutAdm'});
     }
 
     async alterarEvento(req, resp){
@@ -87,8 +103,8 @@ class EventoController {
         let cor = "";
         let id = req.params.id;
 
-        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.patrimonio  != '0' && req.body.quantidade > '0') {
-            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.patrimonio, req.body.quantidade);
+        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.eventoStatusId  != '0') {
+            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.eventoStatusId);
 
             let result = await evento.alterarEvento();
 
@@ -116,7 +132,7 @@ class EventoController {
 
     async excluirEvento(req, resp){
         let id = req.params.id;
-        let evento = new EventoModel(id, null, null, null, null, null, null, null);
+        let evento = new EventoModel(id, null, null, null, null, null, null);
 
         let result = await evento.excluirEvento();
         

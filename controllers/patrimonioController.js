@@ -1,3 +1,5 @@
+const EventoModel = require("../models/eventoModel");
+const PatEvenModel = require("../models/patEvenModel");
 const PatrimonioModel = require("../models/patrimonioModel");
 
 class PatrimonioController {
@@ -71,7 +73,7 @@ async alterarPatrimonio(req, resp){
     if(req.body.quantidadePatrimonio != "" && req.body.tipoPatrimonio != "" && req.body.nomePatrimonio != "") {
         let patrimonio = new PatrimonioModel(id, req.body.quantidadePatrimonio, req.body.tipoPatrimonio, req.body.nomePatrimonio);
 
-        let result = await patrimonio.alterarPatrimonio();
+        let result = await patrimonio.updatePatrimonioPorId();
 
         if(result){
             resp.send({
@@ -113,7 +115,53 @@ async excluirPatrimonio(req, resp){
             msg: "Erro ao excluir patrimonio!"
         })
     }
+}
 
+async alocarPatrimonio(req, res) {
+    const { patrimonio, evento } = req.body;
+
+    if (patrimonio !== "0" && evento !== "0") {
+      let patri = new PatrimonioModel();
+      let alocado = await patri.alocarPatrimonio(patrimonio, evento);
+
+      if (alocado) {
+        res.send({
+          ok: true,
+          message: "Patrimonio alocado com sucesso!",
+        });
+        return;
+      }
+      res.send({
+        ok: false,
+        message: "Não foi possível alocar patrimonio!",
+      });
+      return;
+    }
+    res.send({
+      ok: false,
+      message: "Patrimonio e Evento obrigatórios para alocação!",
+    });
+  }
+
+  async alocarView(req, res) {
+    let patrimonio = new PatrimonioModel();
+    let evenModel = new EventoModel();
+
+    const patrimoniosDisponiveis = await patrimonio.listarPatrimonio()
+      .then((r) => r.filter((patrimonio) => !Boolean(patrimonio.alocado)));
+
+    const eventosNaoFinalizados = await evenModel.listarEvento()
+      .then((r) => r.filter((evento) => evento.statusEventoId !== "3"));
+
+    res.render("./admin/alocacao/alocar", {layout: 'admin/layoutAdm', patrimonios: patrimoniosDisponiveis, eventos: eventosNaoFinalizados});
+  }
+
+async listarAlocacaoView(req, res){
+
+    var patEven = new PatEvenModel();
+    var lista = await patEven.listarInfo();
+
+    res.render('admin/alocacao/listar', {layout: 'admin/layoutAdm', lista: lista  });
 }
 }
 

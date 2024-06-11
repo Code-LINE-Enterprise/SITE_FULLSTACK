@@ -35,23 +35,13 @@
                             </div>
                             <div>
                                 <div class="form-group">
-                                    <label for="patrimonio" class="form-label">Tipo de patrimonio:</label>
-                                    <select class="form-control" id="patrimonio" name="patrimonio">
-                                        <option value="0">Selecione...</option>
-                                        <% for(let i = 0; i<listaPatrimonio.length; i++) { %>
-                                            <% if(evento.patrimonioId == listaPatrimonio[i].patrimonioId) { %>
-                                                <option selected value="<%= listaPatrimonio[i].patrimonioId %>"><%= listaPatrimonio[i].nomePatrimonio %></option>
-                                            <% } else { %>
-                                                <option value="<%= listaPatrimonio[i].patrimonioId %>"><%= listaPatrimonio[i].nomePatrimonio %></option>
-                                            <% } %>
-                                        <% } %>
+                                    <label for="eventoStatusId" class="form-label">Status do Evento:</label>
+                                    <select class="form-control" id="eventoStatusId">
+                                        <option selected value="0">Selecione</option>
+                                        <% for(let i = 0; i<listaStatus.length; i++) { %>
+                                            <option value="<%=listaStatus[i].statusEventoId %>"><%= listaStatus[i].statusNome %></option>
+                                        <% } %> 
                                     </select>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group">
-                                    <label for="quantidade" class="form-label">Quantidade:</label>
-                                    <input style="width: 100px;" type="number" class="form-control" id="quantidade" name="quantidade" value="<%= evento.quantidadePatrimonio %>">
                                 </div>
                             </div>
                             <div>

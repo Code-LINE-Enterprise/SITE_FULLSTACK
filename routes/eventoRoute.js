@@ -12,6 +12,7 @@ routerEvento.get('/', auth.verificarUsuarioLogado, ctrl.listagemEventoView);
 routerEvento.get("/filtrar/:termo/:filtro", auth.verificarUsuarioLogado, ctrl.filtrar);
 routerEvento.get('/addEvento', auth.verificarUsuarioLogado, ctrl.cadastroEventoView);
 routerEvento.post('/addEvento', auth.verificarUsuarioLogado, ctrl.cadastrarEvento);
+routerEvento.get('/possivelStatus', auth.verificarUsuarioLogado, ctrl.obterPossivelStatus);
 routerEvento.get('/alterarEvento/:id', auth.verificarUsuarioLogado, ctrl.alterarEventoView);
 routerEvento.put('/alterarEvento/:id', auth.verificarUsuarioLogado, ctrl.alterarEvento);
 routerEvento.delete('/excluirEvento/:id', auth.verificarUsuarioLogado, ctrl.excluirEvento);

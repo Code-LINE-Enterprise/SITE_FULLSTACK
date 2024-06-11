@@ -1,0 +1,33 @@
+<section>
+    <div class="container">
+      <h1>Alocação de Patrimonio</h1>
+      <form id="patrimonio-form">
+        <div>
+          <div class="form-group">
+            <label for="patrimonioSelect" class="form-label">Patrimonio para alocação:</label>
+            <select class="form-select" id="patrimonioSelect" placeholder="Nome do Patrimonio">
+                    <option value="0">Selecione</option>
+                    <% for(let i = 0; i<patrimonios.length; i++) { %>
+                        <option value="<%=patrimonios[i].patrimonioId %>"><%= patrimonios[i].nomePatrimonio %></option>
+                    <% } %> 
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="eventoSelect" class="form-label">Evento para alocação:</label>
+            <select class="form-select" id="eventoSelect" placeholder="Nome do Evento">
+                <option value="0">Selecione</option>
+                <% for(let i = 0; i<eventos.length; i++) { %>
+                    <option value="<%=eventos[i].eventoId %>"><%= eventos[i].nomeEvento %></option>
+                <% } %> 
+            </select>
+          </div>
+        </div>
+        <div class="mt-4">
+          <a class="btn btn-secondary" href="/patrimonios/listar">Voltar</a>
+          <button class="btn btn-primary" type="submit">Alocar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  <script src="/js/admin/alocacao.js"></script>
+  

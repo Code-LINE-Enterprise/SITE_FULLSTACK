@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("data").style["border-color"] = "#ced4da";
         document.getElementById("local").style["border-color"] = "#ced4da";
         document.getElementById("desc").style["border-color"] = "#ced4da";
-        document.getElementById("patrimonio").style["border-color"] = "#ced4da";
-        document.getElementById("quantidade").style["border-color"] = "#ced4da";
+        document.getElementById("eventoStatusId").style["border-color"] = "#ced4da";
     }
 
     function cadastrar() {
@@ -17,8 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let data = document.querySelector("#data").value;
         let local = document.querySelector("#local").value;
         let desc = document.querySelector("#desc").value;
-        let patrimonio = document.querySelector("#patrimonio").value;
-        let quantidade = document.querySelector("#quantidade").value;
+        let eventoStatusId = document.querySelector("#eventoStatusId").value;
 
         let listaErros = [];
         if(nome == "") {
@@ -33,11 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if(desc == "") {
             listaErros.push("desc");
         }
-        if(patrimonio == "") {
-            listaErros.push("patrimonio");
-        }
-        if(quantidade == "") {
-            listaErros.push("quantidade");
+        if(eventoStatusId == "") {
+            listaErros.push("eventoStatusId");
         }
 
         if(listaErros.length == 0) {
@@ -48,8 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 data: data,
                 local: local,
                 desc: desc,
-                patrimonio: patrimonio,
-                quantidade: quantidade,
+                eventoStatusId: eventoStatusId
             }
 
             fetch("/evento/addEvento", {
@@ -79,10 +73,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             alert("Preencha corretamente os campos indicados!");
         }
-    }
-
-    function validacaoPatrimonio(){
-        
     }
 
 })
