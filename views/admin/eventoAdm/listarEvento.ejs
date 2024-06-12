@@ -57,3 +57,27 @@
                 
     <script src="/js/admin/excluirEvento.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <script>
+   const input = document.getElementById('filtro');
+
+// Adiciona um listener para o evento de input (quando o valor do input muda)
+input.addEventListener('input', function(e) {
+    let value = e.target.value;
+
+    // Verifica se o filtro de data está selecionado
+    const filtroSelecionado = document.querySelector('.dropdown-menu .active');
+    if (filtroSelecionado && filtroSelecionado.getAttribute('data-valor') === '2') {
+        // Remove todos os caracteres que não são números
+        value = value.replace(/\D/g, '');
+
+        // Formata como DD/MM/AAAA
+        if (value.length > 0) {
+            value = value.match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+            value = !value[2] ? value[1] : '' + value[1] + '/' + value[2] + (value[3] ? '/' + value[3] : '');
+        }
+    }
+
+    // Atualiza o valor do input com a máscara aplicada
+    e.target.value = value;
+});
+    </script>
