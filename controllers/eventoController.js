@@ -108,35 +108,38 @@ class EventoController {
         res.render('admin/eventoAdm/alterarEvento', {evento: eventoSelecionado, listaStatus: listaStatus, layout: 'admin/layoutAdm'});
     }
 
-    async alterarEvento(req, resp){
-        let msg = "";
-        let cor = "";
-        let id = req.params.id;
-
-        if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.eventoStatusId  != '0') {
-            let evento = new EventoModel(id, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.eventoStatusId);
-
-            let result = await evento.alterarEvento();
-
-            if(result){
-                resp.send({
-                    ok: true,
-                    msg: "Evento editado com sucesso!"
-                });
+    async alterarEvento(req, resp) {
+        try {
+            let id = req.params.id;
+    
+            // Verifica se todos os parâmetros necessários foram fornecidos e são válidos
+            if (req.body.nome && req.body.data && req.body.local && req.body.desc && req.body.eventoStatusId !== '0') {
+                // Converte a data do formato string para um objeto Date
+                const dataEvento = new Date(req.body.data);
+    
+                // Validações específicas para dia, mês e ano
+                const dia = dataEvento.getDate();
+                const mes = dataEvento.getMonth() + 1; // getMonth retorna 0 para janeiro, 1 para fevereiro, etc.
+                const ano = dataEvento.getFullYear();
+    
+                if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 2023 || ano > 2026) {
+                    return resp.status(400).json({ ok: false, msg: 'Data inválida. O dia deve estar entre 1 e 31, o mês entre 1 e 12, e o ano entre 2023 e 2026.' });
+                }
+    
+                // Continua com a edição do evento se todas as validações foram passadas
+                let evento = new EventoModel(id, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.eventoStatusId);
+                let result = await evento.alterarEvento();
+    
+                if (result) {
+                    resp.json({ ok: true, msg: 'Evento editado com sucesso!' });
+                } else {
+                    resp.status(500).json({ ok: false, msg: 'Erro ao editar evento!' });
+                }
+            } else {
+                resp.status(400).json({ ok: false, msg: 'Parâmetros preenchidos incorretamente!' });
             }
-            else{
-                resp.send({
-                    ok: false,
-                    msg: "Erro ao editar evento!"
-                })
-            }
-        }
-        else
-        {
-            resp.send({
-                ok: false,
-                msg: "Parâmetros preenchidos incorretamente!"
-            });
+        } catch (error) {
+            resp.status(500).json({ ok: false, msg: 'Erro ao processar requisição.', error: error.message });
         }
     }
 

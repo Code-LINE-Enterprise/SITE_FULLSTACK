@@ -22,7 +22,7 @@
             <div>
                 <div class="form-group">
                     <label for="quantDoacao" class="form-label">Quantidade da doaçao:</label>
-                    <input type="number" class="form-control" id="quantDoacao" name="quantDoacao">
+                    <input type="number" class="form-control" id="quantDoacao" min="0" max="999999" keydown="validarQuantidade(this)" name="quantDoacao">
                 </div>
             </div>
             <div>
@@ -33,3 +33,17 @@
     </div>
 </div>
 <script src="/js/admin/addDoacaoMaterial.js"></script>
+<script>
+    function validarQuantidade(input) {
+        const valor = parseInt(input.value);
+        const maximo = parseInt(input.getAttribute('max'));
+        
+        if (valor > maximo) {
+            document.getElementById('erroQuantidade').style.display = 'block';
+            input.setCustomValidity('Quantidade máxima permitida: 999.999');
+        } else {
+            document.getElementById('erroQuantidade').style.display = 'none';
+            input.setCustomValidity('');
+        }
+    }
+</script>

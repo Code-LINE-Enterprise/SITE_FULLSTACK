@@ -28,7 +28,7 @@ class DoacaoController {
     async cadastrarDoacaoMonataria(req, resp){
         let msg = "";
         let cor = "";
-        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao != '0') {
+        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao > '0' && req.body.valorDoacao <= '999999') {
             let doacaoMonetaria = new DoacaoMonetariaModel(0, req.body.tipoDoacaoMonetariaId, req.body.valorDoacao);
 
             let result = await doacaoMonetaria.cadastrarDoacaoMonetaria();
@@ -72,7 +72,7 @@ class DoacaoController {
         let cor = "";
         let id = req.params.id;
 
-        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao != "") {
+        if(req.body.tipoDoacaoMonetariaId != "" && req.body.valorDoacao > '0' && req.body.valorDoacao <= '999999') {
             let doacaoMonetaria = new DoacaoMonetariaModel(id, req.body.tipoDoacaoMonetariaId, req.body.valorDoacao);
 
             let result = await doacaoMonetaria.alterarDoacaoMonetaria();
@@ -137,7 +137,7 @@ class DoacaoController {
     async cadastrarDoacaoMaterial(req, resp){
         let msg = "";
         let cor = "";
-        if(req.body.tipoDoacaoMaterialId != "" && req.body.quantDoacao != "") {
+        if(req.body.tipoDoacaoMaterialId != "" && req.body.quantDoacao != "" && req.body.quantDoacao > "0" && req.body.quantDoacao <= "99999") {
             let doacao = new DoacaoMaterialModel(0, req.body.tipoDoacaoMaterialId, req.body.quantDoacao);
 
             let result = await doacao.cadastrarDoacaoMaterial();
@@ -181,7 +181,7 @@ class DoacaoController {
         let cor = "";
         let id = req.params.id;
 
-        if(req.body.tipoDoacaoMaterialId != "" && req.body.quantDoacao != "") {
+        if(req.body.tipoDoacaoMaterialId != "" && req.body.quantDoacao != "" && req.body.quantDoacao > "0" && req.body.quantDoacao <= "99999") {
             let doacao = new DoacaoMaterialModel(id, req.body.tipoDoacaoMaterialId, req.body.quantDoacao);
 
             let result = await doacao.alterarDoacaoMaterial();

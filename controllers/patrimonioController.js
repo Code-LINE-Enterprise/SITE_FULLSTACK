@@ -28,7 +28,7 @@ cadastroPatrimonioView(req, resp){
 async cadastrarPatrimonio(req, resp){
     let msg = "";
     let cor = "";
-    if(req.body.quantidadePatrimonio != "" && req.body.tipoPatrimonio != "" && req.body.nomePatrimonio != "") {
+    if(req.body.quantidadePatrimonio != "" && req.body.quantidadePatrimonio > "0" && req.body.quantidadePatrimonio <= "9999999" && req.body.tipoPatrimonio != "" && req.body.nomePatrimonio != "") {
         let patrimonio = new PatrimonioModel(0, req.body.quantidadePatrimonio, req.body.tipoPatrimonio, req.body.nomePatrimonio);
 
         let result = await patrimonio.cadastrarPatrimonio();
@@ -70,7 +70,7 @@ async alterarPatrimonio(req, resp){
     let cor = "";
     let id = req.params.id;
 
-    if(req.body.quantidadePatrimonio != "" && req.body.tipoPatrimonio != "" && req.body.nomePatrimonio != "") {
+    if(req.body.quantidadePatrimonio != "" && req.body.quantidadePatrimonio > "0" && req.body.quantidadePatrimonio <= "9999999" && req.body.tipoPatrimonio != "" && req.body.nomePatrimonio != "") {
         let patrimonio = new PatrimonioModel(id, req.body.quantidadePatrimonio, req.body.tipoPatrimonio, req.body.nomePatrimonio);
 
         let result = await patrimonio.updatePatrimonioPorId();

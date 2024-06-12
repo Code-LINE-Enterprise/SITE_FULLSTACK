@@ -28,8 +28,8 @@ class ProdutoController {
     async cadastrarProduto(req, res){
         var ok = true;
         if(req.body.codigo != "" && req.body.nome != "" && 
-        req.body.quantidade != "" && req.body.quantidade  != '0' && 
-        req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0) {
+        req.body.quantidade != "" && req.body.quantidade  > '0' && req.body.quantidade <= '99999' && 
+        req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0 && req.body.valor <= '99999') {
             let arquivo = req.file != null ? req.file.filename : null;
             let produto = new ProdutoModel(0, req.body.codigo, 
                 req.body.nome, req.body.quantidade, 
@@ -60,7 +60,7 @@ class ProdutoController {
 
     async alterarProdutoView(req, res) {
         var ok = true;
-        if(req.body.codigo != "" && req.body.nome != "" && req.body.quantidade != "" && req.body.quantidade  != '0' && req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0) {
+        if(req.body.codigo != "" && req.body.nome != "" && req.body.quantidade != "" && req.body.quantidade  > '0' && req.body.quantidade <= '99999' && req.body.marca != '0' && req.body.categoria  != '0' && req.body.valor > 0 && req.body.valor <= '99999') {
 
             let produtoOld = new ProdutoModel();
             produtoOld = await produtoOld.buscarProduto(req.body.id);
