@@ -151,7 +151,7 @@ async alocarPatrimonio(req, res) {
       .then((r) => r.filter((patrimonio) => !Boolean(patrimonio.alocado)));
 
     const eventosNaoFinalizados = await evenModel.listarEvento()
-      .then((r) => r.filter((evento) => evento.statusEventoId !== "3"));
+      .then((r) => r.filter((evento) => !Boolean(evento.statusNome === "Finalizado")));
 
     res.render("./admin/alocacao/alocar", {layout: 'admin/layoutAdm', patrimonios: patrimoniosDisponiveis, eventos: eventosNaoFinalizados});
   }

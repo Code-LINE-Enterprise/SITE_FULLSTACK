@@ -155,7 +155,7 @@ class PatrimonioModel {
             const delet = await banco.ExecutaComandoNonQuery(sqlDelete, valuesDelete);
     
             //Atualiza nome e status de alocação do patrimonio
-            const sqlAtualizar = "update tb_patrimonios set pat_nclatura = ?, pat_alocado = false where pat_etiqueta = ?";
+            const sqlAtualizar = "update Patrimonio set pat_nclatura = ?, pat_alocado = false where pat_etiqueta = ?";
             const valuesAtualizar = [this.#nomePatrimonio, this.#patrimonioId];
             const update = banco.ExecutaComandoNonQuery(sqlAtualizar,valuesAtualizar);
     
@@ -169,7 +169,7 @@ class PatrimonioModel {
           const updateRelacionamento = await banco.ExecutaComandoNonQuery(sqlUpdate, valuesUpdate);
     
           //Atualiza nome do patrimonio
-          const sqlUpdateNome = "update tb_patrimonios set pat_nclatura = ? where pat_etiqueta = ?";
+          const sqlUpdateNome = "update Patrimonio set pat_nclatura = ? where pat_etiqueta = ?";
           const valuesUpdateNome = [this.#nomePatrimonio, this.#patrimonioId];
           const updateNome = banco.ExecutaComandoNonQuery(sqlUpdateNome,valuesUpdateNome);
     
@@ -177,7 +177,7 @@ class PatrimonioModel {
         }
     
         //Atualiza nome de patrimonio não alocado
-        const sql = "update tb_patrimonios set pat_nclatura = ? where pat_etiqueta = ?";
+        const sql = "update Patrimonio set pat_nclatura = ? where pat_etiqueta = ?";
         const values = [this.#nomePatrimonio, this.#patrimonioId];
     
         let update = await banco.ExecutaComandoNonQuery(sql, values);
