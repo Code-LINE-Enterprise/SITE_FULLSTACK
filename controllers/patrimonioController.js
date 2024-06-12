@@ -150,8 +150,16 @@ async alocarPatrimonio(req, res) {
     const patrimoniosDisponiveis = await patrimonio.listarPatrimonio()
       .then((r) => r.filter((patrimonio) => !Boolean(patrimonio.alocado)));
 
-    const eventosNaoFinalizados = await evenModel.listarEvento()
-      .then((r) => r.filter((evento) => !Boolean(evento.statusNome === "Finalizado")));
+      const eventosNaoFinalizados = await evenModel.listarEvento()
+      .then((r) => {
+        console.log("Eventos retornados:", r); // Verifica se a função está retornando eventos
+        const filtrados = r.filter((evento) => {
+          console.log("Estrutura do evento:", evento); // Verifica a estrutura de cada evento
+          return evento.statusEventoId === 1 || evento.statusEventoId === 2;
+        });
+        console.log("Eventos filtrados:", filtrados); // Verifica os eventos que foram filtrados
+        return filtrados;
+      });
 
     res.render("./admin/alocacao/alocar", {layout: 'admin/layoutAdm', patrimonios: patrimoniosDisponiveis, eventos: eventosNaoFinalizados});
   }

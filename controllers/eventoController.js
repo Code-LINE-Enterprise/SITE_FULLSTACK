@@ -104,7 +104,7 @@ class EventoController {
         let id = req.params.id;
 
         if(req.body.nome != "" && req.body.data != "" && req.body.local != "" && req.body.desc != "" && req.body.eventoStatusId  != '0') {
-            let evento = new EventoModel(0, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.eventoStatusId);
+            let evento = new EventoModel(id, req.body.nome, req.body.data, req.body.local, req.body.desc, req.body.eventoStatusId);
 
             let result = await evento.alterarEvento();
 
