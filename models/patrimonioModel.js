@@ -66,6 +66,11 @@ class PatrimonioModel {
                 termo = "%" + termo + "%"
                 sqlFiltro = ` where pat_tipo like ?`;
             }
+            else if(filtro == "3"){
+                console.log(termo)
+                termo = "%" + termo + "%"
+                sqlFiltro = ` where pat_etiqueta = ?`;
+            }
         }
 
         let sql = `select * from Patrimonio ${sqlFiltro}`;

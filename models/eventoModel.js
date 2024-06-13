@@ -90,6 +90,10 @@ class EventoModel {
             else if(filtro == "3"){
                 termo = "%" + termo + "%"
                 sqlFiltro = ` where local_evento like ?`;
+            }
+            else if(filtro == "4"){
+                termo = "%" + termo + "%"
+                sqlFiltro = ` where evento_cad = ?`;
             };
         }
 

@@ -14,6 +14,15 @@ class Database {
             user: '10442312282', // usuario e senha de cada um de vocês é o RA
             password: '10442312282',
         });
+
+        //this.#conexao.end((err) => {
+        //    if (err) {
+        //      console.error('Erro ao fechar a conexão:', err.stack);
+        //      return;
+        //    }
+        //    console.log('Conexão com o banco de dados encerrada.');
+        //  });
+        
     }
 
     ExecutaComando(sql, valores) {
@@ -51,6 +60,8 @@ class Database {
             });
         })
     }
+
+    
 
 }
 
