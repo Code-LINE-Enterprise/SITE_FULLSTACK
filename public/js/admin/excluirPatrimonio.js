@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(){
                                     <td>${r[i].quantidadePatrimonio}</td>
                                     <td>${r[i].tipoPatrimonio} </td>
                                     <td>${r[i].nomePatrimonio}</td>
-                                    <td>1</td>
+                                    <td>${r[i].alocado}</td>
                                     <td>
                                         <a href="/patrimonio/alterarPatrimonio/${r[i].patrimonioId}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                                         <button onclick="excluirPatrimonio('${r[i].patrimonioId}')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>

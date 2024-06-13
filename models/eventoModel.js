@@ -157,7 +157,7 @@ class EventoModel {
 
         if(rows.length > 0) {
             let row = rows[0];
-            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["desc_evento"], row["EventoStatusDescricao"]);
+            return new EventoModel(row["evento_cad"], row["nome_evento"], row["data_evento"], row["local_evento"], row["desc_evento"], row["EventoStatusId"],row["EventoStatusDescricao"]);
         }
 
         return null;

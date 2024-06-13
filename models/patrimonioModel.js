@@ -176,14 +176,12 @@ class PatrimonioModel {
           const updateRelacionamento = await banco.ExecutaComandoNonQuery(sqlUpdate, valuesUpdate);
     
           //Atualiza nome do patrimonio
-          const sqlUpdateNome = "update Patrimonio set pat_nclatura = ? where pat_etiqueta = ?";
-          const valuesUpdateNome = [this.#nomePatrimonio, this.#patrimonioId];
-          const updateNome = banco.ExecutaComandoNonQuery(sqlUpdateNome,valuesUpdateNome);
+        const sqlUpdateNome = "update Patrimonio set pat_nclatura = ? where pat_etiqueta = ?";
+        const valuesUpdateNome = [this.#nomePatrimonio, this.#patrimonioId];
+        const updateNome = banco.ExecutaComandoNonQuery(sqlUpdateNome,valuesUpdateNome);
 
-          const sql = "update Patrimonio set pat_quant = ?, pat_tipo = ?, pat_nclatura = ? where pat_etiqueta = ?";
-
+        const sql = "update Patrimonio set pat_quant = ?, pat_tipo = ?, pat_nclatura = ? where pat_etiqueta = ?";
         const values = [this.#quantidadePatrimonio, this.#tipoPatrimonio, this.#nomePatrimonio, this.#patrimonioId];
-
         const update = await banco.ExecutaComandoNonQuery(sql, values);
     
           return updateRelacionamento && updateNome && update;
@@ -191,8 +189,7 @@ class PatrimonioModel {
           
         }
 
-    
-        //Atualiza nome de patrimonio não alocado
+        //Atualiza dados de patrimonio não alocado
         let sql = "update Patrimonio set pat_quant = ?, pat_tipo = ?, pat_nclatura = ? where pat_etiqueta = ?";
 
         let values = [this.#quantidadePatrimonio, this.#tipoPatrimonio, this.#nomePatrimonio, this.#patrimonioId];
@@ -229,6 +226,7 @@ class PatrimonioModel {
             "quantidadePatrimonio": this.#quantidadePatrimonio,
             "tipoPatrimonio": this.#tipoPatrimonio,
             "nomePatrimonio": this.#nomePatrimonio,
+            "alocado": this.#alocado,
         }
     }
 }
