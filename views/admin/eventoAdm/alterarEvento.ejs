@@ -37,12 +37,12 @@
                                 <div class="form-group">
                                     <label for="eventoStatusId" class="form-label">Status do Evento:</label>
                                     <select class="form-control" id="eventoStatusId" name="eventoStatusId">
-                                        <option selected value="0">Selecione...</option>
-                                        <% for(let i = 0; i<listaStatus.length; i++) { %>
-                                            <% if(evento.statusEventoId == listaStatus[i].statusEventoId) { %>
-                                                <option selected value="<%= listaStatus[i].statusEventoId %>"><%= listaStatus[i].statusNome %></option>
+                                        <option value="0">Selecione...</option>
+                                        <% for(let i = 0; i<lista.length; i++) { %>
+                                            <% if(lista.statusEventoId == lista[i].statusEventoId) { %>
+                                                <option selected value="<%= lista[i].statusEventoId %>"><%= lista[i].statusNome %></option>
                                             <% } else { %>
-                                                <option value="<%= listaStatus[i].statusEventoId %>"><%= listaStatus[i].statusNome %></option>
+                                                <option value="<%= lista[i].statusEventoId %>"><%= lista[i].statusNome %></option>
                                             <% } %>
                                         <% } %>
                                     </select>

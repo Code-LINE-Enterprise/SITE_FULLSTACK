@@ -70,7 +70,7 @@ class DoacaoMonetariaModel {
 
         let result = await banco.ExecutaComandoNonQuery(sql, valores);
         return result;
-}
+    }
 
     async obterIdDoacaoMonetaria(id) {
         let sql = "select * from Doacao_Monetaria where cod_DoacaoMonetaria = ?";

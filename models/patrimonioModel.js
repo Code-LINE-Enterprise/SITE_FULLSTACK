@@ -58,7 +58,6 @@ class PatrimonioModel {
         let sqlFiltro = "";
         if(termo != "") {
             if(filtro == "1") {
-                termo = "%" + termo + "%"
                 sqlFiltro = ` where pat_nclatura like ?`
             }
             else if(filtro == "2"){
@@ -68,12 +67,13 @@ class PatrimonioModel {
             }
             else if(filtro == "3"){
                 console.log(termo)
-                termo = "%" + termo + "%"
                 sqlFiltro = ` where pat_etiqueta = ?`;
             }
         }
 
         let sql = `select * from Patrimonio ${sqlFiltro}`;
+
+        
 
         let valores = [termo];
 
@@ -105,6 +105,8 @@ class PatrimonioModel {
             let sql = "update Patrimonio set pat_quant = ?, pat_tipo = ?, pat_nclatura = ? where pat_etiqueta = ?";
 
             let valores = [this.#quantidadePatrimonio, this.#tipoPatrimonio, this.#nomePatrimonio, this.#patrimonioId];
+
+            console.log("Valores para atualização:", valores);
 
             let result = await banco.ExecutaComandoNonQuery(sql, valores);
             return result;   
@@ -177,14 +179,24 @@ class PatrimonioModel {
           const sqlUpdateNome = "update Patrimonio set pat_nclatura = ? where pat_etiqueta = ?";
           const valuesUpdateNome = [this.#nomePatrimonio, this.#patrimonioId];
           const updateNome = banco.ExecutaComandoNonQuery(sqlUpdateNome,valuesUpdateNome);
+
+          const sql = "update Patrimonio set pat_quant = ?, pat_tipo = ?, pat_nclatura = ? where pat_etiqueta = ?";
+
+        const values = [this.#quantidadePatrimonio, this.#tipoPatrimonio, this.#nomePatrimonio, this.#patrimonioId];
+
+        const update = await banco.ExecutaComandoNonQuery(sql, values);
     
-          return updateRelacionamento && updateNome;
+          return updateRelacionamento && updateNome && update;
+
+          
         }
+
     
         //Atualiza nome de patrimonio não alocado
-        const sql = "update Patrimonio set pat_nclatura = ? where pat_etiqueta = ?";
-        const values = [this.#nomePatrimonio, this.#patrimonioId];
-    
+        let sql = "update Patrimonio set pat_quant = ?, pat_tipo = ?, pat_nclatura = ? where pat_etiqueta = ?";
+
+        let values = [this.#quantidadePatrimonio, this.#tipoPatrimonio, this.#nomePatrimonio, this.#patrimonioId];
+
         let update = await banco.ExecutaComandoNonQuery(sql, values);
     
         return update;

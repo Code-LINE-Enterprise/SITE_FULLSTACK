@@ -2,7 +2,7 @@
                 <div class="container-fluid">
                     <h1>Listagem de locação de patrimônios</h1>
 <div style="margin-bottom: 15px;display: flex;">
-    <a class="btn btn-primary" href="/patrimonio/alocacao">Alocar</a>
+    <a class="btn btn-info" href="/patrimonio/alocacao">Alocar</a>
     <button id="btnExportarExcel" class="btn btn-primary" style="margin: 0px 30px 0px 30px;" >Exportar para Excel</button>
     <button id="btnExportarPdf"  onclick="window.print()" class="btn btn-danger">Exportar para PDF</button>
 </div>
@@ -15,8 +15,8 @@
             <tbody>
                 <% for (let i = 0; i < lista.length; i++)  { %>
                     <tr>
-                        <td><%= lista[i].pat_etiqueta %></td>
-                        <td><%= lista[i].evento_cad %></td>
+                        <td><%= lista[i].nomePatrimonio %></td>
+                        <td><%= lista[i].nomeEvento %></td>
                     </tr>
                 <% } %>
             </tbody>

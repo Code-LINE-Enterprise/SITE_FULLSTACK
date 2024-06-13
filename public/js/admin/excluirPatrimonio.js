@@ -52,23 +52,26 @@ document.addEventListener("DOMContentLoaded", function(){
         })
         .then(r=> {
             //remontar tabela
-            console.log(r);
+            console.log("Resultado da consulta:", r);
+            console.log(r.alocado);
             if(r.length > 0) {
                 let htmlCorpo ="";
                 for(let i = 0; i<r.length; i++) {
+                    
                     htmlCorpo += `
                                 <tr>
                                     <td>${r[i].patrimonioId}</td>
                                     <td>${r[i].quantidadePatrimonio}</td>
                                     <td>${r[i].tipoPatrimonio} </td>
                                     <td>${r[i].nomePatrimonio}</td>
+                                    <td>${r[i].alocado}</td>
                                     <td>
                                         <a href="/patrimonio/alterarPatrimonio/${r[i].patrimonioId}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                                         <button onclick="excluirPatrimonio('${r[i].patrimonioId}')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>`;
-
                 }
+                
 
                 document.querySelector("#tablePatrimonio > tbody").innerHTML = htmlCorpo;
             }

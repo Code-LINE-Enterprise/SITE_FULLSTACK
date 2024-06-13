@@ -43,7 +43,7 @@
                         <td><%= listaEvento[i].nomeEvento%></td>
                         <td><%= listaEvento[i].dataEvento.toLocaleDateString() %></td>
                         <td><%= listaEvento[i].localEvento %></td>
-                        <td><%= listaEvento[i].statusEventoId %></td>
+                        <td><%= listaEvento[i].statusNome %></td>
                         <td>
                             <a href="/evento/alterarEvento/<%= listaEvento[i].eventoId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                             <button onclick="excluirEvento('<%= listaEvento[i].eventoId %>')" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>

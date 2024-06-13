@@ -92,12 +92,13 @@ class EventoModel {
                 sqlFiltro = ` where local_evento like ?`;
             }
             else if(filtro == "4"){
-                termo = "%" + termo + "%"
                 sqlFiltro = ` where evento_cad = ?`;
             };
         }
 
-        let sql = `select * from Evento ${sqlFiltro} `  // retirado order by evento_cad desc
+        let sql = `select * from Evento e inner join tb_evento_status es on e.EventoStatusId = es.EventoStatusId ${sqlFiltro}  `  // retirado order by evento_cad desc
+        
+
         
         let valores = [termo];
 

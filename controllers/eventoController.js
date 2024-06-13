@@ -105,7 +105,7 @@ class EventoController {
         let statusEvento = new EventoModel();
         let listaStatus = await statusEvento.obterEventoStatus();
 
-        res.render('admin/eventoAdm/alterarEvento', {evento: eventoSelecionado, listaStatus: listaStatus, layout: 'admin/layoutAdm'});
+        res.render('admin/eventoAdm/alterarEvento', {evento: eventoSelecionado, lista: listaStatus, layout: 'admin/layoutAdm'});
     }
 
     async alterarEvento(req, resp) {

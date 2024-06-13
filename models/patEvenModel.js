@@ -6,6 +6,8 @@ class PatEvenModel {
 
     #pat_etiqueta;
     #evento_cad;
+    #nomeEvento;
+    #nomePatrimonio;
 
     get pat_etiqueta(){
         return this.#pat_etiqueta;
@@ -22,52 +24,38 @@ class PatEvenModel {
     set evento_cad(evento_cad) {
         this.#evento_cad = evento_cad;
     } 
-    
-    constructor(pat_etiqueta, evento_cad){
-        this.#pat_etiqueta = pat_etiqueta;
-        this.#evento_cad = evento_cad;
+    get nomeEvento(){
+        return this.#nomeEvento;
     }
 
-    async listarFiltro(termo, filtro) {
+    set nomeEvento(nomeEvento) {
+        this.#nomeEvento = nomeEvento;
+    } 
+    
+    get nomePatrimonio(){
+        return this.#nomePatrimonio;
+    }
 
-        let sqlFiltro = "";
-        if(termo != "") {
-            if(filtro == "2") {
-                sqlFiltro = ` where evento_cad = ?`
-            }
-            else if(filtro == "1") {
-                sqlFiltro = ` where vei_id = ?`;
-            }
-        }
+    set nomePatrimonio(nomePatrimonio) {
+        this.#nomePatrimonio = nomePatrimonio;
+    } 
 
-        let sql = `select * from tb_evento_patrimonio ${sqlFiltro}`;
-        let valores = [];
-
-        if(sqlFiltro != ""){
-            valores.push(termo);
-        }
-
-        
-        let rows = await conexao.ExecutaComando(sql, valores);
-        let lista = [];
-
-        for(var i= 0; i < rows.length; i++){
-            let row = rows[i];
-            lista.push(new PatEvenModel(row["pat_etiqueta"], row["evento_cad"]));
-        }
-
-        return lista;
+    constructor(pat_etiqueta, evento_cad, nomeEvento, nomePatrimonio){
+        this.#pat_etiqueta = pat_etiqueta;
+        this.#evento_cad = evento_cad;
+        this.#nomeEvento = nomeEvento;
+        this.#nomePatrimonio = nomePatrimonio;
     }
 
     async listarInfo() {
 
-        let sql = "select * from tb_evento_patrimonio";
+        let sql = `select * from tb_evento_patrimonio p inner join Patrimonio m on p.pat_etiqueta = m.pat_etiqueta inner join Evento c on p.evento_cad = c.evento_cad `;
         let lista = [];
         let rows = await conexao.ExecutaComando(sql);
 
         for(var i= 0; i < rows.length; i++){
             let row = rows[i];
-            lista.push(new PatEvenModel(row["pat_etiqueta"], row["evento_cad"]));
+            lista.push(new PatEvenModel(row["pat_etiqueta"], row["evento_cad"], row["nome_evento"], row["pat_nclatura"]));
         }
 
         return lista;
